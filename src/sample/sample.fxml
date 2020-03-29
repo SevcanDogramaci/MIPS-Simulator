@@ -9,12 +9,14 @@
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
+      <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
       <RowConstraints />
+      <RowConstraints />
    </rowConstraints>
    <children>
-      <Button fx:id="btnChooseFile" mnemonicParsing="false" onAction="#chooseFilePressed" text="Choose File" />
+      <Button fx:id="btnChooseFile" mnemonicParsing="false" onAction="#chooseFilePressed" text="Choose File" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>
