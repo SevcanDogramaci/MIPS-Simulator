@@ -280,4 +280,4 @@ ldr r2, = sayi2
 	    str r5, [r6]
 
     Equal: sub r8, r8, #1
-	               // Store result in GPIOD output data register*/
+// Store result in GPIOD output data register*/
