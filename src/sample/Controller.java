@@ -66,6 +66,7 @@ public class Controller {
         for (String line : lines){
 
             if(line.length()< 2) continue;
+            line.replace("\t", " ");
             line = line.trim();
 
             if (commentFlag){  // skips until the end of comment block --> only works for good formatted files.
@@ -87,15 +88,19 @@ public class Controller {
 
             if (line.contains("/*")){
                 commentFlag = true;
-
-                if (line.startsWith("/*")){
-                    //System.out.println(line);
-                    continue;
-                }else{
-                    line = line.substring(0, line.indexOf("/*")+1);
-                }
+                line = line.substring(0, line.indexOf("/*")+1);
+//                if (line.startsWith("/*")){
+//                    //System.out.println(line);
+//                    continue;
+//                }else{
+//                    line = line.substring(0, line.indexOf("/*")+1);
+//                }
             }
-            clearedLines.add(line);
+
+            line = line.trim();
+            if (line.length()>1){
+                clearedLines.add(line);
+            }
         }
 
         return clearedLines;
