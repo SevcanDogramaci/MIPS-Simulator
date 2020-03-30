@@ -19,7 +19,7 @@
                     <SplitPane dividerPositions="0.08" layoutX="131.0" layoutY="89.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <items>
                             <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" SplitPane.resizableWithParent="false">
-                                <Button fx:id="btn_choose_file" defaultButton="true" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#chooseFilePressed" scaleShape="false" text="Choose A File" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                <Button fx:id="btn_choose_file" defaultButton="true" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#chooseFilePressed" scaleShape="false" text="Choose A File" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0">
                                     <font>
                                         <Font name="Segoe UI" size="12.0" />
                                     </font>
