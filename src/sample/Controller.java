@@ -89,12 +89,6 @@ public class Controller {
             if (line.contains("/*")){
                 commentFlag = true;
                 line = line.substring(0, line.indexOf("/*")+1);
-//                if (line.startsWith("/*")){
-//                    //System.out.println(line);
-//                    continue;
-//                }else{
-//                    line = line.substring(0, line.indexOf("/*")+1);
-//                }
             }
 
             line = line.trim();
