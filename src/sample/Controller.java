@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ListIterator;
 
 public class Controller {
@@ -41,10 +40,15 @@ public class Controller {
             // read line by line
             String line;
             ArrayList<String> lines = new ArrayList<>(); //keeps lines
-
             while ((line = br.readLine()) != null) {
                 lines.add(line);
                 System.out.println(line);
+            }
+
+            lines = clearComments(lines);
+
+            for (String l : lines) {
+                System.out.println(l);
             }
 
         } catch (IOException e) {
@@ -53,43 +57,48 @@ public class Controller {
     }
 
 
-    public void clearComments(ArrayList<String> lines){
+    public ArrayList<String> clearComments(ArrayList<String> lines){
 
         boolean commentFlag = false;
 
-        ListIterator<String> iterator
-                = lines.listIterator();
+        ArrayList<String> clearedLines = new ArrayList<>();
 
-        while (iterator.hasNext()) {
+        for (String line : lines){
 
-
-            String line = iterator.next();
+            if(line.length()< 2) continue;
             line = line.trim();
 
             if (commentFlag){  // skips until the end of comment block --> only works for good formatted files.
-
-                if (!line.contains("*/")) {
-                    iterator.remove();
-                    continue;
+                if (!line.contains("*/")) continue;
+                else {
+                    commentFlag = false;
+                    line = line.substring(line.indexOf("*/") + 1);
                 }
-                else commentFlag = false;
             }
 
             if (line.startsWith("//")){ // eliminate comment line
-                iterator.remove();
                 continue;
             }
 
+
             if (line.contains("//")){  // eliminate comment part of the line
-                iterator.set(line.substring(0, line.indexOf("//")).trim());
+                line = line.substring(0, line.indexOf("//")).trim();
             }
 
             if (line.contains("/*")){
                 commentFlag = true;
 
+                if (line.startsWith("/*")){
+                    //System.out.println(line);
+                    continue;
+                }else{
+                    line = line.substring(0, line.indexOf("/*")+1);
+                }
             }
-
+            clearedLines.add(line);
         }
+
+        return clearedLines;
 
     }
 

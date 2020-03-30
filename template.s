@@ -1,4 +1,4 @@
-// STM32F4 Discovery - Assembly template
+﻿// STM32F4 Discovery - Assembly template
 // Turns on an LED attached to GPIOD Pin 12
 // We need to enable the clock for GPIOD and set up pin 12 as output.
 
