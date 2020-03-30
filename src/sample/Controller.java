@@ -19,6 +19,11 @@ public class Controller {
     private Button btnChooseFile;
 
     @FXML
+    public void initialize(){
+
+    }
+    
+    @FXML
     public void chooseFilePressed(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("./")); // set initial directory to cwd.
@@ -42,63 +47,15 @@ public class Controller {
             ArrayList<String> lines = new ArrayList<>(); //keeps lines
             while ((line = br.readLine()) != null) {
                 lines.add(line);
-                System.out.println(line);
             }
 
-            lines = clearComments(lines);
+            Parser parser = new Parser(lines);
 
-            for (String l : lines) {
-                System.out.println(l);
-            }
+            parser.printLines();
 
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
         }
-    }
-
-
-    public ArrayList<String> clearComments(ArrayList<String> lines){
-
-        boolean commentFlag = false;
-
-        ArrayList<String> clearedLines = new ArrayList<>();
-
-        for (String line : lines){
-
-            if(line.length()< 2) continue;
-            line.replace("\t", " ");
-            line = line.trim();
-
-            if (commentFlag){  // skips until the end of comment block --> only works for good formatted files.
-                if (!line.contains("*/")) continue;
-                else {
-                    commentFlag = false;
-                    line = line.substring(line.indexOf("*/") + 1);
-                }
-            }
-
-            if (line.startsWith("//")){ // eliminate comment line
-                continue;
-            }
-
-
-            if (line.contains("//")){  // eliminate comment part of the line
-                line = line.substring(0, line.indexOf("//")).trim();
-            }
-
-            if (line.contains("/*")){
-                commentFlag = true;
-                line = line.substring(0, line.indexOf("/*")+1);
-            }
-
-            line = line.trim();
-            if (line.length()>1){
-                clearedLines.add(line);
-            }
-        }
-
-        return clearedLines;
-
     }
 
 }

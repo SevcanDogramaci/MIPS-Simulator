@@ -58,4 +58,10 @@ public class Parser {
             }
         }
     }
+
+    public void printLines() {
+        for (String s: clearedLines){
+            System.out.println(s);
+        }
+    }
 }
