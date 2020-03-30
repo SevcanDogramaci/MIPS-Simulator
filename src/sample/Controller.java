@@ -3,6 +3,10 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -11,18 +15,28 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.ListIterator;
 
 public class Controller {
 
     @FXML
     private Button btnChooseFile;
+    @FXML private TextArea assemblyCodeArea;
+    @FXML private TableView<Register> rTableLeft;
+    @FXML private TableColumn<Register, String> rNameLeft;
+    @FXML private TableColumn<Register, Integer> rValueLeft;
 
     @FXML
     public void initialize(){
-
+        setupRegisterTable();
     }
-    
+
+    private void setupRegisterTable() {
+
+        rNameLeft.setCellValueFactory(new PropertyValueFactory<Register, String>("name"));
+        rValueLeft.setCellValueFactory(new PropertyValueFactory<Register, Integer>("value"));
+        rTableLeft.setItems(ALU.getRegisters());
+    }
+
     @FXML
     public void chooseFilePressed(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
@@ -38,24 +52,9 @@ public class Controller {
 
         if (selectedFile == null) return;
 
-        // read this file and save into a string.
-        try (FileReader reader = new FileReader(selectedFile);
-             BufferedReader br = new BufferedReader(reader)) {
+        Parser parser = new Parser(selectedFile);
 
-            // read line by line
-            String line;
-            ArrayList<String> lines = new ArrayList<>(); //keeps lines
-            while ((line = br.readLine()) != null) {
-                lines.add(line);
-            }
-
-            Parser parser = new Parser(lines);
-
-            parser.printLines();
-
-        } catch (IOException e) {
-            System.err.format("IOException: %s%n", e);
-        }
+        assemblyCodeArea.setText(parser.getLines());
     }
 
 }
