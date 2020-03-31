@@ -3,29 +3,27 @@ package sample;
 public class Register {
 
     private String name;
-    private int no;
     private int value;
 
-    public Register(int no) {
-        this.no = no;
+    public Register(String name) {
+        this.name = name;
         this.value = 0;
     }
 
-    public Register(int no, String name, int value) {
-        this.no = no;
+    public Register(String name, int value) {
         this.name = name;
         this.value = value;
     }
 
-    public void setName(String name) { this.name = name; }
+    public void setValue(int value) {
+        this.value = value;
+    }
 
-    public void setNo(int no) { this.no = no; }
+    public String getName() {
+        return name;
+    }
 
-    public void setValue(int value) { this.value = value; }
-
-    public String getName() { return name; }
-
-    public int getNo() { return no; }
-
-    public int getValue() { return value; }
+    public int getValue() {
+        return value;
+    }
 }

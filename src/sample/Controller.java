@@ -21,9 +21,9 @@ public class Controller {
     @FXML
     private Button btnChooseFile;
     @FXML private TextArea assemblyCodeArea;
-    @FXML private TableView<Register> rTable;
-    @FXML private TableColumn<Register, Integer> rNo;
-    @FXML private TableColumn<Register, Integer> rValue;
+    @FXML private TableView<Register> rTableLeft;
+    @FXML private TableColumn<Register, String> rNameLeft;
+    @FXML private TableColumn<Register, Integer> rValueLeft;
 
     @FXML
     public void initialize(){
@@ -32,9 +32,9 @@ public class Controller {
 
     private void setupRegisterTable() {
 
-        rNo.setCellValueFactory(new PropertyValueFactory<Register, Integer>("no"));
-        rValue.setCellValueFactory(new PropertyValueFactory<Register, Integer>("value"));
-        rTable.setItems(ALU.getRegisters());
+        rNameLeft.setCellValueFactory(new PropertyValueFactory<Register, String>("name"));
+        rValueLeft.setCellValueFactory(new PropertyValueFactory<Register, Integer>("value"));
+        rTableLeft.setItems(ALU.getRegisters());
     }
 
     @FXML

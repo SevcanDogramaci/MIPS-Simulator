@@ -12,11 +12,13 @@ public class ALU {
     static {
         registers = new ArrayList<>();
         for (int i = 0; i < 32; i++)
-            registers.add(new Register(i));
+            registers.add(new Register("R" + i, 0));
     }
+
 
     public static ObservableList<Register> getRegisters(){
         return FXCollections.observableArrayList(registers);
     }
+
 
 }
