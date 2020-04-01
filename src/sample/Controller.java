@@ -31,7 +31,6 @@ public class Controller {
     }
 
     private void setupRegisterTable() {
-
         rNameLeft.setCellValueFactory(new PropertyValueFactory<Register, String>("name"));
         rValueLeft.setCellValueFactory(new PropertyValueFactory<Register, Integer>("value"));
         rTableLeft.setItems(ALU.getRegisters());
@@ -39,6 +38,8 @@ public class Controller {
 
     @FXML
     public void chooseFilePressed(ActionEvent event){
+        ALU.a();
+        rTableLeft.refresh();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("./")); // set initial directory to cwd.
 
