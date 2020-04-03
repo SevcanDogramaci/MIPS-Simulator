@@ -12,8 +12,7 @@ public class ALU {
     static {
         registers = new Register[32];
         for (int i = 0; i < 32; i++)
-            registers[i] = new Register("R" + i, 0);
-            //registers.add(new Register("R" + i, 0));
+            registers[i] = new Register(i);
     }
 
 
