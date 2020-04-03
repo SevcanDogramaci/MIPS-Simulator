@@ -9,6 +9,10 @@ public class RFormatInstruction extends Instruction {
 
     private static Map<String, Short> instructionMap;
 
+    public RFormatInstruction(String line) {
+        super();
+    }
+
     public static boolean checkFormat(String functionName) {
         return instructionMap.containsKey(functionName);
     }

@@ -8,6 +8,10 @@ public class IFormatInstruction extends Instruction {
 
     private static Map<String, Short> instructionMap;
 
+    public IFormatInstruction(String line) {
+        super();
+    }
+
     public static boolean checkFormat(String functionName) {
         return instructionMap.containsKey(functionName);
     }

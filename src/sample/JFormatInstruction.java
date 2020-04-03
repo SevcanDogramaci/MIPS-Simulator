@@ -9,6 +9,10 @@ public class JFormatInstruction extends Instruction {
 
     private short opcode;
 
+    public JFormatInstruction(String line) {
+        super();
+    }
+
     public static boolean checkFormat(String functionName) {
         return instructionMap.containsKey(functionName);
     }
