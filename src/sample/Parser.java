@@ -12,10 +12,18 @@ public class Parser {
     private ArrayList<String> inputLines;
     private ArrayList<String> clearedLines;
 
+    private ArrayList<Instruction> instructions;
+
     public Parser(File file) {
         this.file = file;
         readFile();
         clearComments(inputLines);
+
+        instructions = new ArrayList<>();
+
+        for (String line: clearedLines) {
+            instructions.add(new Instruction(line));
+        }
     }
 
     private void readFile(){

@@ -1,4 +1,11 @@
 package sample;
 
-public class Instruction {
+public abstract class Instruction {
+
+
+    public Instruction(String line) {
+
+    }
+
+
 }
