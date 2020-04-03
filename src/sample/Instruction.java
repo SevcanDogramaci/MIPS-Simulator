@@ -9,9 +9,6 @@ public abstract class Instruction {
         return null;
     }
 
-
-    abstract boolean checkFormat(String functionName);
-
     abstract void parseInstruction (String line);
 
 }

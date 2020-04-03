@@ -7,16 +7,9 @@ public class JFormatInstruction extends Instruction {
 
     private static Map<String, Short> instructionNames;
 
-    static {
-        instructionNames = new HashMap<>();
-        // put instructions;
-    }
-
     private short opcode;
 
-    @Override
-    boolean checkFormat(String functionName) {
-
+    public static boolean checkFormat(String functionName) {
         return false;
     }
 
@@ -25,4 +18,11 @@ public class JFormatInstruction extends Instruction {
 
     }
 
+    // instructions
+    static {
+        instructionNames = new HashMap<>();
+        // put instructions;
+        instructionNames.put("j", (short)2);
+        instructionNames.put("jal", (short)3);
+    }
 }
