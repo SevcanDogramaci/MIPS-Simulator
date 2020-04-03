@@ -1,6 +1,17 @@
 package sample;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class IFormatInstruction extends Instruction {
+    private short opcode;
+
+    private static Map<String, Short> instructionNames;
+
+    static {
+        instructionNames = new HashMap<>();
+        // put instructions;
+    }
 
 
     @Override
