@@ -6,10 +6,10 @@ import java.util.Map;
 public class IFormatInstruction extends Instruction {
     private short opcode;
 
-    private static Map<String, Short> instructionNames;
-    
+    private static Map<String, Short> instructionMap;
+
     public static boolean checkFormat(String functionName) {
-        return false;
+        return instructionMap.containsKey(functionName);
     }
 
     @Override
@@ -18,30 +18,30 @@ public class IFormatInstruction extends Instruction {
     }
 
     static {
-        instructionNames = new HashMap<>();
+        instructionMap = new HashMap<>();
         // put instructions;
-        instructionNames.put("addi", (short)8);
-        instructionNames.put("addiu", (short)9);
-        instructionNames.put("andi", (short)10);
-        instructionNames.put("beq", (short)4);
-        instructionNames.put("bgez", (short)1); //
-        instructionNames.put("bgtz", (short)7);
-        instructionNames.put("blez", (short)6);
-        instructionNames.put("bltz", (short)1); //
-        instructionNames.put("bne", (short)5);
-        instructionNames.put("lb", (short)32);
-        instructionNames.put("lbu", (short)33);
-        instructionNames.put("lhu", (short)37);
-        instructionNames.put("lui", (short)15);
-        instructionNames.put("lw", (short)35);
-        instructionNames.put("lwcl", (short)49);
-        instructionNames.put("ori", (short)11);
-        instructionNames.put("sb", (short)40);
-        instructionNames.put("slti", (short)10);
-        instructionNames.put("sh", (short)41);
-        instructionNames.put("sw", (short)43);
-        instructionNames.put("swcl", (short)57);
-        instructionNames.put("xori", (short)14);
+        instructionMap.put("addi", (short)8);
+        instructionMap.put("addiu", (short)9);
+        instructionMap.put("andi", (short)10);
+        instructionMap.put("beq", (short)4);
+        instructionMap.put("bgez", (short)1); //
+        instructionMap.put("bgtz", (short)7);
+        instructionMap.put("blez", (short)6);
+        instructionMap.put("bltz", (short)1); //
+        instructionMap.put("bne", (short)5);
+        instructionMap.put("lb", (short)32);
+        instructionMap.put("lbu", (short)33);
+        instructionMap.put("lhu", (short)37);
+        instructionMap.put("lui", (short)15);
+        instructionMap.put("lw", (short)35);
+        instructionMap.put("lwcl", (short)49);
+        instructionMap.put("ori", (short)11);
+        instructionMap.put("sb", (short)40);
+        instructionMap.put("slti", (short)10);
+        instructionMap.put("sh", (short)41);
+        instructionMap.put("sw", (short)43);
+        instructionMap.put("swcl", (short)57);
+        instructionMap.put("xori", (short)14);
     }
 
 }

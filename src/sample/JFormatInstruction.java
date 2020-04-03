@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class JFormatInstruction extends Instruction {
 
-    private static Map<String, Short> instructionNames;
+    private static Map<String, Short> instructionMap;
 
     private short opcode;
 
     public static boolean checkFormat(String functionName) {
-        return false;
+        return instructionMap.containsKey(functionName);
     }
 
     @Override
@@ -20,9 +20,9 @@ public class JFormatInstruction extends Instruction {
 
     // instructions
     static {
-        instructionNames = new HashMap<>();
+        instructionMap = new HashMap<>();
         // put instructions;
-        instructionNames.put("j", (short)2);
-        instructionNames.put("jal", (short)3);
+        instructionMap.put("j", (short)2);
+        instructionMap.put("jal", (short)3);
     }
 }
