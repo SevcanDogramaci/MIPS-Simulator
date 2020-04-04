@@ -38,7 +38,7 @@ public class Controller {
     }
 
     @FXML
-    public void chooseFilePressed(ActionEvent event){
+    public void chooseFilePressed(ActionEvent event) throws Exception {
         ALU.a(); // to be removed
         rTable.refresh();
         FileChooser fileChooser = new FileChooser();
@@ -53,6 +53,8 @@ public class Controller {
         File selectedFile = fileChooser.showOpenDialog(new Stage());
 
         if (selectedFile == null) return;
+
+        assemblyCodeArea.setEditable(false);
 
         Parser parser = new Parser(selectedFile);
 

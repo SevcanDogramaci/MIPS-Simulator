@@ -5,7 +5,7 @@ public abstract class Instruction {
     protected short opcode;
     protected int index;
 
-    public static Instruction createInstruction(String line, int i, Parser parser) {
+    public static Instruction createInstruction(String line, int i, Parser parser) throws Exception {
 
         String funcName = line.split(" ")[0];
 

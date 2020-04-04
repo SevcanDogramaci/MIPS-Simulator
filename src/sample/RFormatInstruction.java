@@ -1,5 +1,6 @@
 package sample;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,12 +8,15 @@ public class RFormatInstruction extends Instruction {
 
     private Register sourceReg1, sourceReg2, destinationReg;
     private short shiftAmount, functionCode;
+    private int index;
+    private Register registers[];
 
     private static Map<String, String> instructionMap;
 
-    public RFormatInstruction(String line, int i) {
+    public RFormatInstruction(String line, int i) throws Exception {
         index = i;
         this.opcode = 0;
+        setRegisters();
 
         try {
             parseInstruction(line);
@@ -22,6 +26,7 @@ public class RFormatInstruction extends Instruction {
         }
     }
 
+
     public static boolean checkFormat(String functionName) {
         return instructionMap.containsKey(functionName);
     }
@@ -30,28 +35,44 @@ public class RFormatInstruction extends Instruction {
     void parseInstruction(String line) throws Exception {
         String[] instruction = line.split(",");
         String functionName = instruction[0].split(" ")[0];
+        
+        String code = instructionMap.get(functionName);
 
-        if(checkFormat(functionName)){
-            
-            String code = instructionMap.get(functionName);
+        this.functionCode = Short.parseShort(code.substring(0, 6), 2);
+        char[] registerUsage = code.substring(6).toCharArray();
+        instruction[0] = instruction[0].split(" ")[1].trim();
 
-            this.functionCode = Short.parseShort(code.substring(0, 6), 2);
-            char[] registerUsage = code.substring(6).toCharArray();
 
-            sourceReg1 = new Register(Register.extractRegisterName(instruction[0].split(" ")[1].trim()));
-            sourceReg2 = new Register(Register.extractRegisterName(instruction[1].trim()));
+        int lastIdx = -1;
 
-            if(instruction[2].trim().contains("$")){
-                destinationReg =  new Register(Register.extractRegisterName(instruction[2].trim()));
-                shiftAmount = 0;
-            }
-            else{
-                destinationReg = null;
-                shiftAmount = Short.parseShort(instruction[2].trim());
-            }
+        for(int i = 0; i < instruction.length; i++){
+            lastIdx = getNextRegister(registerUsage, lastIdx);
+            if(lastIdx == 3)
+                shiftAmount = Short.parseShort(instruction[i]);
+            registers[lastIdx] = Register.getRegister(extractRegisterName(instruction[i]));
         }
-        else
-            throw new Exception();
+    }
+
+    private int getNextRegister(char usage[], int idx){
+        for (idx = idx + 1; idx < usage.length; idx++){
+            if (usage[idx] == '1')
+                return idx;
+        }
+        return -1;
+    }
+
+    private String extractRegisterName(String name){
+        if(name.contains("$"))
+            name.replace("$", "");
+        return name;
+    }
+
+
+    private void setRegisters() {
+        registers = new Register[3];
+        registers[0] = destinationReg;
+        registers[1] = sourceReg1;
+        registers[2] = sourceReg2;
     }
 
     static {
