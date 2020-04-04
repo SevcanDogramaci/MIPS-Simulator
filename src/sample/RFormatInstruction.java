@@ -11,13 +11,14 @@ public class RFormatInstruction extends Instruction {
     private static Map<String, Short> instructionMap;
 
     public RFormatInstruction(String line) {
+
         this.opcode = 0;
 
         parseInstruction(line);
     }
 
     public static boolean checkFormat(String functionName) {
-        return false;
+        return instructionMap.containsKey(functionName);
     }
 
     @Override
