@@ -17,6 +17,10 @@ public class Register {
         this.value = value;
     }
 
+    public static Register getRegister(String extractRegisterName) {
+        return null;
+    }
+
     public void setNo(int no) { this.no = no; }
 
     public void setName(String name) { this.name = name; }

@@ -3,7 +3,16 @@ package sample;
 import java.util.HashMap;
 import java.util.Map;
 
+
+
 public class IFormatInstruction extends Instruction {
+
+
+
+    private enum RegisterType {
+
+    }
+
     private short opcode;
     private int index;
     private Parser parser;

@@ -54,6 +54,8 @@ public class Controller {
 
         if (selectedFile == null) return;
 
+        assemblyCodeArea.setEditable(false);
+
         Parser parser = new Parser(selectedFile);
 
         assemblyCodeArea.setText(parser.getLines());
