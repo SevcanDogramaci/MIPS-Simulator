@@ -22,7 +22,7 @@ public class Parser {
         instructions = new ArrayList<>();
 
         for (String line: clearedLines) {
-            instructions.add(new Instruction(line));
+            instructions.add(Instruction.createInstruction(line));
         }
     }
 

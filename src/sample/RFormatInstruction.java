@@ -5,9 +5,16 @@ import java.util.Map;
 
 public class RFormatInstruction extends Instruction {
 
-    private short opcode = 0;
+    private Register sourceReg1, sourceReg2, destinationReg;
+    private short shiftAmount, functionCode;
 
     private static Map<String, Short> instructionMap;
+
+    public RFormatInstruction(String line) {
+        this.opcode = 0;
+
+        parseInstruction(line);
+    }
 
     public static boolean checkFormat(String functionName) {
         return false;
@@ -17,7 +24,6 @@ public class RFormatInstruction extends Instruction {
     void parseInstruction(String line) {
 
     }
-
 
     static {
         instructionMap = new HashMap<>();
