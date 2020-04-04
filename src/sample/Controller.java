@@ -38,7 +38,7 @@ public class Controller {
     }
 
     @FXML
-    public void chooseFilePressed(ActionEvent event){
+    public void chooseFilePressed(ActionEvent event) throws Exception {
         ALU.a(); // to be removed
         rTable.refresh();
         FileChooser fileChooser = new FileChooser();

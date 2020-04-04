@@ -11,6 +11,10 @@ public class Register {
         this.value = 0;
     }
 
+    public Register(String name) {
+        this.name = name;
+    }
+
     public Register(int no, String name, int value) {
         this.no = no;
         this.name = name;
@@ -32,4 +36,10 @@ public class Register {
     public String getName() { return name; }
 
     public int getValue() { return value; }
+
+    public static String extractRegisterName(String name){
+        if(name.contains("$"))
+            name = name.replace("$", "");
+        return name;
+    }
 }

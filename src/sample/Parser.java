@@ -17,7 +17,7 @@ public class Parser {
 
     private ArrayList<Instruction> instructions;
 
-    public Parser(File file) {
+    public Parser(File file) throws Exception {
         this.file = file;
         readFile();
         clearComments(inputLines);

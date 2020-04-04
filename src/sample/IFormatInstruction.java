@@ -14,7 +14,6 @@ public class IFormatInstruction extends Instruction {
     }
 
     private short opcode;
-    private int index;
     private Parser parser;
 
     private static Map<String, Short> instructionMap;

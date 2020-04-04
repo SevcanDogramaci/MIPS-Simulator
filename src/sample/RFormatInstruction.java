@@ -18,7 +18,12 @@ public class RFormatInstruction extends Instruction {
         this.opcode = 0;
         setRegisters();
 
-        parseInstruction(line);
+        try {
+            parseInstruction(line);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -54,7 +59,6 @@ public class RFormatInstruction extends Instruction {
             if (usage[idx] == '1')
                 return idx;
         }
-
         return -1;
     }
 
