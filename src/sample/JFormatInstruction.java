@@ -8,9 +8,11 @@ public class JFormatInstruction extends Instruction {
     private static Map<String, Short> instructionMap;
 
     private long targetOffset;
-
-    public JFormatInstruction(String line) {
-
+    private int index;
+    private Parser parser;
+    public JFormatInstruction(String line, int i, Parser parser) {
+        this.parser = parser;
+        index = i;
         try{
             parseInstruction(line);
         }

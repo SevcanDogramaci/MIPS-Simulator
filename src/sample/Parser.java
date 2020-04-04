@@ -25,8 +25,8 @@ public class Parser {
         instructions = new ArrayList<>();
         labelAddressesMap = new HashMap<>();
 
-        for (String line: clearedLines) {
-            instructions.add(Instruction.createInstruction(line, this));
+        for (int i = 0; i < clearedLines.size(); i++) {
+            instructions.add(Instruction.createInstruction(clearedLines.get(i), i, this));
         }
     }
 
@@ -99,7 +99,7 @@ public class Parser {
             }
             line = line.trim();
 
-            if (line.length()>1){
+            if (line.length()>1 && !line.contains(".")){
                 clearedLines.add(line);
             }
         }

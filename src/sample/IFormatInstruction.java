@@ -5,11 +5,15 @@ import java.util.Map;
 
 public class IFormatInstruction extends Instruction {
     private short opcode;
+    private int index;
+    private Parser parser;
 
     private static Map<String, Short> instructionMap;
 
-    public IFormatInstruction(String line) {
+    public IFormatInstruction(String line, int i, Parser parser) {
         super();
+        this.parser = parser;
+        index = i;
     }
 
     public static boolean checkFormat(String functionName) {

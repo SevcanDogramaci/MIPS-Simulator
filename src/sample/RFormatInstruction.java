@@ -7,11 +7,12 @@ public class RFormatInstruction extends Instruction {
 
     private Register sourceReg1, sourceReg2, destinationReg;
     private short shiftAmount, functionCode;
+    private int index;
 
     private static Map<String, Short> instructionMap;
 
-    public RFormatInstruction(String line) {
-
+    public RFormatInstruction(String line, int i) {
+        index = i;
         this.opcode = 0;
 
         try {
