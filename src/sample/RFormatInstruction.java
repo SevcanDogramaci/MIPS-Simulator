@@ -7,7 +7,6 @@ public class RFormatInstruction extends Instruction {
 
     private Register sourceReg1, sourceReg2, destinationReg;
     private short shiftAmount, functionCode;
-    private int index;
 
     private static Map<String, Short> instructionMap;
 

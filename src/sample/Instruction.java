@@ -3,6 +3,7 @@ package sample;
 public abstract class Instruction {
 
     protected short opcode;
+    protected int index;
 
     public static Instruction createInstruction(String line, int i, Parser parser) {
 
