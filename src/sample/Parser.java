@@ -99,7 +99,7 @@ public class Parser {
             }
             line = line.trim();
 
-            if (line.length()>1){
+            if (line.length()>1 && !line.contains(".")){
                 clearedLines.add(line);
             }
         }
