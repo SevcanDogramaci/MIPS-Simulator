@@ -35,7 +35,7 @@ public class RFormatInstruction extends Instruction {
     void parseInstruction(String line) throws Exception {
         String[] instruction = line.split(",");
         String functionName = instruction[0].split(" ")[0];
-        
+
         String code = instructionMap.get(functionName);
 
         this.functionCode = Short.parseShort(code.substring(0, 6), 2);
