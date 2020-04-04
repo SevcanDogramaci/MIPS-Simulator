@@ -8,7 +8,7 @@ public class RFormatInstruction extends Instruction {
     private Register sourceReg1, sourceReg2, destinationReg;
     private short shiftAmount, functionCode;
 
-    private static Map<String, Short> instructionMap;
+    private static Map<String, String> instructionMap;
 
     public RFormatInstruction(String line, int i) {
         index = i;
@@ -32,7 +32,11 @@ public class RFormatInstruction extends Instruction {
         String functionName = instruction[0].split(" ")[0];
 
         if(checkFormat(functionName)){
-            this.functionCode = instructionMap.get(functionName);
+            
+            String code = instructionMap.get(functionName);
+
+            this.functionCode = Short.parseShort(code.substring(0, 6), 2);
+            char[] registerUsage = code.substring(6).toCharArray();
 
             sourceReg1 = new Register(Register.extractRegisterName(instruction[0].split(" ")[1].trim()));
             sourceReg2 = new Register(Register.extractRegisterName(instruction[1].trim()));
@@ -54,36 +58,36 @@ public class RFormatInstruction extends Instruction {
         instructionMap = new HashMap<>();
         // put instructions;
 
-        instructionMap.put("add", (short) 32);
-        instructionMap.put("addu", (short) 33);
-        instructionMap.put("and", (short) 36);
-        instructionMap.put("break", (short) 13);
-        instructionMap.put("div", (short) 26);
-        instructionMap.put("divu", (short) 27);
-        instructionMap.put("jalr", (short) 9);
-        instructionMap.put("jr", (short) 8);
+        instructionMap.put("add", "100000 1110");
+        instructionMap.put("addu", "100001 1110");
+        instructionMap.put("and", "100100 1110");
+        instructionMap.put("break", "00001101 0000");
+        instructionMap.put("div", "011010 0110");
+        instructionMap.put("divu", "011011 0110");
+        instructionMap.put("jalr", "001001 1100");
+        instructionMap.put("jr", "001001 1100");
 
-        instructionMap.put("mfhi", (short) 16);
-        instructionMap.put("mflo", (short) 18);
-        instructionMap.put("mthi", (short) 17);
-        instructionMap.put("mtlo", (short) 19);
-        instructionMap.put("mult", (short) 24);
-        instructionMap.put("multu", (short) 25);
-        instructionMap.put("nor", (short) 39);
-        instructionMap.put("or", (short) 37);
+        instructionMap.put("mfhi", "010000 1000");
+        instructionMap.put("mflo", "010010 1000");
+        instructionMap.put("mthi", "010001 0100");
+        instructionMap.put("mtlo", "010011 0100");
+        instructionMap.put("mult", "011000 0110");
+        instructionMap.put("multu", "011001 0110");
+        instructionMap.put("nor", "100111 1110");
+        instructionMap.put("or", "100101 1110");
 
-        instructionMap.put("sll", (short) 0);
-        instructionMap.put("sllv", (short) 4);
-        instructionMap.put("slt", (short) 42);
-        instructionMap.put("sltu", (short) 43);
-        instructionMap.put("sra", (short) 3);
-        instructionMap.put("srav", (short) 7);
-        instructionMap.put("srl", (short) 2);
-        instructionMap.put("srlv", (short) 6);
+        instructionMap.put("sll", "000000 1011");
+        instructionMap.put("sllv", "000100 1110");
+        instructionMap.put("slt", "101010 1110");
+        instructionMap.put("sltu", "101011 1110");
+        instructionMap.put("sra", "000011 1011");
+        instructionMap.put("srav", "000111 1110");
+        instructionMap.put("srl", "000010 1011");
+        instructionMap.put("srlv", "000110 1110");
 
-        instructionMap.put("sub", (short) 34);
-        instructionMap.put("subu", (short) 35);
-        instructionMap.put("syscall", (short) 12);
-        instructionMap.put("xor", (short) 38);
+        instructionMap.put("sub", "100010 1110");
+        instructionMap.put("subu", "100011 1110");
+        instructionMap.put("syscall", "001100 0000");
+        instructionMap.put("xor", "100110 1110");
     }
 }
