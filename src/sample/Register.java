@@ -11,14 +11,10 @@ public class Register {
         this.value = 0;
     }
 
-    public Register(String name) {
-        this.name = name;
-    }
-
-    public Register(int no, String name, int value) {
+    public Register(int no, String name) {
         this.no = no;
         this.name = name;
-        this.value = value;
+        this.value = 0;
     }
 
     public static Register getRegister(String extractRegisterName) {
