@@ -4,7 +4,7 @@ public abstract class Instruction {
 
     private short opcode;
 
-    public static Instruction createInstruction (String line) {
+    public static Instruction createInstruction(String line, Parser parser) {
 
         String funcName = line.split(" ")[0];
 

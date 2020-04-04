@@ -5,12 +5,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Parser {
 
     private File file;
     private ArrayList<String> inputLines;
     private ArrayList<String> clearedLines;
+    private Map<String, Integer> labelAddressesMap;
 
     private ArrayList<Instruction> instructions;
 
@@ -20,10 +23,45 @@ public class Parser {
         clearComments(inputLines);
 
         instructions = new ArrayList<>();
+        labelAddressesMap = new HashMap<>();
 
         for (String line: clearedLines) {
-            instructions.add(Instruction.createInstruction(line));
+            instructions.add(Instruction.createInstruction(line, this));
         }
+    }
+
+    private void extractLabels(){
+
+        int i = 0;
+        String line;
+
+        while (i < this.clearedLines.size()){
+
+            line = this.clearedLines.get(i);
+
+            if(line.contains(":")){
+                String labelName = line.substring(0, line.indexOf(":"));
+                String instruction;
+
+                this.labelAddressesMap.put(labelName, i);
+
+                if(line.indexOf(":") < line.length() - 1){
+                    instruction = line.substring(line.indexOf(":")+1, line.length()-1);
+                    this.clearedLines.set(i, instruction);
+                    i++;
+                }
+                else {
+                    this.clearedLines.remove(i);
+                }
+            }
+            else{
+                i++;
+            }
+        }
+    }
+
+    public int getLabelAddress(String labelName){
+        return this.labelAddressesMap.get(labelName);
     }
 
     private void readFile(){
