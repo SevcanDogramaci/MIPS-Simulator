@@ -2,22 +2,22 @@ package sample;
 
 public abstract class Instruction {
 
-    private short opcode;
+    protected short opcode;
 
-    public static Instruction createInstruction(String line, Parser parser) {
+    public static Instruction createInstruction(String line, int i, Parser parser) {
 
         String funcName = line.split(" ")[0];
 
         if (RFormatInstruction.checkFormat(funcName))
-            return new RFormatInstruction(line);
+            return new RFormatInstruction(line, i);
         else if (IFormatInstruction.checkFormat(funcName))
-            return new IFormatInstruction(line);
+            return new IFormatInstruction(line, i, parser);
         else if (JFormatInstruction.checkFormat(funcName))
-            return new JFormatInstruction(line);
+            return new JFormatInstruction(line, i, parser);
 
         return null;
     }
 
-    abstract void parseInstruction (String line);
+    abstract void parseInstruction (String line) throws Exception;
 
 }

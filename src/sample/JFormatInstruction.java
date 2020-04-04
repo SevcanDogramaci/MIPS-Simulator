@@ -7,19 +7,40 @@ public class JFormatInstruction extends Instruction {
 
     private static Map<String, Short> instructionMap;
 
-    private short opcode;
+    private long targetOffset;
+    private int index;
+    private Parser parser;
+    public JFormatInstruction(String line, int i, Parser parser) {
+        this.parser = parser;
+        index = i;
+        try{
+            parseInstruction(line);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
-    public JFormatInstruction(String line) {
-        super();
     }
 
     public static boolean checkFormat(String functionName) {
+
         return instructionMap.containsKey(functionName);
     }
 
     @Override
-    void parseInstruction(String line) {
+    void parseInstruction(String line) throws Exception {
+        String[] instruction = line.split(" ");
 
+        String functionName, offset;
+        functionName = instruction[0];
+        offset = instruction[1];
+
+        if(checkFormat(functionName)){
+            this.opcode = instructionMap.get(functionName);
+            this.targetOffset = Long.parseLong(offset);
+        }
+        else
+            throw new Exception();
     }
 
     // instructions
