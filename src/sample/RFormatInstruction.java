@@ -14,7 +14,12 @@ public class RFormatInstruction extends Instruction {
 
         this.opcode = 0;
 
-        parseInstruction(line);
+        try {
+            parseInstruction(line);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static boolean checkFormat(String functionName) {
@@ -22,8 +27,27 @@ public class RFormatInstruction extends Instruction {
     }
 
     @Override
-    void parseInstruction(String line) {
+    void parseInstruction(String line) throws Exception {
+        String[] instruction = line.split(",");
+        String functionName = instruction[0].split(" ")[0];
 
+        if(checkFormat(functionName)){
+            this.functionCode = instructionMap.get(functionName);
+
+            sourceReg1 = new Register(Register.extractRegisterName(instruction[0].split(" ")[1].trim()));
+            sourceReg2 = new Register(Register.extractRegisterName(instruction[1].trim()));
+
+            if(instruction[2].trim().contains("$")){
+                destinationReg =  new Register(Register.extractRegisterName(instruction[2].trim()));
+                shiftAmount = 0;
+            }
+            else{
+                destinationReg = null;
+                shiftAmount = Short.parseShort(instruction[2].trim());
+            }
+        }
+        else
+            throw new Exception();
     }
 
     static {
