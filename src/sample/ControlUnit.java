@@ -37,7 +37,7 @@ public class ControlUnit {
         }
 
         else if (instruction.isJFormat()){
-            
+
         }
 
 

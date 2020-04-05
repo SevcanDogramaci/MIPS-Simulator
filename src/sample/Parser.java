@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Parser {
 
@@ -22,6 +20,17 @@ public class Parser {
         readFile();
         clearComments(inputLines);
 
+        createInstructions();
+    }
+
+    public Parser(String text) throws Exception {
+        inputLines = (ArrayList<String>) Arrays.asList(text.split("\n"));
+        clearComments(inputLines);
+
+        createInstructions();
+    }
+
+    private void createInstructions() throws Exception {
         instructions = new ArrayList<>();
         labelAddressesMap = new HashMap<>();
 
@@ -29,6 +38,9 @@ public class Parser {
             instructions.add(Instruction.createInstruction(clearedLines.get(i), i, this));
         }
     }
+
+
+
 
     private void extractLabels(){
 
