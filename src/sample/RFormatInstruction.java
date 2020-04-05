@@ -74,11 +74,6 @@ public class RFormatInstruction extends Instruction {
         registers[2] = sourceReg2;
     }
 
-    @Override
-    public boolean isRFormat() {
-        return true;
-    }
-
     static {
         instructionMap = new HashMap<>();
         // put instructions;
