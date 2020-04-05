@@ -34,13 +34,11 @@ public class Controller {
 
         rNo.setCellValueFactory(new PropertyValueFactory<Register, Integer>("no"));
         rValue.setCellValueFactory(new PropertyValueFactory<Register, Integer>("value"));
-        rTable.setItems(ALU.getRegisters());
+        rTable.setItems(RegisterFile.getRegisters());
     }
 
     @FXML
     public void chooseFilePressed(ActionEvent event) throws Exception {
-        ALU.a(); // to be removed
-        rTable.refresh();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("./")); // set initial directory to cwd.
 

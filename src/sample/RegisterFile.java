@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class RegisterFile {
@@ -47,11 +50,16 @@ public class RegisterFile {
         }
     }
 
+
     public static int getRegisterData(int index){
         return registers.get(index).getValue();
     }
 
     public static void setRegisterData(int index, int dataValue){
         registers.get(index).setValue(dataValue);
+    }
+
+    public static ObservableList<Register> getRegisters(){
+        return FXCollections.observableArrayList(registers);
     }
 }

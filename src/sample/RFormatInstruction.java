@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class RFormatInstruction extends Instruction {
 
-    private Register sourceReg1, sourceReg2, destinationReg;
     private short shiftAmount, functionCode;
     private int index;
     private Register registers[];
@@ -73,6 +72,11 @@ public class RFormatInstruction extends Instruction {
         registers[0] = destinationReg;
         registers[1] = sourceReg1;
         registers[2] = sourceReg2;
+    }
+
+    @Override
+    public boolean isRFormat() {
+        return true;
     }
 
     static {
