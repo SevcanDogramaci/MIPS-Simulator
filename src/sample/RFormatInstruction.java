@@ -39,7 +39,7 @@ public class RFormatInstruction extends Instruction {
 
         this.functionCode = Short.parseShort(code.substring(0, 6), 2);
         char[] registerUsage = code.substring(6).toCharArray();
-        instruction[0] = instruction[0].split(" ")[1].trim();
+        instruction[0] = instruction[0].split(" ")[1].trim(); // problem with this line
 
 
         int lastIdx = -1;

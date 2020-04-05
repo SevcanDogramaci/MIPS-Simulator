@@ -19,11 +19,14 @@ import java.util.ArrayList;
 public class Controller {
 
     @FXML
-    private Button btnChooseFile;
+    private Button btnChooseFile, btnRun;
     @FXML private TextArea assemblyCodeArea;
     @FXML private TableView<Register> rTable;
     @FXML private TableColumn<Register, Integer> rNo;
     @FXML private TableColumn<Register, Integer> rValue;
+    @FXML private TableColumn<Register, String > rName;
+
+    private Parser parser;
 
     @FXML
     public void initialize(){
@@ -34,7 +37,17 @@ public class Controller {
 
         rNo.setCellValueFactory(new PropertyValueFactory<Register, Integer>("no"));
         rValue.setCellValueFactory(new PropertyValueFactory<Register, Integer>("value"));
+        rName.setCellValueFactory(new PropertyValueFactory<Register, String >("name"));
         rTable.setItems(RegisterFile.getRegisters());
+    }
+
+    @FXML
+    public void runPressed(ActionEvent event) throws Exception {
+        if(assemblyCodeArea.editableProperty().getValue()){
+            parser = new Parser(assemblyCodeArea.getText());
+        } else {
+            parser.createInstructions();
+        }
     }
 
     @FXML
@@ -54,7 +67,7 @@ public class Controller {
 
         assemblyCodeArea.setEditable(false);
 
-        Parser parser = new Parser(selectedFile);
+        parser = new Parser(selectedFile);
 
         assemblyCodeArea.setText(parser.getLines());
     }

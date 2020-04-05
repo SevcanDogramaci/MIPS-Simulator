@@ -19,8 +19,6 @@ public class Parser {
         this.file = file;
         readFile();
         clearComments(inputLines);
-
-        createInstructions();
     }
 
     public Parser(String text) throws Exception {
@@ -30,7 +28,7 @@ public class Parser {
         createInstructions();
     }
 
-    private void createInstructions() throws Exception {
+    public void createInstructions() throws Exception {
         instructions = new ArrayList<>();
         labelAddressesMap = new HashMap<>();
 
@@ -38,9 +36,6 @@ public class Parser {
             instructions.add(Instruction.createInstruction(clearedLines.get(i), i, this));
         }
     }
-
-
-
 
     private void extractLabels(){
 
