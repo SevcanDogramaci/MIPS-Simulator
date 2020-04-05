@@ -47,11 +47,6 @@ public class JFormatInstruction extends Instruction {
             throw new Exception();
     }
 
-    @Override
-    public boolean isJFormat() {
-        return true;
-    }
-
     // instructions
     static {
         instructionMap = new HashMap<>();

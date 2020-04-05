@@ -37,11 +37,6 @@ public class IFormatInstruction extends Instruction {
 
     }
 
-    @Override
-    public boolean isIFormat() {
-        return true;
-    }
-
     static {
         instructionMap = new HashMap<>();
         // put instructions;

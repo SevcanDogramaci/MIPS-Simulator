@@ -17,6 +17,26 @@ public class ControlUnit {
 
         if (instruction.isRFormat()){
             RegDst = true;
+            RegWrite = true;
+            ALUOp1 = true;
+        }
+
+        else if (instruction.isIFormat()){
+            if (instruction.opcode == 35){ // lw
+                MemRead = true;
+                MemtoReg = true;
+                RegWrite = true;
+                ALUsrc = true;
+            }else if(instruction.opcode == 43){ // sw
+                MemWrite = true;
+                ALUsrc = true;
+            }else if (instruction.opcode == 4){ // beq
+                Branch = true;
+                ALUOp0 = true;
+            }
+        }
+
+        else if (instruction.isJFormat()){
 
         }
 

@@ -35,14 +35,14 @@ public abstract class Instruction {
     }
 
     public boolean isRFormat(){
-        return false;
+        return this instanceof RFormatInstruction;
     }
 
     public boolean isIFormat(){
-        return false;
+        return this instanceof IFormatInstruction;
     }
 
     public boolean isJFormat(){
-        return false;
+        return this instanceof JFormatInstruction;
     }
 }
