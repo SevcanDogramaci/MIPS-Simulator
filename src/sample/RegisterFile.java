@@ -47,7 +47,6 @@ public class RegisterFile {
         }
     }
 
-
     public static int getRegisterData(int index){
         return registers.get(index).getValue();
     }
