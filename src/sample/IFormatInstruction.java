@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class IFormatInstruction extends Instruction {
 
-
+    private int immediate;
 
     private enum RegisterType {
 
@@ -22,6 +22,10 @@ public class IFormatInstruction extends Instruction {
         super();
         this.parser = parser;
         index = i;
+    }
+
+    public int getImmediate() {
+        return immediate;
     }
 
     public static boolean checkFormat(String functionName) {

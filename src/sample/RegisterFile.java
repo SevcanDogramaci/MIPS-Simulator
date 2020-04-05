@@ -50,7 +50,6 @@ public class RegisterFile {
         }
     }
 
-
     public static int getRegisterData(int index){
         return registers.get(index).getValue();
     }
@@ -61,5 +60,10 @@ public class RegisterFile {
 
     public static ObservableList<Register> getRegisters(){
         return FXCollections.observableArrayList(registers);
+    }
+
+    public void resetData(){
+        for(Register register : registers)
+            register.setValue(0);
     }
 }

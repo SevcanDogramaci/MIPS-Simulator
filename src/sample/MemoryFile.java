@@ -8,7 +8,7 @@ public class MemoryFile {
         data = new int[size];
     }
 
-    private void resetData(){
+    public void resetData(){
         for (int i = 0; i < data.length; i++) {
             data[i] = 0;
         }

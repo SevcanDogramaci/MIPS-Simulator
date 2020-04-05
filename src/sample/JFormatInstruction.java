@@ -22,6 +22,10 @@ public class JFormatInstruction extends Instruction {
 
     }
 
+    public long getTargetOffset() {
+        return targetOffset;
+    }
+
     public static boolean checkFormat(String functionName) {
 
         return instructionMap.containsKey(functionName);
