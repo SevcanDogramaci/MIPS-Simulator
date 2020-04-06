@@ -3,21 +3,12 @@ package sample;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
 public class IFormatInstruction extends Instruction {
 
-    private enum RegisterType {
-
-    }
-
-    private short opcode;
     private Parser parser;
-
     private static Map<String, Short> instructionMap;
 
     public IFormatInstruction(String line, int i, Parser parser) {
-        super();
         this.parser = parser;
         index = i;
 
