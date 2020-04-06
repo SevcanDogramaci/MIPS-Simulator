@@ -75,7 +75,7 @@ public class RFormatInstruction extends Instruction {
 
     private String extractRegisterName(String name){
         if(name.contains("$"))
-            name.replace("$", "");
+            name = name.trim().replace("$", "");
         return name;
     }
 

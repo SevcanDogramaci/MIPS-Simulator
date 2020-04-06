@@ -40,10 +40,14 @@ public class JFormatInstruction extends Instruction {
 
         if(checkFormat(functionName)){
             this.opcode = instructionMap.get(functionName);
-            this.targetOffset = Long.parseLong(offset);
+            this.targetOffset = calculateLabel(offset);
         }
         else
             throw new Exception();
+    }
+
+    private long calculateLabel(String s) {
+        return parser.getLabelAddress(s.trim()) - index;
     }
 
     // instructions
