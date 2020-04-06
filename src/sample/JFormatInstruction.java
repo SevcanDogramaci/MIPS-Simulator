@@ -7,7 +7,6 @@ public class JFormatInstruction extends Instruction {
 
     private static Map<String, Short> instructionMap;
 
-    private long targetOffset;
     private Parser parser;
 
     public JFormatInstruction(String line, int i, Parser parser) {
@@ -21,11 +20,7 @@ public class JFormatInstruction extends Instruction {
         }
 
     }
-
-    public long getTargetOffset() {
-        return targetOffset;
-    }
-
+    
     public static boolean checkFormat(String functionName) {
         return instructionMap.containsKey(functionName);
     }
@@ -40,13 +35,13 @@ public class JFormatInstruction extends Instruction {
 
         if(checkFormat(functionName)){
             this.opcode = instructionMap.get(functionName);
-            this.targetOffset = calculateLabel(offset);
+            this.immediate = calculateLabel(offset);
         }
         else
             throw new Exception();
     }
 
-    private long calculateLabel(String s) {
+    private int calculateLabel(String s) {
         return parser.getLabelAddress(s.trim()) - index;
     }
 

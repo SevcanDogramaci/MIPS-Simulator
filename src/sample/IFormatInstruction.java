@@ -7,8 +7,6 @@ import java.util.Map;
 
 public class IFormatInstruction extends Instruction {
 
-    private int immediate;
-
     private enum RegisterType {
 
     }
@@ -42,33 +40,33 @@ public class IFormatInstruction extends Instruction {
         instruction[0] = instruction[0].split(" ")[1].trim();
 
         if(functionName.startsWith("b")){
-            sourceReg1 = RegisterFile.getRegister(extractRegisterName(instruction[0]));
+            sourceReg = RegisterFile.getRegister(extractRegisterName(instruction[0]));
 
             if (instruction.length == 2){
 
                 if (functionName.equalsIgnoreCase("bgez")){
-                    sourceReg2 = RegisterFile.getRegister("t1");
-                    sourceReg2.setValue(1);
+                    targetReg = RegisterFile.getRegister("t1");
+                    targetReg.setValue(1);
                 } else
-                    sourceReg2 = RegisterFile.getRegister("zero");
+                    targetReg = RegisterFile.getRegister("zero");
 
                 immediate = calculateLabel(instruction[1]);
             }else {
-                sourceReg2 = RegisterFile.getRegister(extractRegisterName(instruction[1]));
+                targetReg = RegisterFile.getRegister(extractRegisterName(instruction[1]));
                 immediate = calculateLabel(instruction[2]);
             }
 
         } else {
-            sourceReg2 = RegisterFile.getRegister(extractRegisterName(instruction[0]));
+            targetReg = RegisterFile.getRegister(extractRegisterName(instruction[0]));
 
             if (instruction.length == 2) {
                 String ins = instruction[1].trim();
                 immediate = Integer.parseInt(ins.substring(0, ins.indexOf("(")));
-                sourceReg1 = RegisterFile.getRegister(
+                sourceReg = RegisterFile.getRegister(
                         extractRegisterName(ins.substring(ins.indexOf("(") + 1, ins.indexOf(")"))));
 
             } else {
-                sourceReg1 = RegisterFile.getRegister(extractRegisterName(instruction[1]));
+                sourceReg = RegisterFile.getRegister(extractRegisterName(instruction[1]));
                 immediate = Integer.parseInt(instruction[2].trim());
             }
         }

@@ -3,14 +3,14 @@ package sample;
 public abstract class Instruction {
 
     protected short opcode;
-    protected int index;
-    protected Register sourceReg1, sourceReg2, destinationReg;
+    protected int index, shiftAmount, immediate;
+    protected Register sourceReg, targetReg, destinationReg;
 
     public static Instruction createInstruction(String line, int i, Parser parser) throws Exception {
 
         String funcName = line.split(" ")[0];
 
-         if (IFormatInstruction.checkFormat(funcName))
+        if (IFormatInstruction.checkFormat(funcName))
              System.out.println("I");
 
         if (RFormatInstruction.checkFormat(funcName))
@@ -25,17 +25,29 @@ public abstract class Instruction {
 
     abstract void parseInstruction (String line) throws Exception;
 
-    public boolean isRegS1 () {
-        return sourceReg1 != null;
+    public boolean isRegSource() {
+        return sourceReg != null;
     }
 
-    public boolean isRegS2 () {
-        return sourceReg1 != null;
+    public boolean isRegTarget() {
+        return targetReg != null;
     }
 
     public boolean isRegDest () {
         return destinationReg != null;
     }
+
+    public Register getSourceReg() { return sourceReg; }
+
+    public Register getTargetReg() { return targetReg; }
+
+    public Register getDestinationReg() { return destinationReg; }
+
+    public short getFunction() { return opcode; };
+
+    public int getShiftAmount() { return shiftAmount; }
+
+    public int getImmediate() { return immediate; }
 
     public boolean isRFormat(){
         return this instanceof RFormatInstruction;
@@ -48,4 +60,5 @@ public abstract class Instruction {
     public boolean isJFormat(){
         return this instanceof JFormatInstruction;
     }
+
 }

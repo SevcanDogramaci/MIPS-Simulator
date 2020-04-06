@@ -45,10 +45,39 @@ public class Processor {
         // fetch instruction
         instruction = instructionMemoryFile.fetch(pc);
 
+
         // send instruction to control unit
         ControlUnit controlUnit = new ControlUnit(instruction);
 
-        // ...
+
+        // extract registers' data that will be used
+        int sourceRegData = instruction.getSourceReg().getValue(),
+            targetRegData = instruction.getTargetReg().getValue(),
+            destinationRegData = instruction.getDestinationReg().getValue();
+
+        int writeReg = mux(targetRegData, destinationRegData , controlUnit.isRegDst());
+        registerFile.setRegisters(sourceRegData, targetRegData, writeReg);
+        regData1 = registerFile.readData1();
+        regData2 = registerFile.readData2();
+
+
+        // ALU performs operation
+        alu.setOperation(
+                ALUControl.getControl(controlUnit.isALUOp1(), controlUnit.isALUOp0(), instruction.getFunction()),
+                mux(regData2, instruction.getImmediate(), controlUnit.isALUsrc()),
+                regData1);
+        alu_out = alu.getOut();
+        alu_zero = alu.isZero();
+
+
+        // memory operations
+        data_out = memory.cycle(controlUnit.isMemRead(), controlUnit.isMemWrite(), alu_out, regData2);
+
+
+        // writeback
+        write_data = mux(alu_out, data_out, controlUnit.isMemtoReg());
+        registerFile.write(controlUnit.isRegWrite(), write_data);
+
 
         // update pc 
         updatePc(instruction, new_pc, branch_pc, alu_zero, controlUnit);
@@ -64,8 +93,8 @@ public class Processor {
             branch_pc = (int) (new_pc + (((JFormatInstruction)instruction).getTargetOffset() << 2));
         }
 
-        // update pc if branching exists
-        new_pc = mux(new_pc, branch_pc, controlUnit.isBranch() && alu_zero);
+        // update pc if branching or jumping exists
+        new_pc = mux(new_pc, branch_pc, (controlUnit.isBranch() || controlUnit.isJump()) && alu_zero);
         pc.set(new_pc);
     }
 

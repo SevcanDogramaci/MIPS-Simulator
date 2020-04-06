@@ -1,13 +1,12 @@
 package sample;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RFormatInstruction extends Instruction {
 
-    private short shiftAmount, functionCode;
-    private int index;
+    private short functionCode;
+    //private int index;
     private Register registers[];
 
     private static Map<String, String> instructionMap;
@@ -65,6 +64,11 @@ public class RFormatInstruction extends Instruction {
         }
     }
 
+    @Override
+    public short getFunction() {
+        return functionCode;
+    }
+
     private int getNextRegister(char usage[], int idx){
         for (idx = idx + 1; idx < usage.length; idx++){
             if (usage[idx] == '1')
@@ -83,8 +87,8 @@ public class RFormatInstruction extends Instruction {
     private void setRegisters() {
         registers = new Register[3];
         registers[0] = destinationReg;
-        registers[1] = sourceReg1;
-        registers[2] = sourceReg2;
+        registers[1] = sourceReg;
+        registers[2] = targetReg;
     }
 
     static {
