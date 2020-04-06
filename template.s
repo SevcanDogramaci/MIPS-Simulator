@@ -1,5 +1,5 @@
-﻿nor $t1, $zero, $zero
-add $t2, $t1, $t1
+﻿add $t2, $t1, $t1
+beq $t1, $t5, -3
 sub $t3, $t1, $t2
 add $t1, $t3, $zero
 
@@ -12,7 +12,7 @@ add $t7, $t6, $t5
 
 sw $t7, 2($t4)
 
-beq $t1, $t5, -3
+
 
 add $t5, $t4, $t3
 add $t6, $t5, $t4
