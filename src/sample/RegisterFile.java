@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class RegisterFile {
 
-    private int rr1, rr2, wr;
+    private Register rr1, rr2, wr;
     private static ArrayList<Register> registers = new ArrayList<>();
     private static String[] registerNames = {
             "zero",
@@ -77,19 +77,20 @@ public class RegisterFile {
             register.setValue(0);
     }
 
-    public void setRegisters(int rr1, int rr2, int wr) {
+    public void setRegisters(Register rr1, Register rr2, Register wr) {
         this.rr1 = rr1;
         this.rr2 = rr2;
         this.wr = wr;
     }
 
-    public int readData1() { return  rr1; }
+    public int readData1() { return  rr1 == null ? 0 : rr1.getValue(); }
 
-    public int readData2() { return  rr2; }
+    public int readData2() { return  rr2 == null ? 0 : rr2.getValue(); }
 
     public void write(boolean regWrite, int dataValue) {
         if(regWrite) {
-            setRegisterData(wr, dataValue);
+            if(wr != null)
+                setRegisterData(wr.getNo(), dataValue);
         }
     }
 
