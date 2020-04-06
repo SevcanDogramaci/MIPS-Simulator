@@ -4,9 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RegisterFile {
 
+    private int rr1, rr2, wr;
     private static ArrayList<Register> registers = new ArrayList<>();
     private static String[] registerNames = {
             "zero",
@@ -65,5 +67,30 @@ public class RegisterFile {
     public void resetData(){
         for(Register register : registers)
             register.setValue(0);
+    }
+
+    public void setRegisters(int rr1, int rr2, int wr) {
+        this.rr1 = rr1;
+        this.rr2 = rr2;
+        this.wr = wr;
+    }
+
+    public int readData1() { return  rr1; }
+
+    public int readData2() { return  rr2; }
+
+    public void write(boolean regWrite, int dataValue) {
+        if(regWrite) {
+            setRegisterData(wr, dataValue);
+        }
+    }
+
+    public int[] getData(){
+        int[] registerData = new int[registers.size()];
+
+        for(int i = 0; i < registers.size(); i++) {
+            registerData[i] = registers.get(i).getValue();
+        }
+        return registerData;
     }
 }
