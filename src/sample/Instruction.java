@@ -10,7 +10,7 @@ public abstract class Instruction {
 
         String funcName = line.split(" ")[0];
 
-         if (IFormatInstruction.checkFormat(funcName))
+        if (IFormatInstruction.checkFormat(funcName))
              System.out.println("I");
 
         if (RFormatInstruction.checkFormat(funcName))
@@ -25,12 +25,12 @@ public abstract class Instruction {
 
     abstract void parseInstruction (String line) throws Exception;
 
-    public boolean isRegS1 () {
+    public boolean isRegSource() {
         return sourceReg != null;
     }
 
-    public boolean isRegS2 () {
-        return sourceReg != null;
+    public boolean isRegTarget() {
+        return targetReg != null;
     }
 
     public boolean isRegDest () {
