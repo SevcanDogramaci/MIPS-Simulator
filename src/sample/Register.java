@@ -17,7 +17,6 @@ public class Register {
         this.value = 0;
     }
 
-
     public void setNo(int no) { this.no = no; }
 
     public void setName(String name) { this.name = name; }

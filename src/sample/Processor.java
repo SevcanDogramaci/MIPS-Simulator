@@ -103,4 +103,8 @@ public class Processor {
     private boolean isDone() {
         return pc.get() >= instructionMemoryFile.length();
     }
+
+    public int getIndex() {
+        return pc.get()/4;
+    }
 }

@@ -59,10 +59,25 @@ public class Controller {
 
     @FXML
     public void onStep(ActionEvent event){
+        selectLine(processor.getIndex());
         processor.step();
         rTable.refresh();
     }
 
+    public int ordinalIndexOf(String str, String substr, int n) {
+        int pos = -1;
+        do {
+            pos = str.indexOf(substr, pos + 1);
+        } while (n-- > 0 && pos != -1);
+        return pos;
+    }
+
+    public void selectLine(int lineNum){
+        String txt = assemblyCodeArea.getText();
+        int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
+        int end = ordinalIndexOf(txt, "\n", lineNum);
+        assemblyCodeArea.selectRange(start, end);
+    }
     @FXML
     public void chooseFilePressed(ActionEvent event) throws Exception {
         FileChooser fileChooser = new FileChooser();
