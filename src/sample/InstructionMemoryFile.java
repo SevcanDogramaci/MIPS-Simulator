@@ -3,10 +3,11 @@ package sample;
 import java.util.List;
 
 public class InstructionMemoryFile {
-    private Instruction[] instructions = {};
+    private Instruction[] instructions;
 
     public void load(List<Instruction> instructions) {
-        this.instructions = (Instruction[]) instructions.toArray();
+        this.instructions = new Instruction[instructions.size()];
+        this.instructions = instructions.toArray(this.instructions);
     }
 
     public Instruction fetch(ProgramCounter pc) {

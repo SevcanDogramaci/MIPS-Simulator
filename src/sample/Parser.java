@@ -37,6 +37,7 @@ public class Parser {
         for (int i = 0; i < clearedLines.size(); i++) {
             instructions.add(Instruction.createInstruction(clearedLines.get(i), i, this));
         }
+
     }
 
     private void extractLabels(){
@@ -124,5 +125,9 @@ public class Parser {
             System.out.println(s);
         }
         return sb.toString();
+    }
+
+    public List<Instruction> getInstructions() {
+        return this.instructions;
     }
 }

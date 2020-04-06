@@ -14,7 +14,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.chrono.IsoChronology;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
 
@@ -27,6 +29,7 @@ public class Controller {
     @FXML private TableColumn<Register, String > rName;
 
     private Parser parser;
+    private Processor processor;
 
     @FXML
     public void initialize(){
@@ -48,6 +51,16 @@ public class Controller {
         } else {
             parser.createInstructions();
         }
+
+        List<Instruction> ınstructions = parser.getInstructions();
+        processor = new Processor();
+        processor.loadInstructionsToMemory(ınstructions);
+    }
+
+    @FXML
+    public void onStep(ActionEvent event){
+        processor.step();
+        rTable.refresh();
     }
 
     @FXML
