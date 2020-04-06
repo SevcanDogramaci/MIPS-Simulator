@@ -50,12 +50,12 @@ public class Processor {
 
 
         // extract registers' data that will be used
-        int sourceRegData = instruction.getSourceReg().getValue(),
-            targetRegData = instruction.getTargetReg().getValue(),
-            destinationRegData = instruction.getDestinationReg().getValue();
+        Register sourceReg = instruction.getSourceReg(),
+                targetReg = instruction.getTargetReg(),
+                destinationReg = instruction.getDestinationReg();
 
-        int writeReg = mux(targetRegData, destinationRegData , controlUnit.isRegDst());
-        registerFile.setRegisters(sourceRegData, targetRegData, writeReg);
+        Register writeReg = (Register) mux(targetReg, destinationReg , controlUnit.isRegDst());
+        registerFile.setRegisters(sourceReg, targetReg, writeReg);
         regData1 = registerFile.readData1();
         regData2 = registerFile.readData2();
 
@@ -63,7 +63,7 @@ public class Processor {
         // ALU performs operation
         alu.setOperation(
                 ALUControl.getControl(controlUnit.isALUOp1(), controlUnit.isALUOp0(), instruction.getFunction()),
-                mux(regData2, instruction.getImmediate(), controlUnit.isALUsrc()),
+                (int)mux(regData2, instruction.getImmediate(), controlUnit.isALUsrc()),
                 regData1);
         alu_out = alu.getOut();
         alu_zero = alu.isZero();
@@ -74,7 +74,7 @@ public class Processor {
 
 
         // writeback
-        write_data = mux(alu_out, data_out, controlUnit.isMemtoReg());
+        write_data = (int)mux(alu_out, data_out, controlUnit.isMemtoReg());
         registerFile.write(controlUnit.isRegWrite(), write_data);
 
 
@@ -89,11 +89,11 @@ public class Processor {
 
 
         // update pc if branching or jumping exists
-        new_pc = mux(new_pc, branch_pc, (controlUnit.isBranch() || controlUnit.isJump()) && alu_zero);
+        new_pc = (int)mux(new_pc, branch_pc, (controlUnit.isBranch() || controlUnit.isJump()) && alu_zero);
         pc.set(new_pc);
     }
 
-    private int mux (int value1, int value2, boolean getSecond) {
+    private Object mux (Object value1, Object value2, boolean getSecond) {
         if(getSecond) {
             return value2;
         }
