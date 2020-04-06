@@ -53,7 +53,12 @@ public class IFormatInstruction extends Instruction {
                 immediate = calculateLabel(instruction[1]);
             }else {
                 targetReg = RegisterFile.getRegister(extractRegisterName(instruction[1]));
-                immediate = calculateLabel(instruction[2]);
+
+                try {
+                    immediate = Integer.parseInt(instruction[2].trim());
+                }catch (Exception e){
+                    immediate = calculateLabel(instruction[2]);
+                }
             }
 
         } else {

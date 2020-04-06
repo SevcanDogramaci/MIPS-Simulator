@@ -35,7 +35,9 @@ public class Parser {
         extractLabels();
 
         for (int i = 0; i < clearedLines.size(); i++) {
-            instructions.add(Instruction.createInstruction(clearedLines.get(i), i, this));
+            Instruction in= Instruction.createInstruction(clearedLines.get(i), i, this);
+            if(in != null)
+                instructions.add(in);
         }
 
     }

@@ -6,15 +6,10 @@ public class Register {
     private int no;
     private int value;
 
-    public Register(int no) {
-        this.no = no;
-        this.value = 0;
-    }
-
     public Register(int no, String name) {
         this.no = no;
         this.name = name;
-        this.value = 0;
+        this.value = 1;
     }
 
     public void setNo(int no) { this.no = no; }

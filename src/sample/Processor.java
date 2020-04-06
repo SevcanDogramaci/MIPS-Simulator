@@ -59,6 +59,10 @@ public class Processor {
         regData1 = registerFile.readData1();
         regData2 = registerFile.readData2();
 
+        System.out.println(regData1 + " " + regData2);
+        System.out.println(sourceReg);
+        System.out.println(targetReg);
+        System.out.println(destinationReg);
 
         // ALU performs operation
         alu.setOperation(
