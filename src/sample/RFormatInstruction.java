@@ -43,8 +43,7 @@ public class RFormatInstruction extends Instruction {
         if (instruction.length == 1) // syscall or exit.
             return;
 
-        //if (instruction[0].contains(" "))
-            instruction[0] = instruction[0].split(" ")[1].trim();
+        instruction[0] = instruction[0].split(" ")[1].trim();
 
 
         int lastIdx = -1;

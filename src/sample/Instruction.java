@@ -10,6 +10,9 @@ public abstract class Instruction {
 
         String funcName = line.split(" ")[0];
 
+         if (IFormatInstruction.checkFormat(funcName))
+             System.out.println("I");
+
         if (RFormatInstruction.checkFormat(funcName))
             return new RFormatInstruction(line, i);
         else if (IFormatInstruction.checkFormat(funcName))
