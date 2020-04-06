@@ -20,6 +20,8 @@ public class IFormatInstruction extends Instruction {
         super();
         this.parser = parser;
         index = i;
+
+        parseInstruction(line);
     }
 
     public int getImmediate() {
@@ -32,7 +34,53 @@ public class IFormatInstruction extends Instruction {
 
     @Override
     void parseInstruction(String line) {
+        String[] instruction = line.toLowerCase().split(",");
+        String functionName = instruction[0].split(" ")[0];
 
+        instruction[0] = instruction[0].split(" ")[1].trim();
+
+        if(functionName.startsWith("b")){
+            sourceReg1 = RegisterFile.getRegister(extractRegisterName(instruction[0]));
+
+            if (instruction.length == 2){
+
+                if (functionName.equalsIgnoreCase("bgez")){
+                    sourceReg2 = RegisterFile.getRegister("t1");
+                    sourceReg2.setValue(1);
+                } else
+                    sourceReg2 = RegisterFile.getRegister("zero");
+
+                immediate = calculateLabel(instruction[1]);
+            }else {
+                sourceReg2 = RegisterFile.getRegister(extractRegisterName(instruction[1]));
+                immediate = calculateLabel(instruction[2]);
+            }
+
+        } else {
+            sourceReg2 = RegisterFile.getRegister(extractRegisterName(instruction[0]));
+
+            if (instruction.length == 2) {
+                String ins = instruction[1].trim();
+                immediate = Integer.parseInt(ins.substring(0, ins.indexOf("(")));
+                sourceReg1 = RegisterFile.getRegister(
+                        extractRegisterName(ins.substring(ins.indexOf("(") + 1, ins.indexOf(")"))));
+
+            } else {
+                sourceReg1 = RegisterFile.getRegister(extractRegisterName(instruction[1]));
+                immediate = Integer.parseInt(instruction[2].trim());
+            }
+        }
+
+    }
+
+    private int calculateLabel(String s) {
+        return parser.getLabelAddress(s.trim()) - index;
+    }
+
+    private String extractRegisterName(String name){
+        if(name.contains("$"))
+            name = name.trim().replace("$", "");
+        return name;
     }
 
     static {
