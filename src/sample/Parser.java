@@ -68,7 +68,7 @@ public class Parser {
             }
         }
 
-        labelAddressesMap.forEach((k,v) -> System.out.print(k + "-" + v + ","));
+        // labelAddressesMap.forEach((k,v) -> System.out.print(k + "-" + v + ","));
     }
 
     public int getLabelAddress(String labelName){

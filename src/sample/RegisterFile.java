@@ -58,6 +58,14 @@ public class RegisterFile {
         registers.get(index).setValue(dataValue);
     }
 
+    public static Register getRegister(String name) {
+        for (Register r: registers) {
+            if (r.getName().equalsIgnoreCase(name))
+                return r;
+        }
+        return null;
+    }
+
     public static ObservableList<Register> getRegisters(){
         return FXCollections.observableArrayList(registers);
     }

@@ -44,7 +44,7 @@ public class RFormatInstruction extends Instruction {
             return;
 
         //if (instruction[0].contains(" "))
-            instruction[0] = instruction[0].split(" ")[1].trim(); // problem with this line
+            instruction[0] = instruction[0].split(" ")[1].trim();
 
 
         int lastIdx = -1;
@@ -54,7 +54,7 @@ public class RFormatInstruction extends Instruction {
                 lastIdx = getNextRegister(registerUsage, lastIdx);
                 if (lastIdx == 3)
                     shiftAmount = Short.parseShort(instruction[i]);
-                registers[lastIdx] = Register.getRegister(extractRegisterName(instruction[i]));
+                registers[lastIdx] = RegisterFile.getRegister(extractRegisterName(instruction[i]));
             }catch (Exception e){
                 System.out.println(line + " " + instruction[i] + " " +  lastIdx);
 
