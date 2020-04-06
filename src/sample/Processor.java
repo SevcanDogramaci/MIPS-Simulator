@@ -86,12 +86,7 @@ public class Processor {
     private void updatePc(Instruction instruction, int new_pc, int branch_pc, boolean alu_zero, ControlUnit controlUnit) {
         new_pc += 4;
 
-        if(instruction.isIFormat()){
-            branch_pc = new_pc + (((IFormatInstruction)instruction).getImmediate() << 2);
-        }
-        else if(instruction.isJFormat()){
-            branch_pc = (int) (new_pc + (((JFormatInstruction)instruction).getTargetOffset() << 2));
-        }
+        branch_pc = new_pc + instruction.getImmediate() << 2;
 
         // update pc if branching or jumping exists
         new_pc = mux(new_pc, branch_pc, (controlUnit.isBranch() || controlUnit.isJump()) && alu_zero);
