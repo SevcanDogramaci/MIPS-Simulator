@@ -27,7 +27,6 @@ public class JFormatInstruction extends Instruction {
     }
 
     public static boolean checkFormat(String functionName) {
-
         return instructionMap.containsKey(functionName);
     }
 

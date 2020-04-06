@@ -32,6 +32,8 @@ public class Parser {
         instructions = new ArrayList<>();
         labelAddressesMap = new HashMap<>();
 
+        extractLabels();
+
         for (int i = 0; i < clearedLines.size(); i++) {
             instructions.add(Instruction.createInstruction(clearedLines.get(i), i, this));
         }
@@ -65,6 +67,8 @@ public class Parser {
                 i++;
             }
         }
+
+        labelAddressesMap.forEach((k,v) -> System.out.print(k + "-" + v + ","));
     }
 
     public int getLabelAddress(String labelName){

@@ -58,10 +58,10 @@ public class Processor {
         new_pc += 4;
 
         if(instruction.isIFormat()){
-            branch_pc = new_pc + ((IFormatInstruction)instruction).getImmediate() << 2;
+            branch_pc = new_pc + (((IFormatInstruction)instruction).getImmediate() << 2);
         }
         else if(instruction.isJFormat()){
-            branch_pc = (int) (new_pc + ((JFormatInstruction)instruction).getTargetOffset() << 2);
+            branch_pc = (int) (new_pc + (((JFormatInstruction)instruction).getTargetOffset() << 2));
         }
 
         // update pc if branching exists
