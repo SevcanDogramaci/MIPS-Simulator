@@ -12,6 +12,10 @@ public abstract class Instruction {
 
         if (IFormatInstruction.checkFormat(funcName))
              System.out.println("I");
+        if (RFormatInstruction.checkFormat(funcName))
+            System.out.println("R");
+        else if (JFormatInstruction.checkFormat(funcName))
+            System.out.println("J");
 
         if (RFormatInstruction.checkFormat(funcName))
             return new RFormatInstruction(line, i);
@@ -20,6 +24,7 @@ public abstract class Instruction {
         else if (JFormatInstruction.checkFormat(funcName))
             return new JFormatInstruction(line, i, parser);
 
+        System.out.println("I return null");
         return null;
     }
 

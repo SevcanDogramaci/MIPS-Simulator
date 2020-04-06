@@ -1,57 +1,21 @@
-﻿.data
-str1: .asciiz "Enter the first integer: "
-str2: .asciiz "Enter the second integer: "
-str3: .asciiz "The sum is "
-newline: .asciiz "\n"
+﻿nor $t1, $zero, $zero
+add $t2, $t1, $t1
+sub $t3, $t1, $t2
+add $t1, $t3, $zero
 
-.text       # instructions follow this line
-main:   # indicates start of code (first instruction to execute)
+add $t2, $t1, $t0
+add $t3, $t2, $t1
+add $t4, $t3, $t2
+add $t5, $t4, $t3
+add $t6, $t5, $t4
+add $t7, $t6, $t5
 
-addi $v0, $zero, 4
-  # adds zero and imm value 4 and stores in 32-bit function result registers
+sw $t7, 2($t4)
 
-la $a0, str1
-  #load system register $a0, with the address of the string to be output
-syscall
+beq $t1, $t5, -3
 
-addi $v0, $zero, 5
-   # adds zero and imm value 5 and stores in 32-bit function result registers
-syscall
-add $s0, $zero, $v0
-   #adds 0 and value in $v0 and stores in $s0
-addi $v0, $zero, 4
-   # adds zero and imm value 4 and stores in 32-bit function result registers
-la $a0, str2
-   #load system register $a0, with the address of the string to be output
-syscall
+add $t5, $t4, $t3
+add $t6, $t5, $t4
+add $t7, $t6, $t5
 
-addi $v0, $zero, 5
-   # adds zero and imm value 5 and stores in 32-bit function result registers
-syscall
-add $s1, $zero, $v0
-   #adds 0 and value in $v0 and stores in $s1
-add $s2, $s0, $s1
-   # adds value in $s0 and value in $s1 and stores in $s2
-addi $v0, $zero, 4
-   # adds zero and imm value 4 and stores in 32-bit function result registers
-la $a0, str3
-   # load system register $a0, with the address of the string to be output
-syscall
-
-addi $v0, $zero, 1
-   # adds zero and imm value 1 and stores in 32-bit function result registers
-add $a0, $zero, $s2
-   # adds value in $s2 and 0 and stores in system register $a0
-syscall
-
-addi $v0, $zero, 4
-   # adds zero and imm value 4 and stores in 32-bit function result registers
-la $a0, newline
-   # load system register $a0, with the address of the string to be output
-syscall
-
-addi $v0, $zero, 10
-   # adds zero and imm value 10 and stores in 32-bit function result registers
-syscall
-jr  $ra
-   # jump to address contained in $ra
+beq $t1, $t1, -4

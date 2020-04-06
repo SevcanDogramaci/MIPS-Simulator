@@ -59,6 +59,10 @@ public class Processor {
         regData1 = registerFile.readData1();
         regData2 = registerFile.readData2();
 
+        System.out.println(regData1 + " " + regData2);
+        System.out.println(sourceReg);
+        System.out.println(targetReg);
+        System.out.println(destinationReg);
 
         // ALU performs operation
         alu.setOperation(
@@ -102,5 +106,9 @@ public class Processor {
 
     private boolean isDone() {
         return pc.get() >= instructionMemoryFile.length();
+    }
+
+    public int getIndex() {
+        return pc.get()/4;
     }
 }

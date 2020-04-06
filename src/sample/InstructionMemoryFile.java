@@ -11,7 +11,6 @@ public class InstructionMemoryFile {
     }
 
     public Instruction fetch(ProgramCounter pc) {
-
         return instructions[pc.get()/4];
     }
 
