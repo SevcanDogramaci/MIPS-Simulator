@@ -7,8 +7,6 @@ import java.util.Map;
 
 public class IFormatInstruction extends Instruction {
 
-    private int immediate;
-
     private enum RegisterType {
 
     }
