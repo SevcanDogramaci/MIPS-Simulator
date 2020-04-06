@@ -2,7 +2,8 @@ package sample;
 
 public class ALUControl {
 
-    public static short getControl(boolean ALUOp1, boolean ALUOp0, short funct){
+    public static short getControl(boolean ALUOp1, boolean ALUOp0, short funct) {
+
         if(!ALUOp1 && !ALUOp0) {
             return ALU.ADD;
         }

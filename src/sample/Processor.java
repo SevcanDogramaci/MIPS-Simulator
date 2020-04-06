@@ -87,6 +87,7 @@ public class Processor {
 
         branch_pc = new_pc + (instruction.getImmediate() << 2);
 
+
         // update pc if branching or jumping exists
         new_pc = mux(new_pc, branch_pc, (controlUnit.isBranch() || controlUnit.isJump()) && alu_zero);
         pc.set(new_pc);
