@@ -22,7 +22,7 @@ public class Parser {
     }
 
     public Parser(String text) throws Exception {
-        inputLines = (ArrayList<String>) Arrays.asList(text.split("\n"));
+        inputLines = new ArrayList<>(Arrays.asList(text.split("\n")));
         clearComments(inputLines);
 
         createInstructions();

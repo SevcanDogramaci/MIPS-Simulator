@@ -38,17 +38,31 @@ public class RFormatInstruction extends Instruction {
         String code = instructionMap.get(functionName);
 
         this.functionCode = Short.parseShort(code.substring(0, 6), 2);
-        char[] registerUsage = code.substring(6).toCharArray();
-        instruction[0] = instruction[0].split(" ")[1].trim(); // problem with this line
+        char[] registerUsage = code.substring(7).toCharArray();
+
+        if (instruction.length == 1) // syscall or exit.
+            return;
+
+        //if (instruction[0].contains(" "))
+            instruction[0] = instruction[0].split(" ")[1].trim(); // problem with this line
 
 
         int lastIdx = -1;
 
         for(int i = 0; i < instruction.length; i++){
-            lastIdx = getNextRegister(registerUsage, lastIdx);
-            if(lastIdx == 3)
-                shiftAmount = Short.parseShort(instruction[i]);
-            registers[lastIdx] = Register.getRegister(extractRegisterName(instruction[i]));
+            try {
+                lastIdx = getNextRegister(registerUsage, lastIdx);
+                if (lastIdx == 3)
+                    shiftAmount = Short.parseShort(instruction[i]);
+                registers[lastIdx] = Register.getRegister(extractRegisterName(instruction[i]));
+            }catch (Exception e){
+                System.out.println(line + " " + instruction[i] + " " +  lastIdx);
+
+                for (char a: registerUsage) {
+                    System.out.print(a);
+                }
+                e.printStackTrace();
+            }
         }
     }
 
