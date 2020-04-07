@@ -6,21 +6,15 @@ import java.util.Map;
 public class JFormatInstruction extends Instruction {
 
     private static Map<String, Short> instructionMap;
-
     private Parser parser;
 
-    public JFormatInstruction(String line, int i, Parser parser) {
+    public JFormatInstruction(String line, int i, Parser parser) throws Exception {
         this.parser = parser;
         index = i;
-        try{
-            parseInstruction(line);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        System.out.println(sourceReg+" "+destinationReg + " " +targetReg);
+        //System.out.println(sourceReg+" "+destinationReg + " " +targetReg);
 
+        parseInstruction(line);
     }
 
     public static boolean checkFormat(String functionName) {

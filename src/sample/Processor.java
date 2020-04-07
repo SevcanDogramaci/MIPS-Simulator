@@ -104,7 +104,7 @@ public class Processor {
         return value1;
     }
 
-    private boolean isDone() {
+    public boolean isDone() {
         return pc.get() >= instructionMemoryFile.length();
     }
 

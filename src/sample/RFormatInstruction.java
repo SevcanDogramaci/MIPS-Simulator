@@ -6,9 +6,7 @@ import java.util.Map;
 public class RFormatInstruction extends Instruction {
 
     private short functionCode;
-    //private int index;
     private Register registers[];
-
     private static Map<String, String> instructionMap;
 
     public RFormatInstruction(String line, int i) throws Exception {
@@ -24,9 +22,7 @@ public class RFormatInstruction extends Instruction {
         }
 
         System.out.println(sourceReg+" "+destinationReg + " " +targetReg);
-
     }
-
 
     public static boolean checkFormat(String functionName) {
         return instructionMap.containsKey(functionName);

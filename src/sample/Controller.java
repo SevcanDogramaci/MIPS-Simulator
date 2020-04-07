@@ -2,10 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -16,7 +13,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.chrono.IsoChronology;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public class Controller {
 
@@ -57,13 +56,40 @@ public class Controller {
         List<Instruction> instructions = parser.getInstructions();
         processor = new Processor();
         processor.loadInstructionsToMemory(instructions);
+        selectLine(0);
     }
 
     @FXML
-    public void onStep(ActionEvent event){
-        selectLine(processor.getIndex());
-        processor.step();
-        rTable.refresh();
+    public void onStep(ActionEvent event) throws Exception {
+        selectLine(processor.getIndex() + 1);
+
+        if(!processor.isDone()){
+            processor.step();
+            rTable.refresh();
+            selectLine(processor.getIndex() + 1);
+        }
+        else
+            alertProgramFinish(event);
+    }
+
+    private void alertProgramFinish(ActionEvent event) throws Exception {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setHeaderText("The program has finished!");
+        alert.setContentText("Do you want to run again ?");
+
+        ButtonType btnExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType btnStartAgain = new ButtonType("Start Again", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(btnStartAgain, btnExit);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == btnStartAgain)
+            runPressed(event);
+        else
+            System.exit(0);
+
     }
 
     public int ordinalIndexOf(String str, String substr, int n) {
@@ -75,9 +101,10 @@ public class Controller {
     }
 
     public void selectLine(int lineNum){
+        System.out.println("line num : " + lineNum);
         String txt = assemblyCodeArea.getText();
-        int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum  );
-        int end = ordinalIndexOf(txt, "\n", lineNum + 1);
+        int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
+        int end = ordinalIndexOf(txt, "\n", lineNum  );
         assemblyCodeArea.selectRange(start, end);
     }
     @FXML
