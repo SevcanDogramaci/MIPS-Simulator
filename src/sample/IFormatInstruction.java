@@ -22,6 +22,8 @@ public class IFormatInstruction extends Instruction {
         index = i;
 
         parseInstruction(line);
+
+        System.out.println(sourceReg+" "+destinationReg + " " +targetReg);
     }
 
     public int getImmediate() {

@@ -21,7 +21,7 @@ import java.util.List;
 public class Controller {
 
     @FXML
-    private Button btnChooseFile, btnRun;
+    private Button btnChooseFile, btnRun, btnStep;
     @FXML private TextArea assemblyCodeArea;
     @FXML private TableView<Register> rTable;
     @FXML private TableColumn<Register, Integer> rNo;
@@ -46,15 +46,17 @@ public class Controller {
 
     @FXML
     public void runPressed(ActionEvent event) throws Exception {
+        btnRun.setDisable(true);
+        btnStep.setDisable(false);
         if(assemblyCodeArea.editableProperty().getValue()){
             parser = new Parser(assemblyCodeArea.getText());
         } else {
             parser.createInstructions();
         }
 
-        List<Instruction> ınstructions = parser.getInstructions();
+        List<Instruction> instructions = parser.getInstructions();
         processor = new Processor();
-        processor.loadInstructionsToMemory(ınstructions);
+        processor.loadInstructionsToMemory(instructions);
     }
 
     @FXML
@@ -74,8 +76,8 @@ public class Controller {
 
     public void selectLine(int lineNum){
         String txt = assemblyCodeArea.getText();
-        int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
-        int end = ordinalIndexOf(txt, "\n", lineNum);
+        int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum  );
+        int end = ordinalIndexOf(txt, "\n", lineNum + 1);
         assemblyCodeArea.selectRange(start, end);
     }
     @FXML

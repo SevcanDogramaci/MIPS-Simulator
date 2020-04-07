@@ -1,5 +1,4 @@
-﻿nor $t1, $zero, $zero
-add $t2, $t1, $t1
+﻿add $t2, $t1, $t1
 sub $t3, $t1, $t2
 add $t1, $t3, $zero
 

@@ -19,6 +19,8 @@ public class JFormatInstruction extends Instruction {
             e.printStackTrace();
         }
 
+        System.out.println(sourceReg+" "+destinationReg + " " +targetReg);
+
     }
 
     public static boolean checkFormat(String functionName) {

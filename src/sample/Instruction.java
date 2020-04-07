@@ -11,7 +11,7 @@ public abstract class Instruction {
         String funcName = line.split(" ")[0];
 
         if (IFormatInstruction.checkFormat(funcName))
-             System.out.println("I");
+             System.out.println("I " );
         if (RFormatInstruction.checkFormat(funcName))
             System.out.println("R");
         else if (JFormatInstruction.checkFormat(funcName))

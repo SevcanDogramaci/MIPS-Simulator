@@ -22,6 +22,9 @@ public class RFormatInstruction extends Instruction {
         catch (Exception e) {
             e.printStackTrace();
         }
+
+        System.out.println(sourceReg+" "+destinationReg + " " +targetReg);
+
     }
 
 
@@ -50,9 +53,21 @@ public class RFormatInstruction extends Instruction {
         for(int i = 0; i < instruction.length; i++){
             try {
                 lastIdx = getNextRegister(registerUsage, lastIdx);
-                if (lastIdx == 3)
-                    shiftAmount = Short.parseShort(instruction[i]);
-                registers[lastIdx] = RegisterFile.getRegister(extractRegisterName(instruction[i]));
+
+                switch (lastIdx) {
+                    case 0:
+                        destinationReg = RegisterFile.getRegister(extractRegisterName(instruction[i]));
+                        break;
+                    case 1:
+                        sourceReg = RegisterFile.getRegister(extractRegisterName(instruction[i]));
+                        break;
+                    case 2:
+                        targetReg = RegisterFile.getRegister(extractRegisterName(instruction[i]));
+                        break;
+                    case 3:
+                        shiftAmount = Short.parseShort(instruction[i]);
+                        break;
+                }
             }catch (Exception e){
                 System.out.println(line + " " + instruction[i] + " " +  lastIdx);
 
