@@ -121,10 +121,11 @@ public class Parser {
 
     public String getLines() {
         StringBuilder sb = new StringBuilder();
-        for (String s: clearedLines){
+
+        for (String s: clearedLines) {
             sb.append(s);
-            sb.append("\n");
-            System.out.println(s);
+            if(!s.contains(":"))
+                sb.append("\n");
         }
         return sb.toString();
     }

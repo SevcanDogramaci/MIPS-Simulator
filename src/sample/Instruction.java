@@ -5,6 +5,7 @@ public abstract class Instruction {
     protected short opcode;
     protected int index, shiftAmount, immediate;
     protected Register sourceReg, targetReg, destinationReg;
+    protected String line;
 
     public static Instruction createInstruction(String line, int i, Parser parser) throws Exception {
 
@@ -48,7 +49,7 @@ public abstract class Instruction {
 
     public Register getDestinationReg() { return destinationReg; }
 
-    public short getFunction() { return opcode; };
+    public short getFunction() { return opcode; }
 
     public int getShiftAmount() { return shiftAmount; }
 
@@ -66,4 +67,7 @@ public abstract class Instruction {
         return this instanceof JFormatInstruction;
     }
 
+    public String getLine() {
+        return line;
+    }
 }

@@ -11,6 +11,7 @@ public class JFormatInstruction extends Instruction {
     public JFormatInstruction(String line, int i, Parser parser) throws Exception {
         this.parser = parser;
         index = i;
+        this.line = line;
 
         //System.out.println(sourceReg+" "+destinationReg + " " +targetReg);
 

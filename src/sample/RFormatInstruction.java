@@ -6,13 +6,12 @@ import java.util.Map;
 public class RFormatInstruction extends Instruction {
 
     private short functionCode;
-    private Register registers[];
     private static Map<String, String> instructionMap;
 
     public RFormatInstruction(String line, int i) throws Exception {
         index = i;
         this.opcode = 0;
-        setRegisters();
+        this.line = line;
 
         try {
             parseInstruction(line);
@@ -92,14 +91,6 @@ public class RFormatInstruction extends Instruction {
         if(name.contains("$"))
             name = name.trim().replace("$", "");
         return name;
-    }
-
-
-    private void setRegisters() {
-        registers = new Register[3];
-        registers[0] = destinationReg;
-        registers[1] = sourceReg;
-        registers[2] = targetReg;
     }
 
     static {

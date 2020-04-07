@@ -11,6 +11,7 @@ public class IFormatInstruction extends Instruction {
     public IFormatInstruction(String line, int i, Parser parser) {
         this.parser = parser;
         index = i;
+        this.line = line;
 
         parseInstruction(line);
 
