@@ -28,6 +28,8 @@ public class IFormatInstruction extends Instruction {
         String[] instruction = line.toLowerCase().split(",");
         String functionName = instruction[0].split(" ")[0];
 
+        opcode = instructionMap.get(functionName);
+
         instruction[0] = instruction[0].split(" ")[1].trim();
 
         if(functionName.startsWith("b")){
@@ -84,7 +86,7 @@ public class IFormatInstruction extends Instruction {
         // put instructions;
         instructionMap.put("addi", (short)8);
         instructionMap.put("addiu", (short)9);
-        instructionMap.put("andi", (short)10);
+        instructionMap.put("andi", (short)12);
         instructionMap.put("beq", (short)4);
         instructionMap.put("bgez", (short)1); //
         instructionMap.put("bgtz", (short)7);
