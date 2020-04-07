@@ -22,7 +22,19 @@ public class ControlUnit {
         }
 
         else if (instruction.isIFormat()){
-            if (instruction.opcode == 35){ // lw
+            System.out.println("Immediate : " + instruction.immediate);
+            if(instruction.opcode > 7 && instruction.opcode < 10){
+                System.out.println("Here1 " + instruction.opcode);
+                ALUsrc = true;
+                RegWrite = true;
+            }
+            else if(instruction.opcode > 9 && instruction.opcode < 15){
+                System.out.println("Here2 " + instruction.opcode);
+                ALUOp1 = true;
+                ALUsrc = true;
+                RegWrite = true;
+            }
+            else if (instruction.opcode >= 32 && instruction.opcode <= 37){ // lw
                 MemRead = true;
                 MemtoReg = true;
                 RegWrite = true;
