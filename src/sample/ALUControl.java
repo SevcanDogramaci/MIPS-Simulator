@@ -20,6 +20,7 @@ public class ALUControl {
                 return ALU.ADD;
 
             case 2:
+            case 3:
                 System.out.println("SUB");
                 return ALU.SUBTRACT;
 
