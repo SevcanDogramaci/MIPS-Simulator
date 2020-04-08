@@ -13,8 +13,6 @@ public class JFormatInstruction extends Instruction {
         index = i;
         this.line = line;
 
-        //System.out.println(sourceReg+" "+destinationReg + " " +targetReg);
-
         parseInstruction(line);
     }
 
@@ -32,14 +30,16 @@ public class JFormatInstruction extends Instruction {
 
         if(checkFormat(functionName)){
             this.opcode = instructionMap.get(functionName);
+            System.out.println(offset);
             this.immediate = calculateLabel(offset);
+            this.targetReg = RegisterFile.getRegister("ra");
         }
         else
             throw new Exception();
     }
 
     private int calculateLabel(String s) {
-        return parser.getLabelAddress(s.trim()) - index;
+        return parser.getLabelAddress(s.trim()) - index - 1;
     }
 
     // instructions

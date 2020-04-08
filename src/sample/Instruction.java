@@ -11,13 +11,6 @@ public abstract class Instruction {
 
         String funcName = line.split(" ")[0].replace("\n", "");
 
-        if (IFormatInstruction.checkFormat("ori"))
-             System.out.println("I " );
-        if (RFormatInstruction.checkFormat("add"))
-            System.out.println("R");
-        else if (JFormatInstruction.checkFormat("jal"))
-            System.out.println("J");
-
         if (RFormatInstruction.checkFormat(funcName))
             return new RFormatInstruction(line, i);
         else if (IFormatInstruction.checkFormat(funcName))
@@ -25,7 +18,6 @@ public abstract class Instruction {
         else if (JFormatInstruction.checkFormat(funcName))
             return new JFormatInstruction(line, i, parser);
 
-        System.out.println("I return null: " + line + " " + funcName);
         return null;
     }
 

@@ -1,9 +1,8 @@
 add $t1, $t3, $zero
-addi $t2, $t1, 18
-addu $t1, $t3, $zero
-and $t5, $t2, $zero
-or $t5, $t6, $zero
-addi $t2, $t2, -15
+label:
+andi $t7, $t7, 0
 andi $t7, $t7, 0
 ori $t7, $t7, 1
+slti $t7, $t7, 0
+j label
 slti $t7, $t7, 0

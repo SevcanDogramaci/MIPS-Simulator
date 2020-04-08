@@ -126,6 +126,8 @@ public class Parser {
             sb.append(s);
             if(!s.contains(":"))
                 sb.append("\n");
+            else
+                sb.append(" ");
         }
         return sb.toString();
     }
