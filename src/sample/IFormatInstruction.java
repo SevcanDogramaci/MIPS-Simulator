@@ -76,7 +76,7 @@ public class IFormatInstruction extends Instruction {
     }
 
     private int calculateLabel(String s) {
-        return parser.getLabelAddress(s.trim()) - index;
+        return parser.getLabelAddress(s.trim()) - index - 1;
     }
 
     private String extractRegisterName(String name){
