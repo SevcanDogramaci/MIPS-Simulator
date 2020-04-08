@@ -44,9 +44,7 @@ public class JFormatInstruction extends Instruction {
 
     // instructions
     static {
-        //instructionMap = new HashMap<>();
-        // put instructions;
-        instructionMap.put("j", (short)2);
-        instructionMap.put("jal", (short)3);
+        instructionMap.put("j", (short)2);  // +
+        instructionMap.put("jal", (short)3);// +
     }
 }
