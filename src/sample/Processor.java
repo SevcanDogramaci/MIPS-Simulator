@@ -79,6 +79,7 @@ public class Processor {
 
         // writeback
         write_data = (int)mux(alu_out, data_out, controlUnit.isMemtoReg());
+        write_data = (int)mux(write_data, new_pc + 4, controlUnit.isJump() && !controlUnit.isMemtoReg());
         registerFile.write(controlUnit.isRegWrite(), write_data);
 
         System.out.println("OLD PC : " + pc.get());
@@ -96,6 +97,7 @@ public class Processor {
 
 
         // update pc if branching or jumping exists
+
         new_pc = (int)mux(new_pc, branch_pc, (controlUnit.isBranch() && alu_zero) ||
                                                        (controlUnit.isBranchNotEqual() && !alu_zero) ||
                                                         controlUnit.isJump());

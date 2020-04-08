@@ -43,7 +43,8 @@ public class ControlUnit {
             }else if(instruction.opcode == 43){ // sw
                 MemWrite = true;
                 ALUsrc = true;
-            }else if (instruction.opcode == 4){ // beq
+            }
+            else if (instruction.opcode == 4){ // beq
                 Branch = true;
                 ALUOp0 = true;
             }
@@ -54,7 +55,11 @@ public class ControlUnit {
         }
 
         else if (instruction.isJFormat()){
-
+            Jump = true;
+            ALUOp0 = true;
+            if (instruction.opcode == 3){
+                RegWrite = true;
+            }
         }
 
 
@@ -75,6 +80,7 @@ public class ControlUnit {
     public boolean isJump() {
         return Jump;
     }
+
 
     public boolean isMemRead() {
         return MemRead;

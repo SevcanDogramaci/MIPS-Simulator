@@ -14,8 +14,6 @@ public class IFormatInstruction extends Instruction {
         this.line = line;
 
         parseInstruction(line);
-
-        System.out.println(sourceReg+" "+destinationReg + " " +targetReg);
     }
 
     public int getImmediate() {
@@ -23,7 +21,6 @@ public class IFormatInstruction extends Instruction {
     }
 
     public static boolean checkFormat(String functionName) {
-        System.out.println(instructionMap.containsKey(functionName));
         return instructionMap.containsKey(functionName);
     }
 

@@ -49,6 +49,7 @@ public class Controller {
         btnStep.setDisable(false);
         if(assemblyCodeArea.editableProperty().getValue()){
             parser = new Parser(assemblyCodeArea.getText());
+            assemblyCodeArea.setText(parser.getLines());
         } else {
             parser.createInstructions();
         }
@@ -65,7 +66,7 @@ public class Controller {
         if(!processor.isDone()){
             processor.step();
             rTable.refresh();
-            selectLine(processor.getIndex() + 1);
+            selectLine(processor.getIndex());
         }
         else
             alertProgramFinish(event);
@@ -102,10 +103,11 @@ public class Controller {
     private void selectLine(int lineNum){
         System.out.println("line num : " + lineNum);
         String txt = assemblyCodeArea.getText();
-        int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 2);
-        int end = lineNum == 0 ? ordinalIndexOf(txt, "\n", lineNum ) : ordinalIndexOf(txt, "\n", lineNum - 1);
+        int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
+        int end = ordinalIndexOf(txt, "\n", lineNum );
         assemblyCodeArea.selectRange(start, end);
     }
+
     @FXML
     public void chooseFilePressed(ActionEvent event) throws Exception {
         FileChooser fileChooser = new FileChooser();
