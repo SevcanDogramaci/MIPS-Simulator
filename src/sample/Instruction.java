@@ -9,13 +9,13 @@ public abstract class Instruction {
 
     public static Instruction createInstruction(String line, int i, Parser parser) throws Exception {
 
-        String funcName = line.split(" ")[0];
+        String funcName = line.split(" ")[0].replace("\n", "");
 
-        if (IFormatInstruction.checkFormat(funcName))
+        if (IFormatInstruction.checkFormat("ori"))
              System.out.println("I " );
-        if (RFormatInstruction.checkFormat(funcName))
+        if (RFormatInstruction.checkFormat("add"))
             System.out.println("R");
-        else if (JFormatInstruction.checkFormat(funcName))
+        else if (JFormatInstruction.checkFormat("jal"))
             System.out.println("J");
 
         if (RFormatInstruction.checkFormat(funcName))
@@ -25,7 +25,7 @@ public abstract class Instruction {
         else if (JFormatInstruction.checkFormat(funcName))
             return new JFormatInstruction(line, i, parser);
 
-        System.out.println("I return null");
+        System.out.println("I return null: " + line + " " + funcName);
         return null;
     }
 

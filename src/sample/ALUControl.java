@@ -10,14 +10,19 @@ public class ALUControl {
         if(ALUOp0) {
             return ALU.SUBTRACT;
         }
+
+        System.out.println("result = " + (funct & 15));
+
         switch(funct & 15) {
             case 0:
                 return ALU.ADD;
             case 2:
                 return ALU.SUBTRACT;
-            case 3:
+            case 12:
+                System.out.println("AND");
                 return ALU.AND;
-            case 4:
+            case 11:
+                System.out.println("OR");
                 return ALU.OR;
             case 7:
                 return ALU.NOR;
@@ -25,6 +30,7 @@ public class ALUControl {
                 return ALU.SLT;
         }
 
+        System.out.println("NO RESULT");
         assert false;
         return 0;
     }

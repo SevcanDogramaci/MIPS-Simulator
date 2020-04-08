@@ -6,7 +6,7 @@ import java.util.Map;
 public class IFormatInstruction extends Instruction {
 
     private Parser parser;
-    private static Map<String, Short> instructionMap;
+    private static final Map<String, Short> instructionMap;
 
     public IFormatInstruction(String line, int i, Parser parser) {
         this.parser = parser;
@@ -23,6 +23,7 @@ public class IFormatInstruction extends Instruction {
     }
 
     public static boolean checkFormat(String functionName) {
+        System.out.println(instructionMap.containsKey(functionName));
         return instructionMap.containsKey(functionName);
     }
 
@@ -30,6 +31,8 @@ public class IFormatInstruction extends Instruction {
     void parseInstruction(String line) {
         String[] instruction = line.toLowerCase().split(",");
         String functionName = instruction[0].split(" ")[0];
+
+        opcode = instructionMap.get(functionName);
 
         instruction[0] = instruction[0].split(" ")[1].trim();
 
@@ -87,7 +90,7 @@ public class IFormatInstruction extends Instruction {
         // put instructions;
         instructionMap.put("addi", (short)8);
         instructionMap.put("addiu", (short)9);
-        instructionMap.put("andi", (short)10);
+        instructionMap.put("andi", (short)12);
         instructionMap.put("beq", (short)4);
         instructionMap.put("bgez", (short)1); //
         instructionMap.put("bgtz", (short)7);

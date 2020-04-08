@@ -37,9 +37,9 @@ public class Controller {
 
     private void setupRegisterTable() {
 
-        rNo.setCellValueFactory(new PropertyValueFactory<Register, Integer>("no"));
-        rValue.setCellValueFactory(new PropertyValueFactory<Register, Integer>("value"));
-        rName.setCellValueFactory(new PropertyValueFactory<Register, String >("name"));
+        rNo.setCellValueFactory(new PropertyValueFactory<>("no"));
+        rValue.setCellValueFactory(new PropertyValueFactory<>("value"));
+        rName.setCellValueFactory(new PropertyValueFactory<>("name"));
         rTable.setItems(RegisterFile.getRegisters());
     }
 
@@ -61,7 +61,6 @@ public class Controller {
 
     @FXML
     public void onStep(ActionEvent event) throws Exception {
-        selectLine(processor.getIndex() + 1);
 
         if(!processor.isDone()){
             processor.step();
@@ -92,7 +91,7 @@ public class Controller {
 
     }
 
-    public int ordinalIndexOf(String str, String substr, int n) {
+    private int ordinalIndexOf(String str, String substr, int n) {
         int pos = -1;
         do {
             pos = str.indexOf(substr, pos + 1);
@@ -100,11 +99,11 @@ public class Controller {
         return pos;
     }
 
-    public void selectLine(int lineNum){
+    private void selectLine(int lineNum){
         System.out.println("line num : " + lineNum);
         String txt = assemblyCodeArea.getText();
-        int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
-        int end = ordinalIndexOf(txt, "\n", lineNum  );
+        int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 2);
+        int end = lineNum == 0 ? ordinalIndexOf(txt, "\n", lineNum ) : ordinalIndexOf(txt, "\n", lineNum - 1);
         assemblyCodeArea.selectRange(start, end);
     }
     @FXML

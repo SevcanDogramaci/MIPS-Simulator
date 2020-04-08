@@ -6,7 +6,7 @@ import java.util.Map;
 public class RFormatInstruction extends Instruction {
 
     private short functionCode;
-    private static Map<String, String> instructionMap;
+    private static final Map<String, String> instructionMap;
 
     public RFormatInstruction(String line, int i) throws Exception {
         index = i;
