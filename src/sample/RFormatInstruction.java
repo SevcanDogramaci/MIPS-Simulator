@@ -18,6 +18,8 @@ public class RFormatInstruction extends Instruction {
     }
 
     public static boolean checkFormat(String functionName) {
+        System.out.println("Map contains key : " + instructionMap.containsKey(functionName));
+
         return instructionMap.containsKey(functionName);
     }
 
@@ -98,6 +100,7 @@ public class RFormatInstruction extends Instruction {
     }
 
     static {
+        System.out.println("STATIC BLOCK STARTS");
         instructionMap = new HashMap<>();
         // put instructions;
 
