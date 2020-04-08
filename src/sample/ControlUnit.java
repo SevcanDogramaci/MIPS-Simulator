@@ -4,6 +4,7 @@ public class ControlUnit {
 
     private boolean RegDst; // rt or rd for write
     private boolean Branch;
+    private boolean BranchNotEqual;
     private boolean Jump;
     private boolean MemRead;
     private boolean MemtoReg;
@@ -46,6 +47,10 @@ public class ControlUnit {
                 Branch = true;
                 ALUOp0 = true;
             }
+            else if (instruction.opcode == 5){ // bne
+                BranchNotEqual = true;
+                ALUOp0 = true;
+            }
         }
 
         else if (instruction.isJFormat()){
@@ -61,6 +66,10 @@ public class ControlUnit {
 
     public boolean isBranch() {
         return Branch;
+    }
+
+    public boolean isBranchNotEqual() {
+        return BranchNotEqual;
     }
 
     public boolean isJump() {
