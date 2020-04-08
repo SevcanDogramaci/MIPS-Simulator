@@ -93,7 +93,7 @@ public class Processor {
 
 
         // update pc if branching or jumping exists
-        new_pc = (int)mux(new_pc, branch_pc, (controlUnit.isBranch() || controlUnit.isJump()) && alu_zero);
+        new_pc = (int)mux(new_pc, branch_pc, controlUnit.isBranch() || (controlUnit.isJump() && alu_zero));
         pc.set(new_pc);
     }
 

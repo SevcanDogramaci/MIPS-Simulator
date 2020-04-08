@@ -65,7 +65,7 @@ public class Controller {
         if(!processor.isDone()){
             processor.step();
             rTable.refresh();
-            selectLine(processor.getIndex() + 1);
+            selectLine(processor.getIndex());
         }
         else
             alertProgramFinish(event);

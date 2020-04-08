@@ -58,7 +58,7 @@ public class Parser {
                 this.labelAddressesMap.put(labelName, i);
 
                 if(line.indexOf(":") < line.length() - 1){
-                    instruction = line.substring(line.indexOf(":")+1, line.length()-1);
+                    instruction = line.substring(line.indexOf(":")+1);
                     this.clearedLines.set(i, instruction);
                     i++;
                 }
