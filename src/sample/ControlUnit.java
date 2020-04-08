@@ -13,10 +13,18 @@ public class ControlUnit {
     private boolean MemWrite;
     private boolean ALUsrc;  // reg2 or immediate
     private boolean RegWrite;
+    private boolean JumpReg;
 
     public ControlUnit(Instruction instruction) {
 
         if (instruction.isRFormat()){
+            if(instruction.getFunction() == 8){ // jr
+                JumpReg = true;
+                return;
+            }
+            else if(instruction.getFunction() == 9){ // jalr
+                JumpReg = true;
+            }
             RegDst = true;
             RegWrite = true;
             ALUOp1 = true;
@@ -81,6 +89,9 @@ public class ControlUnit {
         return Jump;
     }
 
+    public boolean isJumpReg() {
+        return JumpReg;
+    }
 
     public boolean isMemRead() {
         return MemRead;
