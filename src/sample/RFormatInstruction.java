@@ -6,15 +6,21 @@ import java.util.Map;
 public class RFormatInstruction extends Instruction {
 
     private short functionCode;
-    private Register registers[];
-    private static Map<String, String> instructionMap;
+    private static final Map<String, String> instructionMap;
 
     public RFormatInstruction(String line, int i) throws Exception {
         index = i;
         this.opcode = 0;
-        setRegisters();
+        this.line = line;
 
-        parseInstruction(line);
+        try {
+            parseInstruction(line);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(sourceReg+" "+destinationReg + " " +targetReg);
     }
 
     public static boolean checkFormat(String functionName) {
@@ -44,8 +50,6 @@ public class RFormatInstruction extends Instruction {
         for(int i = 0; i < instruction.length; i++){
             try {
                 lastIdx = getNextRegister(registerUsage, lastIdx);
-                if (lastIdx == 3)
-                    shiftAmount = Short.parseShort(instruction[i]);
 
                 switch (lastIdx) {
                     case 0:
@@ -89,14 +93,6 @@ public class RFormatInstruction extends Instruction {
         if(name.contains("$"))
             name = name.trim().replace("$", "");
         return name;
-    }
-
-
-    private void setRegisters() {
-        registers = new Register[3];
-        registers[0] = destinationReg;
-        registers[1] = sourceReg;
-        registers[2] = targetReg;
     }
 
     static {

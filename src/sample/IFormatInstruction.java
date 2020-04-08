@@ -6,13 +6,16 @@ import java.util.Map;
 public class IFormatInstruction extends Instruction {
 
     private Parser parser;
-    private static Map<String, Short> instructionMap;
+    private static final Map<String, Short> instructionMap;
 
     public IFormatInstruction(String line, int i, Parser parser) {
         this.parser = parser;
         index = i;
+        this.line = line;
 
         parseInstruction(line);
+
+        System.out.println(sourceReg+" "+destinationReg + " " +targetReg);
     }
 
     public int getImmediate() {
@@ -20,6 +23,7 @@ public class IFormatInstruction extends Instruction {
     }
 
     public static boolean checkFormat(String functionName) {
+        System.out.println(instructionMap.containsKey(functionName));
         return instructionMap.containsKey(functionName);
     }
 

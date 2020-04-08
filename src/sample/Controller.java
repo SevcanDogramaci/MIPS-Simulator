@@ -20,7 +20,7 @@ import java.util.Optional;
 public class Controller {
 
     @FXML
-    private Button btnChooseFile, btnRun;
+    private Button btnChooseFile, btnRun, btnStep;
     @FXML private TextArea assemblyCodeArea;
     @FXML private TableView<Register> rTable;
     @FXML private TableColumn<Register, Integer> rNo;
@@ -37,14 +37,16 @@ public class Controller {
 
     private void setupRegisterTable() {
 
-        rNo.setCellValueFactory(new PropertyValueFactory<Register, Integer>("no"));
-        rValue.setCellValueFactory(new PropertyValueFactory<Register, Integer>("value"));
-        rName.setCellValueFactory(new PropertyValueFactory<Register, String >("name"));
+        rNo.setCellValueFactory(new PropertyValueFactory<>("no"));
+        rValue.setCellValueFactory(new PropertyValueFactory<>("value"));
+        rName.setCellValueFactory(new PropertyValueFactory<>("name"));
         rTable.setItems(RegisterFile.getRegisters());
     }
 
     @FXML
     public void runPressed(ActionEvent event) throws Exception {
+        btnRun.setDisable(true);
+        btnStep.setDisable(false);
         if(assemblyCodeArea.editableProperty().getValue()){
             parser = new Parser(assemblyCodeArea.getText());
         } else {
@@ -54,15 +56,16 @@ public class Controller {
         List<Instruction> instructions = parser.getInstructions();
         processor = new Processor();
         processor.loadInstructionsToMemory(instructions);
+        selectLine(0);
     }
 
     @FXML
     public void onStep(ActionEvent event) throws Exception {
-        selectLine(processor.getIndex());
 
         if(!processor.isDone()){
             processor.step();
             rTable.refresh();
+            selectLine(processor.getIndex() + 1);
         }
         else
             alertProgramFinish(event);
@@ -88,7 +91,7 @@ public class Controller {
 
     }
 
-    public int ordinalIndexOf(String str, String substr, int n) {
+    private int ordinalIndexOf(String str, String substr, int n) {
         int pos = -1;
         do {
             pos = str.indexOf(substr, pos + 1);
@@ -96,11 +99,11 @@ public class Controller {
         return pos;
     }
 
-    public void selectLine(int lineNum){
+    private void selectLine(int lineNum){
         System.out.println("line num : " + lineNum);
         String txt = assemblyCodeArea.getText();
-        int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
-        int end = ordinalIndexOf(txt, "\n", lineNum);
+        int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 2);
+        int end = lineNum == 0 ? ordinalIndexOf(txt, "\n", lineNum ) : ordinalIndexOf(txt, "\n", lineNum - 1);
         assemblyCodeArea.selectRange(start, end);
     }
     @FXML

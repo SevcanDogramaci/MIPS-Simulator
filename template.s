@@ -1,4 +1,4 @@
-﻿add $t1, $t3, $zero
+add $t1, $t3, $zero
 addi $t2, $t1, 18
 addu $t1, $t3, $zero
 and $t5, $t2, $zero

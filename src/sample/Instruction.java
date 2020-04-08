@@ -5,16 +5,17 @@ public abstract class Instruction {
     protected short opcode;
     protected int index, shiftAmount, immediate;
     protected Register sourceReg, targetReg, destinationReg;
+    protected String line;
 
     public static Instruction createInstruction(String line, int i, Parser parser) throws Exception {
 
-        String funcName = line.split(" ")[0];
+        String funcName = line.split(" ")[0].replace("\n", "");
 
-        if (IFormatInstruction.checkFormat(funcName))
-             System.out.println("I");
-        if (RFormatInstruction.checkFormat(funcName))
+        if (IFormatInstruction.checkFormat("ori"))
+             System.out.println("I " );
+        if (RFormatInstruction.checkFormat("add"))
             System.out.println("R");
-        else if (JFormatInstruction.checkFormat(funcName))
+        else if (JFormatInstruction.checkFormat("jal"))
             System.out.println("J");
 
         if (RFormatInstruction.checkFormat(funcName))
@@ -24,7 +25,7 @@ public abstract class Instruction {
         else if (JFormatInstruction.checkFormat(funcName))
             return new JFormatInstruction(line, i, parser);
 
-        System.out.println("I return null");
+        System.out.println("I return null: " + line + " " + funcName);
         return null;
     }
 
@@ -48,7 +49,7 @@ public abstract class Instruction {
 
     public Register getDestinationReg() { return destinationReg; }
 
-    public short getFunction() { return opcode; };
+    public short getFunction() { return opcode; }
 
     public int getShiftAmount() { return shiftAmount; }
 
@@ -66,4 +67,7 @@ public abstract class Instruction {
         return this instanceof JFormatInstruction;
     }
 
+    public String getLine() {
+        return line;
+    }
 }
