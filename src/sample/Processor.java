@@ -85,22 +85,24 @@ public class Processor {
         System.out.println("OLD PC : " + pc.get());
 
         // update pc 
-        updatePc(instruction, new_pc, branch_pc, alu_zero, controlUnit);
+        updatePc(instruction, new_pc, regData1, alu_zero, controlUnit);
 
         System.out.println("NEW PC : " + pc.get());
     }
 
-    private void updatePc(Instruction instruction, int new_pc, int branch_pc, boolean alu_zero, ControlUnit controlUnit) {
+    private void updatePc(Instruction instruction, int new_pc, int jr_pc, boolean alu_zero, ControlUnit controlUnit) {
         new_pc += 4;
 
-        branch_pc = new_pc + (instruction.getImmediate() << 2);
+        int branch_pc = new_pc + (instruction.getImmediate() << 2);
 
 
         // update pc if branching or jumping exists
 
         new_pc = (int)mux(new_pc, branch_pc, (controlUnit.isBranch() && alu_zero) ||
-                                                       (controlUnit.isBranchNotEqual() && !alu_zero) ||
-                                                        controlUnit.isJump());
+                (controlUnit.isBranchNotEqual() && !alu_zero) ||
+                controlUnit.isJump());
+
+        new_pc = (int)mux(new_pc, jr_pc, controlUnit.isJumpReg());
         pc.set(new_pc);
     }
 

@@ -20,6 +20,19 @@ public class IFormatInstruction extends Instruction {
         return immediate;
     }
 
+    @Override
+    public String getMachineCode() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(fillWithZero(Integer.toBinaryString(opcode), 6))
+                .append(" ")
+                .append(fillWithZero(Integer.toBinaryString(sourceReg.getNo()), 5)).append(" ")
+                .append(fillWithZero(Integer.toBinaryString(targetReg.getNo()), 5)).append(" ")
+                .append(fillWithZero(Integer.toBinaryString(immediate), 16));
+
+        return sb.toString();
+    }
+
     public static boolean checkFormat(String functionName) {
         return instructionMap.containsKey(functionName);
     }

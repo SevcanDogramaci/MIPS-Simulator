@@ -2,10 +2,17 @@ package sample;
 
 public class MemoryFile {
 
+    public static final int STACK_START = 0;
+
     private int data[];
+
 
     public MemoryFile(int size){
         data = new int[size];
+    }
+
+    public static int getStackStart() {
+        return STACK_START;
     }
 
     public void resetData(){

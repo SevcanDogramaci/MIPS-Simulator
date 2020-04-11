@@ -30,12 +30,22 @@ public class JFormatInstruction extends Instruction {
 
         if(checkFormat(functionName)){
             this.opcode = instructionMap.get(functionName);
-            System.out.println(offset);
             this.immediate = calculateLabel(offset);
             this.targetReg = RegisterFile.getRegister("ra");
         }
         else
             throw new Exception();
+    }
+
+    @Override
+    public String getMachineCode() {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(fillWithZero(Integer.toBinaryString(opcode), 6))
+                .append(" ")
+                .append(fillWithZero(Integer.toBinaryString(immediate), 26));
+        return sb.toString();
     }
 
     private int calculateLabel(String s) {

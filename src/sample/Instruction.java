@@ -62,4 +62,14 @@ public abstract class Instruction {
     public String getLine() {
         return line;
     }
+
+    public abstract String getMachineCode();
+
+    protected String fillWithZero(String s, int expectedLen){
+        StringBuilder sBuilder = new StringBuilder(s);
+        for (int i = expectedLen - sBuilder.length(); i > 0; i--){
+            sBuilder.insert(0, "0");
+        }
+        return sBuilder.toString();
+    }
 }
