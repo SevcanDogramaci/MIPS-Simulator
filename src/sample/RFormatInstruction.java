@@ -75,7 +75,6 @@ public class RFormatInstruction extends Instruction {
             }
         }
     }
-
     @Override
     public short getFunction() {
         return functionCode;
@@ -144,8 +143,9 @@ public class RFormatInstruction extends Instruction {
         instructionMap.put("break", "00001101 0000");
         instructionMap.put("div", "011010 0110");
         instructionMap.put("divu", "011011 0110");
-        instructionMap.put("jalr", "001001 1100");
-        instructionMap.put("jr", "001000 0100");
+
+        instructionMap.put("jalr", "001001 1100");  // +
+        instructionMap.put("jr", "001000 0100");    // +
 
         instructionMap.put("mfhi", "010000 1000");
         instructionMap.put("mflo", "010010 1000");

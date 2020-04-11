@@ -15,11 +15,10 @@ public class ControlUnit {
     private boolean ALUsrc;  // reg2 or immediate
     private boolean RegWrite;
 
-
-
     public ControlUnit(Instruction instruction) {
 
         if (instruction.isRFormat()){
+//<<<<<<< HEAD
             if (instruction.getFunction() == 8){
                 //System.out.println(instruction.getSourceReg().getName());
                 System.out.println(instruction.getLine());
@@ -34,6 +33,18 @@ public class ControlUnit {
                 RegWrite = true;
                 ALUOp1 = true;
             }
+/*=======
+            if(instruction.getFunction() == 8){ // jr
+                JumpReg = true;
+                return;
+            }
+            else if(instruction.getFunction() == 9){ // jalr
+                JumpReg = true;
+            }
+            RegDst = true;
+            RegWrite = true;
+            ALUOp1 = true;
+>>>>>>> fc6e8c3381c697e86b9bf9f40d8988961fcfa58c*/
         }
 
         else if (instruction.isIFormat()){
@@ -83,10 +94,6 @@ public class ControlUnit {
         return RegDst;
     }
 
-    public boolean isJumpReg() {
-        return JumpReg;
-    }
-
     public boolean isBranch() {
         return Branch;
     }
@@ -99,6 +106,9 @@ public class ControlUnit {
         return Jump;
     }
 
+    public boolean isJumpReg() {
+        return JumpReg;
+    }
 
     public boolean isMemRead() {
         return MemRead;
