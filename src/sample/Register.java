@@ -6,23 +6,10 @@ public class Register {
     private int no;
     private int value;
 
-    public Register(int no) {
-        this.no = no;
-        this.value = 0;
-    }
-
-    public Register(String name) {
-        this.name = name;
-    }
-
-    public Register(int no, String name, int value) {
+    public Register(int no, String name) {
         this.no = no;
         this.name = name;
-        this.value = value;
-    }
-
-    public static Register getRegister(String extractRegisterName) {
-        return null;
+        this.value = 1;
     }
 
     public void setNo(int no) { this.no = no; }

@@ -5,25 +5,18 @@ import java.util.Map;
 
 public class JFormatInstruction extends Instruction {
 
-    private static Map<String, Short> instructionMap;
-
-    private long targetOffset;
+    private static final Map<String, Short> instructionMap = new HashMap<>();
     private Parser parser;
 
-    public JFormatInstruction(String line, int i, Parser parser) {
+    public JFormatInstruction(String line, int i, Parser parser) throws Exception {
         this.parser = parser;
         index = i;
-        try{
-            parseInstruction(line);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.line = line;
 
+        parseInstruction(line);
     }
 
     public static boolean checkFormat(String functionName) {
-
         return instructionMap.containsKey(functionName);
     }
 
@@ -37,17 +30,21 @@ public class JFormatInstruction extends Instruction {
 
         if(checkFormat(functionName)){
             this.opcode = instructionMap.get(functionName);
-            this.targetOffset = Long.parseLong(offset);
+            System.out.println(offset);
+            this.immediate = calculateLabel(offset);
+            this.targetReg = RegisterFile.getRegister("ra");
         }
         else
             throw new Exception();
     }
 
+    private int calculateLabel(String s) {
+        return parser.getLabelAddress(s.trim()) - index - 1;
+    }
+
     // instructions
     static {
-        instructionMap = new HashMap<>();
-        // put instructions;
-        instructionMap.put("j", (short)2);
-        instructionMap.put("jal", (short)3);
+        instructionMap.put("j", (short)2);  // +
+        instructionMap.put("jal", (short)3);// +
     }
 }

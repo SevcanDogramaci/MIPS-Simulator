@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Parser {
 
@@ -21,13 +19,27 @@ public class Parser {
         this.file = file;
         readFile();
         clearComments(inputLines);
+    }
 
+    public Parser(String text) throws Exception {
+        inputLines = new ArrayList<>(Arrays.asList(text.split("\n")));
+        clearComments(inputLines);
+
+        createInstructions();
+    }
+
+    public void createInstructions() throws Exception {
         instructions = new ArrayList<>();
         labelAddressesMap = new HashMap<>();
 
+        extractLabels();
+
         for (int i = 0; i < clearedLines.size(); i++) {
-            instructions.add(Instruction.createInstruction(clearedLines.get(i), i, this));
+            Instruction in= Instruction.createInstruction(clearedLines.get(i), i, this);
+            if(in != null)
+                instructions.add(in);
         }
+
     }
 
     private void extractLabels(){
@@ -46,7 +58,7 @@ public class Parser {
                 this.labelAddressesMap.put(labelName, i);
 
                 if(line.indexOf(":") < line.length() - 1){
-                    instruction = line.substring(line.indexOf(":")+1, line.length()-1);
+                    instruction = line.substring(line.indexOf(":")+1);
                     this.clearedLines.set(i, instruction);
                     i++;
                 }
@@ -58,6 +70,8 @@ public class Parser {
                 i++;
             }
         }
+
+        // labelAddressesMap.forEach((k,v) -> System.out.print(k + "-" + v + ","));
     }
 
     public int getLabelAddress(String labelName){
@@ -107,11 +121,18 @@ public class Parser {
 
     public String getLines() {
         StringBuilder sb = new StringBuilder();
-        for (String s: clearedLines){
+
+        for (String s: clearedLines) {
             sb.append(s);
-            sb.append("\n");
-            System.out.println(s);
+            if(!s.contains(":"))
+                sb.append("\n");
+            else
+                sb.append(" ");
         }
         return sb.toString();
+    }
+
+    public List<Instruction> getInstructions() {
+        return this.instructions;
     }
 }
