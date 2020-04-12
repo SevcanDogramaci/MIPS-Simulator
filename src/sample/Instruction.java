@@ -2,12 +2,10 @@ package sample;
 
 public abstract class Instruction {
 
-    protected int address;
-    protected String machineCode;
-    protected short opcode;
+    protected short opcode, address;
     protected int index, shiftAmount, immediate;
     protected Register sourceReg, targetReg, destinationReg;
-    protected String line;
+    protected String line, machineCode;
 
 
     public static Instruction createInstruction(String line, int i, Parser parser) throws Exception {
@@ -62,7 +60,7 @@ public abstract class Instruction {
         return this instanceof JFormatInstruction;
     }
 
-    public void setAddress(int address) { this.address = address; }
+    public void setAddress(short address) { this.address = address; }
 
     public String getLine() {
         return line;
@@ -70,9 +68,7 @@ public abstract class Instruction {
 
     public abstract String getMachineCode();
 
-    public int getAddress() {
-        return address;
-    }
+    public short getAddress() { return address; }
 
     protected String fillWithZero(String s, int expectedLen){
         StringBuilder sBuilder = new StringBuilder(s);

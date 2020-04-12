@@ -12,7 +12,7 @@ public class InstructionMemoryFile {
         this.instructions = new Instruction[instructions.size()];
 
         for(int i = 0; i <instructions.size(); i++){
-            instructions.get(i).setAddress(i);
+            instructions.get(i).setAddress((short)i);
         }
 
         this.instructions = instructions.toArray(this.instructions);

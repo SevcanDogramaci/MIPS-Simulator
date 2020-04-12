@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class JFormatInstruction extends Instruction {
 
-    private static final Map<String, Short> instructionMap = new HashMap<>();
+    private static final Map<String, Short> instructionMap;
     private Parser parser;
 
     public JFormatInstruction(String line, int i, Parser parser) throws Exception {
@@ -55,6 +55,8 @@ public class JFormatInstruction extends Instruction {
 
     // instructions
     static {
+        instructionMap = new HashMap<>();
+
         instructionMap.put("j", (short)2);  // +
         instructionMap.put("jal", (short)3);// +
     }

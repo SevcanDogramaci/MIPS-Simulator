@@ -13,14 +13,8 @@ public class RFormatInstruction extends Instruction {
         this.opcode = 0;
         this.line = line;
 
-        try {
-            parseInstruction(line);
-            machineCode = getMachineCode();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        parseInstruction(line);
+        machineCode = getMachineCode();
     }
 
     public static boolean checkFormat(String functionName) {
@@ -118,7 +112,6 @@ public class RFormatInstruction extends Instruction {
 
         return sb.toString();
     }
-
 
     private int getNextRegister(char usage[], int idx){
         for (idx = idx + 1; idx < usage.length; idx++){

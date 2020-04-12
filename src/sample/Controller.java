@@ -29,7 +29,7 @@ public class Controller {
     @FXML private TableColumn<Register, Integer> rNo;
     @FXML private TableColumn<Register, Integer> rValue;
     @FXML private TableColumn<Register, String > rName;
-    @FXML private TableColumn<Instruction, Integer > textSegAddress;
+    @FXML private TableColumn<Instruction, Short > textSegAddress;
     @FXML private TableColumn<Instruction, String > textSegValue;
     @FXML private TableView<Instruction> textSegTable;
 
