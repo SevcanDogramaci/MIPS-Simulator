@@ -14,6 +14,7 @@ public class JFormatInstruction extends Instruction {
         this.line = line;
 
         parseInstruction(line);
+        machineCode = getMachineCode();
     }
 
     public static boolean checkFormat(String functionName) {

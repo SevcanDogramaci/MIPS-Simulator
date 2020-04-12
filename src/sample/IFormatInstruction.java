@@ -14,6 +14,7 @@ public class IFormatInstruction extends Instruction {
         this.line = line;
 
         parseInstruction(line);
+        machineCode = getMachineCode();
     }
 
     public int getImmediate() {

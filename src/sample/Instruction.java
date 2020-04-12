@@ -2,10 +2,13 @@ package sample;
 
 public abstract class Instruction {
 
+    protected int address;
+    protected String machineCode;
     protected short opcode;
     protected int index, shiftAmount, immediate;
     protected Register sourceReg, targetReg, destinationReg;
     protected String line;
+
 
     public static Instruction createInstruction(String line, int i, Parser parser) throws Exception {
 
@@ -59,11 +62,17 @@ public abstract class Instruction {
         return this instanceof JFormatInstruction;
     }
 
+    public void setAddress(int address) { this.address = address; }
+
     public String getLine() {
         return line;
     }
 
     public abstract String getMachineCode();
+
+    public int getAddress() {
+        return address;
+    }
 
     protected String fillWithZero(String s, int expectedLen){
         StringBuilder sBuilder = new StringBuilder(s);

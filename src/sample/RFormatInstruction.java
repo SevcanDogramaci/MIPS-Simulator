@@ -15,6 +15,7 @@ public class RFormatInstruction extends Instruction {
 
         try {
             parseInstruction(line);
+            machineCode = getMachineCode();
         }
         catch (Exception e) {
             e.printStackTrace();
