@@ -1,5 +1,5 @@
 
 # Default ignored files
-.idea/libraries
+.idea/libraries/lib.xml
 .idea/workspace.xml
 out
