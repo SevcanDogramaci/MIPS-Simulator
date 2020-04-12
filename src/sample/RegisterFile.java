@@ -73,7 +73,7 @@ public class RegisterFile {
 
     public void resetData(){
         for(Register register : registers)
-            register.setValue(1);
+            register.setValue(0);
     }
 
     public void setRegisters(Register rr1, Register rr2, Register wr) {
