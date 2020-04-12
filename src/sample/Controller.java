@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -26,6 +29,9 @@ public class Controller {
     @FXML private TableColumn<Register, Integer> rNo;
     @FXML private TableColumn<Register, Integer> rValue;
     @FXML private TableColumn<Register, String > rName;
+    @FXML private TableColumn<Instruction, Integer > textSegAddress;
+    @FXML private TableColumn<Instruction, String > textSegValue;
+    @FXML private TableView<Instruction> textSegTable;
 
     private Parser parser;
     private Processor processor;
@@ -36,12 +42,18 @@ public class Controller {
     }
 
     private void setupRegisterTable() {
-
         rNo.setCellValueFactory(new PropertyValueFactory<>("no"));
         rValue.setCellValueFactory(new PropertyValueFactory<>("value"));
         rName.setCellValueFactory(new PropertyValueFactory<>("name"));
         rTable.setItems(RegisterFile.getRegisters());
     }
+
+    private void setupTextSegmentTable() {
+        textSegAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        textSegValue.setCellValueFactory(new PropertyValueFactory<>("machineCode"));
+        textSegTable.setItems(InstructionMemoryFile.getInstructions());
+    }
+
 
     @FXML
     public void runPressed(ActionEvent event) throws Exception {
@@ -49,14 +61,18 @@ public class Controller {
         btnStep.setDisable(false);
         if(assemblyCodeArea.editableProperty().getValue()){
             parser = new Parser(assemblyCodeArea.getText());
-            assemblyCodeArea.setText(parser.getLines());
+            //assemblyCodeArea.setText(parser.getLines());
+            // burası çalışırsa start again'de sorun yapıyordu
+            // burası çalışmazsa select edilen line yanlış gözüküyor
         } else {
             parser.createInstructions();
         }
 
         List<Instruction> instructions = parser.getInstructions();
+
         processor = new Processor();
         processor.loadInstructionsToMemory(instructions);
+        setupTextSegmentTable();
         selectLine(0);
     }
 
