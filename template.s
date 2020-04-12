@@ -1,4 +1,4 @@
-add $t1, $t3, $zero
+addi $t1, $t3, 8
 jal label
 ori $t7, $t7, 1
 slti $t7, $t7, 0
