@@ -13,10 +13,10 @@
 
 <VBox fx:id="window" prefHeight="579.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-        <SplitPane dividerPositions="0.7" layoutX="285.0" layoutY="100.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.705" layoutX="285.0" layoutY="100.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="577.0" prefWidth="539.0" SplitPane.resizableWithParent="false">
-               <SplitPane dividerPositions="0.5050251256281407" prefHeight="577.0" prefWidth="523.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
+               <SplitPane dividerPositions="0.4" prefHeight="577.0" prefWidth="523.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
                  <items>
                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                         <children>
@@ -55,7 +55,7 @@
                                                             <columns>
                                                                 <TableColumn fx:id="rNo" editable="false" minWidth="-Infinity" prefWidth="46.0" resizable="false" text="No" />
                                                    <TableColumn fx:id="rName" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="76.0" resizable="false" sortable="false" text="Name" />
-                                                                <TableColumn fx:id="rValue" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="133.0" resizable="false" sortable="false" text="Value" />
+                                                                <TableColumn fx:id="rValue" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="110.0" resizable="false" sortable="false" text="Value" />
                                                             </columns>
                                                         </TableView>
                                                     </AnchorPane>
@@ -77,12 +77,12 @@
                              <items>
                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="235.0" prefWidth="253.0">
                                     <children>
-                                       <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <TableView fx:id="STable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                          <columns>
-                                           <TableColumn fx:id="STable" maxWidth="-1.0" prefWidth="284.0" text="Stack">
+                                           <TableColumn maxWidth="352.0" prefWidth="352.0" text="Stack">
                                                 <columns>
-                                                 <TableColumn fx:id="sAdress" maxWidth="1.7976931348623157E308" prefWidth="124.0" text="Address" />
-                                                   <TableColumn fx:id="sValue" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="160.0" text="Value" />
+                                                 <TableColumn fx:id="sAdress" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Address" />
+                                                   <TableColumn fx:id="sValue" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="250.0" sortable="false" text="Value" />
                                                 </columns>
                                              </TableColumn>
                                          </columns>
@@ -91,12 +91,12 @@
                                  </AnchorPane>
                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                     <children>
-                                       <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <TableView fx:id="textSegTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                           <columns>
-                                             <TableColumn fx:id="textSegTable" maxWidth="1.7976931348623157E308" prefWidth="284.0" text="Text Segment">
+                                             <TableColumn maxWidth="1.7976931348623157E308" prefWidth="284.0" text="Text Segment">
                                                 <columns>
-                                                   <TableColumn fx:id="textSegAddress" maxWidth="1.7976931348623157E308" prefWidth="124.0" text="Address" />
-                                                   <TableColumn fx:id="textSegValue" maxWidth="500.0" minWidth="-Infinity" prefWidth="160.0" text="Value" />
+                                                   <TableColumn fx:id="textSegAddress" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Address" />
+                                                   <TableColumn fx:id="textSegValue" editable="false" maxWidth="500.0" minWidth="-Infinity" prefWidth="250.0" sortable="false" text="Value" />
                                                 </columns>
                                              </TableColumn>
                                           </columns>
