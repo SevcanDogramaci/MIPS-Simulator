@@ -19,21 +19,21 @@ public class ControlUnit {
 
         if (instruction.isRFormat()){
 //<<<<<<< HEAD
-            if (instruction.getFunction() == 8){
-                //System.out.println(instruction.getSourceReg().getName());
-                System.out.println(instruction.getLine());
-                JumpReg = true;
-            } else if(instruction.getFunction() == 9){
-                JumpReg = true;
-                RegWrite = true;
-                ALUOp0 = true;
-                RegDst = true;
-            } else{
-                RegDst = true;
-                RegWrite = true;
-                ALUOp1 = true;
-            }
-/*=======
+//            if (instruction.getFunction() == 8){
+//                //System.out.println(instruction.getSourceReg().getName());
+//                System.out.println(instruction.getLine());
+//                JumpReg = true;
+//            } else if(instruction.getFunction() == 9){
+//                JumpReg = true;
+//                RegWrite = true;
+//                ALUOp0 = true;
+//                RegDst = true;
+//            } else{
+//                RegDst = true;
+//                RegWrite = true;
+//                ALUOp1 = true;
+//            }
+
             if(instruction.getFunction() == 8){ // jr
                 JumpReg = true;
                 return;
@@ -44,7 +44,7 @@ public class ControlUnit {
             RegDst = true;
             RegWrite = true;
             ALUOp1 = true;
->>>>>>> fc6e8c3381c697e86b9bf9f40d8988961fcfa58c*/
+
         }
 
         else if (instruction.isIFormat()){
