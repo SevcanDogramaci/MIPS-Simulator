@@ -59,17 +59,23 @@ public class Controller {
     public void runPressed(ActionEvent event) throws Exception {
         btnRun.setDisable(true);
         btnStep.setDisable(false);
-        if(assemblyCodeArea.editableProperty().getValue()){
+        if(assemblyCodeArea.editableProperty().getValue()) {
             parser = new Parser(assemblyCodeArea.getText());
             assemblyCodeArea.setText(parser.getLines());
-            // burası çalışırsa start again'de sorun yapıyordu
-            // burası çalışmazsa select edilen line yanlış gözüküyor
-        } else {
-            parser.createInstructions();
         }
+
+        parser.createInstructions();
 
         List<Instruction> instructions = parser.getInstructions();
 
+        processor = new Processor();
+        processor.loadInstructionsToMemory(instructions);
+        setupTextSegmentTable();
+        selectLine(0);
+    }
+
+    private void startAgain () {
+        List<Instruction> instructions = parser.getInstructions();
         processor = new Processor();
         processor.loadInstructionsToMemory(instructions);
         setupTextSegmentTable();
@@ -102,7 +108,7 @@ public class Controller {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == btnStartAgain)
-            runPressed(event);
+            startAgain();
         else
             System.exit(0);
 

@@ -25,7 +25,7 @@ public class Parser {
         inputLines = new ArrayList<>(Arrays.asList(text.split("\n")));
         clearComments(inputLines);
 
-        createInstructions();
+        // createInstructions();
     }
 
     public void createInstructions() throws Exception {
@@ -75,6 +75,7 @@ public class Parser {
     }
 
     public int getLabelAddress(String labelName){
+        System.out.println(labelAddressesMap);
         return this.labelAddressesMap.get(labelName);
     }
 
@@ -124,10 +125,10 @@ public class Parser {
 
         for (String s: clearedLines) {
             sb.append(s);
-            if(!s.contains(":"))
-                sb.append("\n");
-            else
+            if(s.contains(":") && s.trim().lastIndexOf(":") == s.trim().length() - 1)
                 sb.append(" ");
+            else
+                sb.append("\n");
         }
         return sb.toString();
     }
