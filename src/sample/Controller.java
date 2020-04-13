@@ -14,7 +14,7 @@ import java.util.Optional;
 public class Controller {
 
     @FXML private Button btnRun, btnStep;
-    @FXML private TextArea assemblyCodeArea;
+    @FXML private TextArea assemblyCodeArea, sTable;
     @FXML private TableView<Register> rTable;
     @FXML private TableColumn<Register, Integer> rNo;
     @FXML private TableColumn<Register, Integer> rValue;
@@ -77,6 +77,7 @@ public class Controller {
         if(!processor.isDone()){
             processor.step();
             rTable.refresh();
+            sTable.setText(processor.getStackData());
             selectLine(processor.getIndex());
         }
         else

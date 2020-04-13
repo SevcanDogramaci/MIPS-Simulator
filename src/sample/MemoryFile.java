@@ -2,7 +2,7 @@ package sample;
 
 public class MemoryFile {
 
-    public static final int STACK_START = 0;
+    public static final int STACK_START = 3996;
     private Register stackPointer;
 
     private int data[];
@@ -10,10 +10,6 @@ public class MemoryFile {
     public MemoryFile(int size){
         stackPointer = RegisterFile.getRegister("sp");
         data = new int[size];
-    }
-
-    public static int getStackStart() {
-        return STACK_START;
     }
 
     public void resetData(){
@@ -35,11 +31,11 @@ public class MemoryFile {
     }
 
     private void set(int index, int value){
-        data[index] = value;
+        data[index >> 2] = value;
     }
 
     private int get(int index){
-        return data[index];
+        return data[index >> 2];
     }
 
     public int[] getData(){
@@ -49,11 +45,13 @@ public class MemoryFile {
     public String getMemoryData (){
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Address\tData\n-------\t-------");
+        sb.append("Address\tData\n-------\t-------\n");
 
-        for (int i = stackPointer.getValue(); i < data.length; i++) {
+        System.out.println("");
+
+        for (int i = stackPointer.getValue() >> 2; i < data.length; i++) {
             //sb.append(Integer.toHexString(i << 2)).append("\t").append(Integer.toHexString(data[i]));
-            sb.append(i << 2).append("\t").append(data[i]);
+            sb.append(i << 2).append("\t\t").append(data[i]).append("\n");
         }
 
         return sb.toString();

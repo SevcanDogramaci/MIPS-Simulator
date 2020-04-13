@@ -10,8 +10,10 @@ public class Register {
         this.no = no;
         this.name = name;
 
-        if (name.equalsIgnoreCase("sp"))
+        if (name.equals("sp")){
             this.value = MemoryFile.STACK_START;
+            System.out.println("sp value: " + value);
+        }
         else
             this.value = 0;
 

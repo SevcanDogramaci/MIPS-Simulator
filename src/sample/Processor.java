@@ -48,7 +48,6 @@ public class Processor {
         // send instruction to control unit
         ControlUnit controlUnit = new ControlUnit(instruction);
 
-
         // extract registers' data that will be used
         Register sourceReg = instruction.getSourceReg(),
                 targetReg = instruction.getTargetReg(),
@@ -122,5 +121,9 @@ public class Processor {
 
     public int getIndex() {
         return pc.get()/4;
+    }
+
+    public String getStackData(){
+        return memory.getMemoryData();
     }
 }
