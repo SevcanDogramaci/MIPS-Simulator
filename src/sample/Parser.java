@@ -24,8 +24,6 @@ public class Parser {
     public Parser(String text) throws Exception {
         inputLines = new ArrayList<>(Arrays.asList(text.split("\n")));
         clearComments(inputLines);
-
-        // createInstructions();
     }
 
     public void createInstructions() throws Exception {
@@ -59,7 +57,7 @@ public class Parser {
 
                 if(line.indexOf(":") < line.length() - 1){
                     instruction = line.substring(line.indexOf(":")+1);
-                    this.clearedLines.set(i, instruction);
+                    this.clearedLines.set(i, instruction.trim());
                     i++;
                 }
                 else {
