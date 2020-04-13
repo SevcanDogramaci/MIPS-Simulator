@@ -1,8 +1,5 @@
 package sample;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableIntegerValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -10,20 +7,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.chrono.IsoChronology;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 public class Controller {
 
-    @FXML
-    private Button btnChooseFile, btnRun, btnStep;
+    @FXML private Button btnRun, btnStep;
     @FXML private TextArea assemblyCodeArea;
     @FXML private TableView<Register> rTable;
     @FXML private TableColumn<Register, Integer> rNo;
@@ -53,7 +43,6 @@ public class Controller {
         textSegValue.setCellValueFactory(new PropertyValueFactory<>("machineCode"));
         textSegTable.setItems(InstructionMemoryFile.getInstructions());
     }
-
 
     @FXML
     public void runPressed(ActionEvent event) throws Exception {
@@ -111,7 +100,6 @@ public class Controller {
             startAgain();
         else
             System.exit(0);
-
     }
 
     private int ordinalIndexOf(String str, String substr, int n) {
