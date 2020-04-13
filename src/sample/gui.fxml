@@ -77,16 +77,12 @@
                              <items>
                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="235.0" prefWidth="253.0">
                                     <children>
-                                       <TableView fx:id="STable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                         <columns>
-                                           <TableColumn maxWidth="352.0" prefWidth="352.0" text="Stack">
-                                                <columns>
-                                                 <TableColumn fx:id="sAdress" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Address" />
-                                                   <TableColumn fx:id="sValue" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="250.0" sortable="false" text="Value" />
-                                                </columns>
-                                             </TableColumn>
-                                         </columns>
-                                       </TableView>
+                                       <Label fx:id="sLabel" alignment="CENTER" prefHeight="24.0" prefWidth="355.0" scaleShape="false" text="Stack" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <font>
+                                             <Font name="Segoe UI Bold" size="12.0" />
+                                          </font>
+                                       </Label>
+                                       <TextArea fx:id="sTable" layoutY="19.0" prefHeight="242.0" prefWidth="355.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0" />
                                     </children>
                                  </AnchorPane>
                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
