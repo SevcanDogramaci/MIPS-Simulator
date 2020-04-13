@@ -61,7 +61,7 @@ public class Controller {
         btnStep.setDisable(false);
         if(assemblyCodeArea.editableProperty().getValue()){
             parser = new Parser(assemblyCodeArea.getText());
-            //assemblyCodeArea.setText(parser.getLines());
+            assemblyCodeArea.setText(parser.getLines());
             // burası çalışırsa start again'de sorun yapıyordu
             // burası çalışmazsa select edilen line yanlış gözüküyor
         } else {
@@ -117,6 +117,7 @@ public class Controller {
     }
 
     private void selectLine(int lineNum){
+        textSegTable.getSelectionModel().select(lineNum);
         System.out.println("line num : " + lineNum);
         String txt = assemblyCodeArea.getText();
         int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
