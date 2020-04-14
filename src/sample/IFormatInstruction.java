@@ -34,14 +34,6 @@ public class IFormatInstruction extends Instruction {
         machineCode = getMachineCode();
     }
 
-    public short getAccessLength() {
-        return (short)accessLength.getByteNum();
-    }
-
-    public void setAccessLength(AccessLength accessLength) {
-        this.accessLength = accessLength;
-    }
-
     public int getImmediate() {
         return immediate;
     }
@@ -79,6 +71,7 @@ public class IFormatInstruction extends Instruction {
 
                 if (functionName.equalsIgnoreCase("bgez")) {
                     targetReg = RegisterFile.getRegister("t1");
+                    assert targetReg != null;
                     targetReg.setValue(1);
                 } else
                     targetReg = RegisterFile.getRegister("zero");
@@ -103,6 +96,7 @@ public class IFormatInstruction extends Instruction {
                 sourceReg = RegisterFile.getRegister(
                         extractRegisterName(ins.substring(ins.indexOf("(") + 1, ins.indexOf(")"))));
 
+
             } else {
                 sourceReg = RegisterFile.getRegister(extractRegisterName(instruction[1]));
                 immediate = Integer.parseInt(instruction[2].trim());
@@ -121,6 +115,18 @@ public class IFormatInstruction extends Instruction {
         return name;
     }
 
+    public short getAccessLength() {
+        switch (this.opcode & 3) {
+            case 0:
+                return (short) AccessLength.BYTE.getByteNum();
+            case 1:
+                return (short) AccessLength.HALF_WORD.getByteNum();
+            case 3:
+                return (short) AccessLength.WORD.getByteNum();
+        }
+        return 0;
+    }
+
     static {
         instructionMap = new HashMap<>();
         // put instructions;
@@ -136,7 +142,8 @@ public class IFormatInstruction extends Instruction {
         instructionMap.put("bne", (short) 5);    // +
 
         instructionMap.put("lb", (short) 32);
-        instructionMap.put("lbu", (short) 33);
+        instructionMap.put("lbu", (short) 36);
+        instructionMap.put("lh", (short) 33);
         instructionMap.put("lhu", (short) 37);
         instructionMap.put("lui", (short) 15);
         instructionMap.put("lw", (short) 35);
