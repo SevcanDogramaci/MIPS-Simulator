@@ -5,7 +5,24 @@ import java.util.Map;
 
 public class IFormatInstruction extends Instruction {
 
+    public enum AccessLength {
+        BYTE(1),
+        HALF_WORD(2),
+        WORD(4);
+
+        private final int byteNum;
+
+        AccessLength(int byteNum) {
+            this.byteNum = byteNum;
+        }
+
+        public int getByteNum() {
+            return this.byteNum;
+        }
+    }
+
     private Parser parser;
+    private AccessLength accessLength;
     private static final Map<String, Short> instructionMap;
 
     public IFormatInstruction(String line, int i, Parser parser) {
@@ -15,6 +32,14 @@ public class IFormatInstruction extends Instruction {
 
         parseInstruction(line);
         machineCode = getMachineCode();
+    }
+
+    public short getAccessLength() {
+        return (short)accessLength.getByteNum();
+    }
+
+    public void setAccessLength(AccessLength accessLength) {
+        this.accessLength = accessLength;
     }
 
     public int getImmediate() {
@@ -47,24 +72,24 @@ public class IFormatInstruction extends Instruction {
 
         instruction[0] = instruction[0].split(" ")[1].trim();
 
-        if(functionName.startsWith("b")){
+        if (functionName.startsWith("b")) {
             sourceReg = RegisterFile.getRegister(extractRegisterName(instruction[0]));
 
-            if (instruction.length == 2){
+            if (instruction.length == 2) {
 
-                if (functionName.equalsIgnoreCase("bgez")){
+                if (functionName.equalsIgnoreCase("bgez")) {
                     targetReg = RegisterFile.getRegister("t1");
                     targetReg.setValue(1);
                 } else
                     targetReg = RegisterFile.getRegister("zero");
 
                 immediate = calculateLabel(instruction[1]);
-            }else {
+            } else {
                 targetReg = RegisterFile.getRegister(extractRegisterName(instruction[1]));
 
                 try {
                     immediate = Integer.parseInt(instruction[2].trim());
-                }catch (Exception e){
+                } catch (Exception e) {
                     immediate = calculateLabel(instruction[2]);
                 }
             }
@@ -90,8 +115,8 @@ public class IFormatInstruction extends Instruction {
         return parser.getLabelAddress(s.trim()) - index - 1;
     }
 
-    private String extractRegisterName(String name){
-        if(name.contains("$"))
+    private String extractRegisterName(String name) {
+        if (name.contains("$"))
             name = name.trim().replace("$", "");
         return name;
     }
@@ -99,33 +124,32 @@ public class IFormatInstruction extends Instruction {
     static {
         instructionMap = new HashMap<>();
         // put instructions;
-        instructionMap.put("addi", (short)8);   // +
-        instructionMap.put("addiu", (short)9);  // +
-        instructionMap.put("andi", (short)12);  // +
+        instructionMap.put("addi", (short) 8);   // +
+        instructionMap.put("addiu", (short) 9);  // +
+        instructionMap.put("andi", (short) 12);  // +
 
-        instructionMap.put("beq", (short)4);    // +
-        instructionMap.put("bgez", (short)1);   // //
-        instructionMap.put("bgtz", (short)7);
-        instructionMap.put("blez", (short)6);
-        instructionMap.put("bltz", (short)1);   // //
-        instructionMap.put("bne", (short)5);    // +
+        instructionMap.put("beq", (short) 4);    // +
+        instructionMap.put("bgez", (short) 1);   // //
+        instructionMap.put("bgtz", (short) 7);
+        instructionMap.put("blez", (short) 6);
+        instructionMap.put("bltz", (short) 1);   // //
+        instructionMap.put("bne", (short) 5);    // +
 
-        instructionMap.put("lb", (short)32);
-        instructionMap.put("lbu", (short)33);
-        instructionMap.put("lhu", (short)37);
-        instructionMap.put("lui", (short)15);
-        instructionMap.put("lw", (short)35);
-        instructionMap.put("lwcl", (short)49);
+        instructionMap.put("lb", (short) 32);
+        instructionMap.put("lbu", (short) 33);
+        instructionMap.put("lhu", (short) 37);
+        instructionMap.put("lui", (short) 15);
+        instructionMap.put("lw", (short) 35);
+        instructionMap.put("lwcl", (short) 49);
 
-        instructionMap.put("ori", (short)11);   // +
+        instructionMap.put("ori", (short) 11);   // +
 
-        instructionMap.put("sb", (short)40);
-        instructionMap.put("slti", (short)10);  // +
-        instructionMap.put("sh", (short)41);
-        instructionMap.put("sw", (short)43);
-        instructionMap.put("swcl", (short)57);
+        instructionMap.put("sb", (short) 40);
+        instructionMap.put("slti", (short) 10);  // +
+        instructionMap.put("sh", (short) 41);
+        instructionMap.put("sw", (short) 43);
+        instructionMap.put("swcl", (short) 57);
 
-        instructionMap.put("xori", (short)14);
+        instructionMap.put("xori", (short) 14);
     }
-
 }
