@@ -48,7 +48,7 @@ public class ControlUnit {
                 MemtoReg = true;
                 RegWrite = true;
                 ALUsrc = true;
-            }else if(instruction.opcode == 43){ // sw
+            }else if(instruction.opcode >= 40 && instruction.opcode <= 43){ // sw
                 MemWrite = true;
                 ALUsrc = true;
             }

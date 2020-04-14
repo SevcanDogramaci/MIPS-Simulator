@@ -77,6 +77,8 @@ public class RFormatInstruction extends Instruction {
 
     @Override
     public String getMachineCode() {
+
+        System.out.println("denem: " + line);
         StringBuilder sb = new StringBuilder();
 
         sb.append(fillWithZero(Integer.toBinaryString(opcode), 6))

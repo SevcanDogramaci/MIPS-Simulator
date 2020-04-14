@@ -24,13 +24,13 @@ public class MemoryFile {
         }
     }
 
-    public int cycle(boolean read, boolean write, int index, int writeValue){
+    public int cycle(boolean read, boolean write, int index, int writeValue, int accessLength){
 
         if (read){
-            return get(index, 4);
+            return get(index, accessLength);
         }
         else if (write){
-            set(index, writeValue, 4);
+            set(index, writeValue, accessLength);
         }
 
         return 0;
@@ -40,10 +40,12 @@ public class MemoryFile {
         byte[] row = data[index >> 2];
         byte offset = (byte) (index % 4);
 
-        for (int i = offset; i < offset + type; i++) {
-            row[i] = (byte) (value >> (type-1-i) * 8);
-        }
+        System.out.println("set: " + value + " " + type + " " + offset + " " + (index>>2));
 
+        int j = 0;
+        for (int i = offset; i < offset + type; i++, j++) {
+            row[i] = (byte) (value >> (type-1-j) * 8);
+        }
     }
 
     private int get(int index, int type){
@@ -51,11 +53,12 @@ public class MemoryFile {
         byte offset = (byte) (index % 4);
         int ret = 0;
 
-        for (int i = offset; i < offset + type; i++) {
+        int j = 0;
+        for (int i = offset; i < offset + type; i++, j++) {
             if(i == offset)
                 ret += (row[i]<< (type-1-i) * 8);
             else
-            ret += (unsignedToBytes(row[i])<< (type-1-i) * 8);
+                ret += (unsignedToBytes(row[i])<< (type-1-j) * 8);
         }
 
         return ret;
