@@ -37,7 +37,7 @@ public class MemoryFile {
     }
 
     private void set(int index, int value, int type){
-        byte row[] = data[index >> 2];
+        byte[] row = data[index >> 2];
         byte offset = (byte) (index % 4);
 
         for (int i = offset; i < offset + type; i++) {
@@ -52,7 +52,10 @@ public class MemoryFile {
         int ret = 0;
 
         for (int i = offset; i < offset + type; i++) {
-            ret += (byte) (row[i] << (type-1-i) * 8);
+            if(i == offset)
+                ret += (row[i]<< (type-1-i) * 8);
+            else
+            ret += (unsignedToBytes(row[i])<< (type-1-i) * 8);
         }
 
         return ret;
@@ -64,22 +67,27 @@ public class MemoryFile {
 
         sb.append("Address\tData\n-------\t-------\n");
 
-        System.out.println("");
 
         for (int i = stackPointer.getValue() >> 2; i < data.length; i++) {
             //sb.append(Integer.toHexString(i << 2)).append("\t").append(Integer.toHexString(data[i]));
             sb.append(i << 2).append("\t\t");
 
-            byte row[] = data[i];
+            byte[] row = data[i];
 
             for (int j = 0; j < row.length; j++) {
-                sb.append(row[j]).append(" ");
+
+                sb.append(String.format("%8s", Integer.toBinaryString(row[j] & 0xFF)).replace(' ', '0'))
+                        .append(" ");
             }
 
             sb.append("\n");
         }
 
         return sb.toString();
+    }
+
+    public static int unsignedToBytes(byte b) {
+        return b & 0xFF;
     }
 
 
