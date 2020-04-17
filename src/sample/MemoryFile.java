@@ -24,10 +24,10 @@ public class MemoryFile {
         }
     }
 
-    public int cycle(boolean read, boolean write, int index, int writeValue, int accessLength){
+    public int cycle(boolean read, boolean write, int index, int writeValue, int accessLength, boolean signed){
 
         if (read){
-            return get(index, accessLength);
+            return get(index, accessLength, signed);
         }
         else if (write){
             set(index, writeValue, accessLength);
@@ -48,14 +48,14 @@ public class MemoryFile {
         }
     }
 
-    private int get(int index, int type){
+    private int get(int index, int type, boolean signed){
         byte[] row = data[index >> 2];
         byte offset = (byte) (index % 4);
         int ret = 0;
 
         int j = 0;
         for (int i = offset; i < offset + type; i++, j++) {
-            if(i == offset)
+            if(i == offset && signed)
                 ret += (row[i]<< (type-1-i) * 8);
             else
                 ret += (unsignedToBytes(row[i])<< (type-1-j) * 8);

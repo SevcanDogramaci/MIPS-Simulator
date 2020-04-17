@@ -14,6 +14,7 @@ public class ControlUnit {
     private boolean MemWrite;
     private boolean ALUsrc;  // reg2 or immediate
     private boolean RegWrite;
+    private boolean SignExtend;
 
     public ControlUnit(Instruction instruction) {
 
@@ -48,7 +49,11 @@ public class ControlUnit {
                 MemtoReg = true;
                 RegWrite = true;
                 ALUsrc = true;
-            }else if(instruction.opcode >= 40 && instruction.opcode <= 43){ // sw
+                SignExtend = true;
+                if(instruction.opcode == 36 || instruction.opcode == 37){
+                    SignExtend = false;
+                }
+            } else if(instruction.opcode >= 40 && instruction.opcode <= 43){ // sw
                 MemWrite = true;
                 ALUsrc = true;
             }
@@ -117,5 +122,9 @@ public class ControlUnit {
 
     public boolean isRegWrite() {
         return RegWrite;
+    }
+
+    public boolean isSignExtend() {
+        return SignExtend;
     }
 }

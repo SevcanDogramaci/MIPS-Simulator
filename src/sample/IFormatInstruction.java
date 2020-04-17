@@ -147,7 +147,7 @@ public class IFormatInstruction extends Instruction {
         instructionMap.put("lhu", (short) 37);
         instructionMap.put("lui", (short) 15);
         instructionMap.put("lw", (short) 35);
-        instructionMap.put("lwcl", (short) 49);
+        instructionMap.put("lwcl", (short) 49);  // -
 
         instructionMap.put("ori", (short) 11);   // +
 
@@ -155,7 +155,7 @@ public class IFormatInstruction extends Instruction {
         instructionMap.put("slti", (short) 10);  // +
         instructionMap.put("sh", (short) 41);
         instructionMap.put("sw", (short) 43);
-        instructionMap.put("swcl", (short) 57);
+        instructionMap.put("swcl", (short) 57);  // -
 
         instructionMap.put("xori", (short) 14);
     }

@@ -76,8 +76,8 @@ public class Processor {
         int accessLength = instruction instanceof IFormatInstruction
                 ? ((IFormatInstruction)instruction).getAccessLength() : 4;
 
-        data_out = memory.cycle(controlUnit.isMemRead(), controlUnit.isMemWrite(), alu_out, regData2, accessLength);
-
+        data_out = memory.cycle(controlUnit.isMemRead(), controlUnit.isMemWrite(),
+                alu_out, regData2, accessLength, controlUnit.isSignExtend());
 
         // writeback
         write_data = (int)mux(alu_out, data_out, controlUnit.isMemtoReg());
@@ -85,8 +85,6 @@ public class Processor {
                 (controlUnit.isJump() && !controlUnit.isMemtoReg())
                         || (controlUnit.isRegWrite() && controlUnit.isJumpReg()));
         registerFile.write(controlUnit.isRegWrite(), write_data);
-
-        //System.out.println("OLD PC : " + pc.get());
 
 
         // update pc 
