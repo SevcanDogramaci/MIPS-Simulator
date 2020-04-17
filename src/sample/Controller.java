@@ -148,6 +148,7 @@ public class Controller {
     @FXML
     public void restartApplication() {
         assemblyCodeArea.setText("");
+        assemblyCodeArea.setEditable(true);
         btnRun.setDisable(false);
         btnStep.setDisable(true);
         btnChoose.setDisable(false);
