@@ -7,25 +7,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.chrono.IsoChronology;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 public class Controller {
 
-    @FXML
-    private Button btnChooseFile, btnRun, btnStep;
-    @FXML private TextArea assemblyCodeArea;
+    @FXML private Button btnRun, btnStep, btnChoose;
+    @FXML private TextArea assemblyCodeArea, sTable;
     @FXML private TableView<Register> rTable;
     @FXML private TableColumn<Register, Integer> rNo;
     @FXML private TableColumn<Register, Integer> rValue;
     @FXML private TableColumn<Register, String > rName;
+    @FXML private TableColumn<Instruction, Short > textSegAddress;
+    @FXML private TableColumn<Instruction, String > textSegValue;
+    @FXML private TableView<Instruction> textSegTable;
 
     private Parser parser;
     private Processor processor;
@@ -36,36 +32,55 @@ public class Controller {
     }
 
     private void setupRegisterTable() {
-
         rNo.setCellValueFactory(new PropertyValueFactory<>("no"));
         rValue.setCellValueFactory(new PropertyValueFactory<>("value"));
         rName.setCellValueFactory(new PropertyValueFactory<>("name"));
         rTable.setItems(RegisterFile.getRegisters());
     }
 
+    private void setupTextSegmentTable() {
+        textSegAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        textSegValue.setCellValueFactory(new PropertyValueFactory<>("machineCode"));
+        textSegTable.setItems(InstructionMemoryFile.getInstructions());
+    }
+
     @FXML
     public void runPressed(ActionEvent event) throws Exception {
+
+        if(assemblyCodeArea.getText().equals("") && parser == null)
+            return;
+
         btnRun.setDisable(true);
         btnStep.setDisable(false);
-        if(assemblyCodeArea.editableProperty().getValue()){
+        if(assemblyCodeArea.editableProperty().getValue()) {
             parser = new Parser(assemblyCodeArea.getText());
             assemblyCodeArea.setText(parser.getLines());
-        } else {
-            parser.createInstructions();
         }
 
+        parser.createInstructions();
+
+        List<Instruction> instructions = parser.getInstructions();
+
+        processor = new Processor();
+        processor.loadInstructionsToMemory(instructions);
+        setupTextSegmentTable();
+        selectLine(0);
+    }
+
+    private void startAgain () {
         List<Instruction> instructions = parser.getInstructions();
         processor = new Processor();
         processor.loadInstructionsToMemory(instructions);
+        setupTextSegmentTable();
         selectLine(0);
     }
 
     @FXML
     public void onStep(ActionEvent event) throws Exception {
-
         if(!processor.isDone()){
             processor.step();
             rTable.refresh();
+            sTable.setText(processor.getStackData());
             selectLine(processor.getIndex());
         }
         else
@@ -86,10 +101,9 @@ public class Controller {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == btnStartAgain)
-            runPressed(event);
+            startAgain();
         else
             System.exit(0);
-
     }
 
     private int ordinalIndexOf(String str, String substr, int n) {
@@ -101,6 +115,7 @@ public class Controller {
     }
 
     private void selectLine(int lineNum){
+        textSegTable.getSelectionModel().select(lineNum);
         System.out.println("line num : " + lineNum);
         String txt = assemblyCodeArea.getText();
         int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
@@ -128,6 +143,19 @@ public class Controller {
         parser = new Parser(selectedFile);
 
         assemblyCodeArea.setText(parser.getLines());
+    }
+
+    @FXML
+    public void restartApplication() {
+        assemblyCodeArea.setText("");
+        assemblyCodeArea.setEditable(true);
+        btnRun.setDisable(false);
+        btnStep.setDisable(true);
+        btnChoose.setDisable(false);
+        parser = null;
+        textSegTable.setItems(null);
+        RegisterFile.resetData();
+        sTable.setText("");
     }
 
 }

@@ -44,7 +44,6 @@ public class ALU {
         return out;
     }
 
-
     public boolean isZero() {
         return zero;
     }

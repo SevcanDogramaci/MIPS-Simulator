@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RegisterFile {
 
@@ -52,10 +51,6 @@ public class RegisterFile {
         }
     }
 
-    public static int getRegisterData(int index){
-        return registers.get(index).getValue();
-    }
-
     public static void setRegisterData(int index, int dataValue){
         registers.get(index).setValue(dataValue);
     }
@@ -72,9 +67,11 @@ public class RegisterFile {
         return FXCollections.observableArrayList(registers);
     }
 
-    public void resetData(){
-        for(Register register : registers)
-            register.setValue(1);
+    public static void resetData(){
+        for(Register register : registers) {
+            register.setValue(0);
+            if (register.getName().equals("sp")) register.setValue(MemoryFile.STACK_START);
+        }
     }
 
     public void setRegisters(Register rr1, Register rr2, Register wr) {

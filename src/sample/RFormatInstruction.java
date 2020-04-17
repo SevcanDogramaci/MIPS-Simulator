@@ -13,13 +13,8 @@ public class RFormatInstruction extends Instruction {
         this.opcode = 0;
         this.line = line;
 
-        try {
-            parseInstruction(line);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        parseInstruction(line);
+        machineCode = getMachineCode();
     }
 
     public static boolean checkFormat(String functionName) {
@@ -80,6 +75,46 @@ public class RFormatInstruction extends Instruction {
         return functionCode;
     }
 
+    @Override
+    public String getMachineCode() {
+
+        System.out.println("denem: " + line);
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(fillWithZero(Integer.toBinaryString(opcode), 6))
+                .append(" ");
+
+        String code = instructionMap.get(line.split(",")[0].split(" ")[0]);
+        char[] registerUsage = code.substring(7).toCharArray();
+
+        if (registerUsage[1] == '1')
+            sb.append(fillWithZero(Integer.toBinaryString(sourceReg.getNo()), 5));
+        else
+            sb.append(fillWithZero("", 5));
+
+        sb.append(" ");
+        if (registerUsage[2] == '1')
+            sb.append(fillWithZero(Integer.toBinaryString(targetReg.getNo()), 5));
+        else
+            sb.append(fillWithZero("", 5));
+
+        sb.append(" ");
+        if (registerUsage[0] == '1')
+            sb.append(fillWithZero(Integer.toBinaryString(destinationReg.getNo()), 5));
+        else
+            sb.append(fillWithZero("", 5));
+
+        sb.append(" ");
+        if (registerUsage[3] == '1')
+            sb.append(fillWithZero(Integer.toBinaryString(shiftAmount), 5));
+        else
+            sb.append(fillWithZero("", 5));
+
+        sb.append(" ").append(fillWithZero(Integer.toBinaryString(functionCode), 6));
+
+        return sb.toString();
+    }
+
     private int getNextRegister(char usage[], int idx){
         for (idx = idx + 1; idx < usage.length; idx++){
             if (usage[idx] == '1')
@@ -104,8 +139,9 @@ public class RFormatInstruction extends Instruction {
         instructionMap.put("break", "00001101 0000");
         instructionMap.put("div", "011010 0110");
         instructionMap.put("divu", "011011 0110");
-        instructionMap.put("jalr", "001001 1100");
-        instructionMap.put("jr", "001000 0100");
+
+        instructionMap.put("jalr", "001001 1100");  // +
+        instructionMap.put("jr", "001000 0100");    // +
 
         instructionMap.put("mfhi", "010000 1000");
         instructionMap.put("mflo", "010010 1000");

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class JFormatInstruction extends Instruction {
 
-    private static final Map<String, Short> instructionMap = new HashMap<>();
+    private static final Map<String, Short> instructionMap;
     private Parser parser;
 
     public JFormatInstruction(String line, int i, Parser parser) throws Exception {
@@ -14,6 +14,7 @@ public class JFormatInstruction extends Instruction {
         this.line = line;
 
         parseInstruction(line);
+        machineCode = getMachineCode();
     }
 
     public static boolean checkFormat(String functionName) {
@@ -30,12 +31,22 @@ public class JFormatInstruction extends Instruction {
 
         if(checkFormat(functionName)){
             this.opcode = instructionMap.get(functionName);
-            System.out.println(offset);
             this.immediate = calculateLabel(offset);
             this.targetReg = RegisterFile.getRegister("ra");
         }
         else
             throw new Exception();
+    }
+
+    @Override
+    public String getMachineCode() {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(fillWithZero(Integer.toBinaryString(opcode), 6))
+                .append(" ")
+                .append(fillWithZero(Integer.toBinaryString(immediate), 26));
+        return sb.toString();
     }
 
     private int calculateLabel(String s) {
@@ -44,6 +55,8 @@ public class JFormatInstruction extends Instruction {
 
     // instructions
     static {
+        instructionMap = new HashMap<>();
+
         instructionMap.put("j", (short)2);  // +
         instructionMap.put("jal", (short)3);// +
     }

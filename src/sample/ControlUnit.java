@@ -6,6 +6,7 @@ public class ControlUnit {
     private boolean Branch;
     private boolean BranchNotEqual;
     private boolean Jump;
+    private boolean JumpReg;
     private boolean MemRead;
     private boolean MemtoReg;
     private boolean ALUOp1;
@@ -13,7 +14,6 @@ public class ControlUnit {
     private boolean MemWrite;
     private boolean ALUsrc;  // reg2 or immediate
     private boolean RegWrite;
-    private boolean JumpReg;
 
     public ControlUnit(Instruction instruction) {
 
@@ -48,7 +48,7 @@ public class ControlUnit {
                 MemtoReg = true;
                 RegWrite = true;
                 ALUsrc = true;
-            }else if(instruction.opcode == 43){ // sw
+            }else if(instruction.opcode >= 40 && instruction.opcode <= 43){ // sw
                 MemWrite = true;
                 ALUsrc = true;
             }
@@ -69,8 +69,6 @@ public class ControlUnit {
                 RegWrite = true;
             }
         }
-
-
     }
 
     public boolean isRegDst() {

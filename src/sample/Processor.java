@@ -38,7 +38,7 @@ public class Processor {
 
         Instruction instruction;
         int alu_out = 0, data_out = 0, regData1 = 0, regData2 = 0,
-            new_pc = pc.get(), branch_pc = new_pc, write_data;
+                new_pc = pc.get(), branch_pc = new_pc, write_data;
         boolean alu_zero = false;
 
         // fetch instruction
@@ -47,7 +47,6 @@ public class Processor {
 
         // send instruction to control unit
         ControlUnit controlUnit = new ControlUnit(instruction);
-
 
         // extract registers' data that will be used
         Register sourceReg = instruction.getSourceReg(),
@@ -59,10 +58,10 @@ public class Processor {
         regData1 = registerFile.readData1();
         regData2 = registerFile.readData2();
 
-        System.out.println("RegData1 : " + regData1 + " RegData2 : " + regData2);
-        System.out.println("SourceReg:" + sourceReg);
-        System.out.println("TargetReg:" + targetReg);
-        System.out.println("DestinationReg:" + destinationReg);
+        //System.out.println("RegData1 : " + regData1 + " RegData2 : " + regData2);
+        //System.out.println("SourceReg:" + sourceReg);
+        //System.out.println("TargetReg:" + targetReg);
+        //System.out.println("DestinationReg:" + destinationReg);
 
         // ALU performs operation
         alu.setOperation(
@@ -74,7 +73,10 @@ public class Processor {
 
 
         // memory operations
-        data_out = memory.cycle(controlUnit.isMemRead(), controlUnit.isMemWrite(), alu_out, regData2);
+        int accessLength = instruction instanceof IFormatInstruction
+                ? ((IFormatInstruction)instruction).getAccessLength() : 4;
+
+        data_out = memory.cycle(controlUnit.isMemRead(), controlUnit.isMemWrite(), alu_out, regData2, accessLength);
 
 
         // writeback
@@ -84,13 +86,13 @@ public class Processor {
                         || (controlUnit.isRegWrite() && controlUnit.isJumpReg()));
         registerFile.write(controlUnit.isRegWrite(), write_data);
 
-        System.out.println("OLD PC : " + pc.get());
+        //System.out.println("OLD PC : " + pc.get());
 
 
         // update pc 
         updatePc(instruction, new_pc, branch_pc, regData1, alu_zero, controlUnit);
 
-        System.out.println("NEW PC : " + pc.get());
+        //System.out.println("NEW PC : " + pc.get());
     }
 
     private void updatePc(Instruction instruction, int new_pc, int branch_pc,  int jr_pc, boolean alu_zero, ControlUnit controlUnit) {
@@ -101,8 +103,8 @@ public class Processor {
 
         // update pc if branching or jumping exists
         new_pc = (int)mux(new_pc, branch_pc, (controlUnit.isBranch() && alu_zero) ||
-                                                       (controlUnit.isBranchNotEqual() && !alu_zero) ||
-                                                        controlUnit.isJump());
+                (controlUnit.isBranchNotEqual() && !alu_zero) ||
+                controlUnit.isJump());
 
         new_pc = (int)mux(new_pc, jr_pc, controlUnit.isJumpReg());
 
@@ -122,5 +124,9 @@ public class Processor {
 
     public int getIndex() {
         return pc.get()/4;
+    }
+
+    public String getStackData(){
+        return memory.getMemoryData();
     }
 }

@@ -11,58 +11,111 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="window" prefHeight="579.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<VBox fx:id="window" prefHeight="579.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-        <SplitPane dividerPositions="0.5" layoutX="285.0" layoutY="100.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.705" layoutX="285.0" layoutY="100.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                    <SplitPane dividerPositions="0.08" layoutX="131.0" layoutY="89.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <items>
-                            <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" SplitPane.resizableWithParent="false">
-                                <Button fx:id="btnChooseFile" defaultButton="true" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#chooseFilePressed" scaleShape="false" text="Choose A File" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0">
-                                    <font>
-                                        <Font name="Segoe UI" size="12.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="btnRun" defaultButton="true" layoutX="308.0" layoutY="8.0" mnemonicParsing="false" onAction="#runPressed" prefWidth="41.0" scaleShape="false" text="Run" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="8.0">
-                                    <font>
-                                        <Font name="Segoe UI" size="12.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="btnStep" disable="true" layoutX="358.0" layoutY="9.0" mnemonicParsing="false" onAction="#onStep" scaleShape="false" text="Step" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
-                                    <font>
-                                        <Font name="Segoe UI" size="12.0" />
-                                    </font>
-                                </Button>
-                            </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                <Label fx:id="rLabel" alignment="CENTER" text="Registers" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <font>
-                                        <Font name="Segoe UI Bold" size="16.0" />
-                                    </font>
-                                    <padding>
-                                        <Insets bottom="4.0" top="4.0" />
-                                    </padding>
-                                </Label>
-                                <SplitPane layoutX="53.0" layoutY="65.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="577.0" prefWidth="539.0" SplitPane.resizableWithParent="false">
+               <SplitPane dividerPositions="0.45" prefHeight="577.0" prefWidth="523.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
+                 <items>
+                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                        <children>
+                                <SplitPane dividerPositions="0.08" orientation="VERTICAL" prefHeight="575.0" prefWidth="285.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <items>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                            <TableView fx:id="rTable" layoutX="1.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                <columns>
-                                                    <TableColumn fx:id="rNo" editable="false" minWidth="-Infinity" prefWidth="46.0" resizable="false" text="No" />
-                                       <TableColumn fx:id="rName" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="76.0" resizable="false" sortable="false" text="Name" />
-                                                    <TableColumn fx:id="rValue" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="294.0" sortable="false" text="Value" />
-                                                </columns>
-                                            </TableView>
+                                        <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" SplitPane.resizableWithParent="false">
+                                            <Button fx:id="btnChoose" defaultButton="true" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#chooseFilePressed" scaleShape="false" text="Choose File" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="8.0">
+                                                <font>
+                                                    <Font name="Segoe UI" size="12.0" />
+                                                </font>
+                                            </Button>
+                                            <Button fx:id="btnRun" defaultButton="true" layoutX="146.0" layoutY="8.0" mnemonicParsing="false" onAction="#runPressed" prefHeight="23.0" prefWidth="40.0" scaleShape="false" text="Run" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="8.0">
+                                                <font>
+                                                    <Font name="Segoe UI" size="12.0" />
+                                                </font>
+                                            </Button>
+                                            <Button fx:id="btnStep" disable="true" layoutX="358.0" layoutY="9.0" mnemonicParsing="false" onAction="#onStep" prefHeight="23.0" prefWidth="40.0" scaleShape="false" text="Step" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="8.0">
+                                                <font>
+                                                    <Font name="Segoe UI" size="12.0" />
+                                                </font>
+                                            </Button>
+                                    <Button fx:id="btnReset" defaultButton="true" layoutX="88.0" layoutY="8.0" mnemonicParsing="false" onAction="#restartApplication" prefHeight="23.0" prefWidth="47.0" scaleShape="false" text="Reset" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="8.0">
+                                       <font>
+                                          <Font name="Segoe UI" size="12.0" />
+                                       </font>
+                                    </Button>
+                                        </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                            <Label fx:id="rLabel" alignment="CENTER" text="Registers" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <font>
+                                                    <Font name="Segoe UI Bold" size="16.0" />
+                                                </font>
+                                                <padding>
+                                                    <Insets bottom="4.0" top="4.0" />
+                                                </padding>
+                                            </Label>
+                                            <SplitPane layoutX="53.0" layoutY="65.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
+                                                <items>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                        <TableView fx:id="rTable" layoutX="1.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <columns>
+                                                                <TableColumn fx:id="rNo" editable="false" minWidth="-Infinity" prefWidth="46.0" resizable="false" text="No" />
+                                                   <TableColumn fx:id="rName" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="76.0" resizable="false" sortable="false" text="Name" />
+                                                                <TableColumn fx:id="rValue" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="140.0" resizable="false" sortable="false" text="Value" />
+                                                            </columns>
+                                                        </TableView>
+                                                    </AnchorPane>
+                                                </items>
+                                            </SplitPane>
                                         </AnchorPane>
                                     </items>
                                 </SplitPane>
-                            </AnchorPane>
-                        </items>
-                    </SplitPane>
+                        </children>
+                     </AnchorPane>
+                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="575.0" prefWidth="284.0">
+                        <children>
+                           <Label fx:id="mLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" prefHeight="45.0" prefWidth="292.0" text="Memory" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <font>
+                                 <Font name="Segoe UI Bold" size="17.0" />
+                              </font>
+                           </Label>
+                           <SplitPane dividerPositions="0.5" layoutX="39.0" layoutY="48.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+                             <items>
+                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="235.0" prefWidth="253.0">
+                                    <children>
+                                       <Label fx:id="sLabel" alignment="CENTER" prefHeight="24.0" prefWidth="355.0" scaleShape="false" text="Stack" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <font>
+                                             <Font name="Segoe UI Bold" size="12.0" />
+                                          </font>
+                                       </Label>
+                                       <TextArea fx:id="sTable" editable="false" layoutY="19.0" prefHeight="242.0" prefWidth="355.0" promptText="No content in table" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0" />
+                                    </children>
+                                 </AnchorPane>
+                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                    <children>
+                                       <TableView fx:id="textSegTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <columns>
+                                             <TableColumn maxWidth="1.7976931348623157E308" prefWidth="284.0" text="Text Segment">
+                                                <columns>
+                                                   <TableColumn fx:id="textSegAddress" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Address" />
+                                                   <TableColumn fx:id="textSegValue" editable="false" maxWidth="500.0" minWidth="-Infinity" prefWidth="250.0" sortable="false" text="Value" />
+                                                </columns>
+                                             </TableColumn>
+                                          </columns>
+                                       </TableView>
+                                    </children>
+                                 </AnchorPane>
+                             </items>
+                           </SplitPane>
+                        </children>
+                     </AnchorPane>
+                 </items>
+               </SplitPane>
                 </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                    <TextArea fx:id="assemblyCodeArea" layoutX="80.0" layoutY="173.0" promptText="Write assembly code here or choose an assembly file" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="577.0" prefWidth="276.0">
+                    <TextArea fx:id="assemblyCodeArea" layoutX="80.0" layoutY="173.0" promptText="Write assembly code here or choose an assembly file" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <font>
+                     <Font name="Segoe UI" size="12.0" />
+                  </font></TextArea>
                 </AnchorPane>
             </items>
         </SplitPane>
