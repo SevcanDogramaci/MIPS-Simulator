@@ -8,12 +8,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
 public class Controller {
 
-    @FXML private Button btnRun, btnStep;
+    @FXML private Button btnRun, btnStep, btnChoose;
     @FXML private TextArea assemblyCodeArea, sTable;
     @FXML private TableView<Register> rTable;
     @FXML private TableColumn<Register, Integer> rNo;
@@ -46,6 +48,10 @@ public class Controller {
 
     @FXML
     public void runPressed(ActionEvent event) throws Exception {
+
+        if(assemblyCodeArea.getText().equals("") && parser == null)
+            return;
+
         btnRun.setDisable(true);
         btnStep.setDisable(false);
         if(assemblyCodeArea.editableProperty().getValue()) {
@@ -140,6 +146,19 @@ public class Controller {
         parser = new Parser(selectedFile);
 
         assemblyCodeArea.setText(parser.getLines());
+    }
+
+
+    @FXML
+    public void restartApplication() throws URISyntaxException, IOException {
+        assemblyCodeArea.setText("");
+        btnRun.setDisable(false);
+        btnStep.setDisable(true);
+        btnChoose.setDisable(false);
+        parser = null;
+        textSegTable.setItems(null);
+        rTable.setItems(null);
+        sTable.setText("");
     }
 
 }
