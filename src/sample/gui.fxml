@@ -16,7 +16,7 @@
         <SplitPane dividerPositions="0.705" layoutX="285.0" layoutY="100.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="577.0" prefWidth="539.0" SplitPane.resizableWithParent="false">
-               <SplitPane dividerPositions="0.4" prefHeight="577.0" prefWidth="523.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
+               <SplitPane dividerPositions="0.45" prefHeight="577.0" prefWidth="523.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
                  <items>
                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                         <children>
@@ -28,17 +28,17 @@
                                                     <Font name="Segoe UI" size="12.0" />
                                                 </font>
                                             </Button>
-                                            <Button fx:id="btnRun" defaultButton="true" layoutX="146.0" layoutY="8.0" mnemonicParsing="false" onAction="#runPressed" prefWidth="41.0" scaleShape="false" text="Run" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="8.0">
+                                            <Button fx:id="btnRun" defaultButton="true" layoutX="146.0" layoutY="8.0" mnemonicParsing="false" onAction="#runPressed" prefHeight="23.0" prefWidth="40.0" scaleShape="false" text="Run" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="8.0">
                                                 <font>
                                                     <Font name="Segoe UI" size="12.0" />
                                                 </font>
                                             </Button>
-                                            <Button fx:id="btnStep" disable="true" layoutX="358.0" layoutY="9.0" mnemonicParsing="false" onAction="#onStep" scaleShape="false" text="Step" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="8.0">
+                                            <Button fx:id="btnStep" disable="true" layoutX="358.0" layoutY="9.0" mnemonicParsing="false" onAction="#onStep" prefHeight="23.0" prefWidth="40.0" scaleShape="false" text="Step" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="8.0">
                                                 <font>
                                                     <Font name="Segoe UI" size="12.0" />
                                                 </font>
                                             </Button>
-                                    <Button fx:id="btnReset" defaultButton="true" layoutX="88.0" layoutY="8.0" mnemonicParsing="false" onAction="#restartApplication" prefHeight="23.0" prefWidth="48.0" scaleShape="false" text="Reset" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="8.0">
+                                    <Button fx:id="btnReset" defaultButton="true" layoutX="88.0" layoutY="8.0" mnemonicParsing="false" onAction="#restartApplication" prefHeight="23.0" prefWidth="47.0" scaleShape="false" text="Reset" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="8.0">
                                        <font>
                                           <Font name="Segoe UI" size="12.0" />
                                        </font>
@@ -60,7 +60,7 @@
                                                             <columns>
                                                                 <TableColumn fx:id="rNo" editable="false" minWidth="-Infinity" prefWidth="46.0" resizable="false" text="No" />
                                                    <TableColumn fx:id="rName" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="76.0" resizable="false" sortable="false" text="Name" />
-                                                                <TableColumn fx:id="rValue" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="110.0" resizable="false" sortable="false" text="Value" />
+                                                                <TableColumn fx:id="rValue" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="140.0" resizable="false" sortable="false" text="Value" />
                                                             </columns>
                                                         </TableView>
                                                     </AnchorPane>
