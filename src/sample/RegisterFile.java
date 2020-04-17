@@ -50,7 +50,7 @@ public class RegisterFile {
             registers.add(new Register(registerNo ++, registerName));
         }
     }
-    
+
     public static void setRegisterData(int index, int dataValue){
         registers.get(index).setValue(dataValue);
     }
