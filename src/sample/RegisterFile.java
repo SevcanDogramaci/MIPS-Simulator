@@ -51,10 +51,6 @@ public class RegisterFile {
         }
     }
 
-    public static int getRegisterData(int index){
-        return registers.get(index).getValue();
-    }
-
     public static void setRegisterData(int index, int dataValue){
         registers.get(index).setValue(dataValue);
     }
@@ -71,7 +67,7 @@ public class RegisterFile {
         return FXCollections.observableArrayList(registers);
     }
 
-    public void resetData(){
+    public static void resetData(){
         for(Register register : registers) {
             register.setValue(0);
             if (register.getName().equals("sp")) register.setValue(MemoryFile.STACK_START);
