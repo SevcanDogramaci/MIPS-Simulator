@@ -8,8 +8,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -79,7 +77,6 @@ public class Controller {
 
     @FXML
     public void onStep(ActionEvent event) throws Exception {
-
         if(!processor.isDone()){
             processor.step();
             rTable.refresh();
@@ -148,16 +145,15 @@ public class Controller {
         assemblyCodeArea.setText(parser.getLines());
     }
 
-
     @FXML
-    public void restartApplication() throws URISyntaxException, IOException {
+    public void restartApplication() {
         assemblyCodeArea.setText("");
         btnRun.setDisable(false);
         btnStep.setDisable(true);
         btnChoose.setDisable(false);
         parser = null;
         textSegTable.setItems(null);
-        rTable.setItems(null);
+        RegisterFile.resetData();
         sTable.setText("");
     }
 
