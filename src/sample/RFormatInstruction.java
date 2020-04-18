@@ -57,7 +57,7 @@ public class RFormatInstruction extends Instruction {
                         targetReg = RegisterFile.getRegister(extractRegisterName(instruction[i]));
                         break;
                     case 3:
-                        shiftAmount = Short.parseShort(instruction[i]);
+                        shiftAmount = Short.parseShort(instruction[i].trim());
                         break;
                 }
             }catch (Exception e){
