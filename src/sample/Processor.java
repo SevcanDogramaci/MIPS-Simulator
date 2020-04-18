@@ -67,7 +67,7 @@ public class Processor {
         alu.setOperation(
                 ALUControl.getControl(controlUnit.isALUOp1(), controlUnit.isALUOp0(), instruction.getFunction()),
                 (int)mux(regData2, instruction.getImmediate(), controlUnit.isALUsrc()),
-                regData1);
+                regData1, instruction.getShiftAmount());
         alu_out = alu.getOut();
         alu_zero = alu.isZero();
 
