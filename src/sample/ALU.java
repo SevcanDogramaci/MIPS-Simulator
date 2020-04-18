@@ -4,13 +4,14 @@ public class ALU {
     public static final short AND = 0;
     public static final short OR = 1;
     public static final short ADD = 2;
+    public static final short XOR = 3;
     public static final short SUBTRACT = 6;
     public static final short SLT = 7;
     public static final short NOR = 12;
     public static final short SLL = 13;
     public static final short SRL = 14;
     public static final short SRA = 15;
-    public static final short XOR = 3;
+
 
     private int out;
     private boolean zero;

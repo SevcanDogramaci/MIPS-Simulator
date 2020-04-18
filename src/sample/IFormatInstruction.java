@@ -86,6 +86,7 @@ public class IFormatInstruction extends Instruction {
                 } catch (Exception e) {
                     immediate = calculateLabel(instruction[2]);
                 }
+
             }
 
         } else {
@@ -93,7 +94,16 @@ public class IFormatInstruction extends Instruction {
             System.out.println(targetReg==null ? instruction[0] : targetReg.getValue());
 
             if (instruction.length == 2) {
+
                 String ins = instruction[1].trim();
+
+                if (!ins.contains("(")){
+                    immediate = Integer.parseInt(ins);
+                    shiftAmount = 16;
+                    sourceReg = targetReg;
+                    return;
+                }
+
                 immediate = Integer.parseInt(ins.substring(0, ins.indexOf("(")));
                 sourceReg = RegisterFile.getRegister(
                         extractRegisterName(ins.substring(ins.indexOf("(") + 1, ins.indexOf(")"))));

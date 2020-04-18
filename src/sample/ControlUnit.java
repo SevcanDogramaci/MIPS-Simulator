@@ -67,10 +67,9 @@ public class ControlUnit {
                 BranchNotEqual = true;
                 ALUOp0 = true;
             }
-            else if (instruction.opcode == 1){
+            else if (instruction.opcode == 1){ // bgez
                 ALUOp1 = true;
                 instruction.opcode = 42;
-                System.out.println("rt" + instruction.getTargetReg().getValue());
                 if (instruction.shiftAmount == 1){
                     instruction.getTargetReg().setValue(0);
                     branchCode = 1;
@@ -91,6 +90,11 @@ public class ControlUnit {
                 instruction.opcode = 42;
                 branchCode = 3;
                 instruction.getTargetReg().setValue(1);
+            }
+            else if (instruction.opcode == 15){
+                ALUOp1 = true;
+                RegWrite = true;
+                ALUsrc = true;
             }
         }
 
