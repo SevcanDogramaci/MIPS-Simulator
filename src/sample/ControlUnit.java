@@ -27,21 +27,18 @@ public class ControlUnit {
             else if(instruction.getFunction() == 9){ // jalr
                 JumpReg = true;
             }
-            System.out.println("SHIFT AMOUNT: " + instruction.getShiftAmount());
             RegDst = true;
             RegWrite = true;
             ALUOp1 = true;
         }
 
         else if (instruction.isIFormat()){
-            //System.out.println("Immediate : " + instruction.immediate);
+
             if(instruction.opcode > 7 && instruction.opcode < 10){
-                //System.out.println("Here1 " + instruction.opcode);
                 ALUsrc = true;
                 RegWrite = true;
             }
-            else if(instruction.opcode > 9 && instruction.opcode < 15){
-                //System.out.println("Here2 " + instruction.opcode);
+            else if(instruction.opcode > 9 && instruction.opcode <= 15){
                 ALUOp1 = true;
                 ALUsrc = true;
                 RegWrite = true;
@@ -78,7 +75,6 @@ public class ControlUnit {
                     branchCode = 4;
                     instruction.getTargetReg().setValue(1);
                 }
-
             }
             else if (instruction.opcode == 7){
                 ALUOp1 = true;
@@ -90,11 +86,6 @@ public class ControlUnit {
                 instruction.opcode = 42;
                 branchCode = 3;
                 instruction.getTargetReg().setValue(1);
-            }
-            else if (instruction.opcode == 15){
-                ALUOp1 = true;
-                RegWrite = true;
-                ALUsrc = true;
             }
         }
 
