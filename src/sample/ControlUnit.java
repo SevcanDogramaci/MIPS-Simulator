@@ -26,6 +26,7 @@ public class ControlUnit {
             else if(instruction.getFunction() == 9){ // jalr
                 JumpReg = true;
             }
+            System.out.println("SHIFT AMOUNT: " + instruction.getShiftAmount());
             RegDst = true;
             RegWrite = true;
             ALUOp1 = true;
