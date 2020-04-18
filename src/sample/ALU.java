@@ -41,16 +41,22 @@ public class ALU {
                 out = rsv < srcv ? 1 : 0;
                 break;
             case SLL:
-                out = srcv << shamt;
-                System.out.println("OUT : " + out);
+                if(srcv != 0 && shamt == 0)
+                    out = rsv << srcv;
+                else
+                    out = srcv << shamt;
                 break;
             case SRL:
-                out = srcv >>> shamt;
-                System.out.println("OUT : " + out);
+                if(srcv != 0 && shamt == 0)
+                    out = rsv >>> srcv;
+                else
+                    out = srcv >>> shamt;
                 break;
             case SRA:
-                out = srcv >> shamt;
-                System.out.println("OUT : " + out);
+                if(srcv != 0 && shamt == 0)
+                    out = rsv >> srcv;
+                else
+                    out = srcv >> shamt;
         }
     }
 
