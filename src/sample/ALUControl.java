@@ -51,6 +51,7 @@ public class ALUControl {
 
             case 0:
             case 4:
+            case 15:
                 System.out.println("SLL");
                 return ALU.SLL;
 
