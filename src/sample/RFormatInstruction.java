@@ -50,7 +50,6 @@ public class RFormatInstruction extends Instruction {
                         destinationReg = RegisterFile.getRegister(extractRegisterName(instruction[i]));
                         break;
                     case 1:
-                        System.out.println(instruction[i]);
                         sourceReg = RegisterFile.getRegister(extractRegisterName(instruction[i]));
                         break;
                     case 2:
@@ -77,8 +76,6 @@ public class RFormatInstruction extends Instruction {
 
     @Override
     public String getMachineCode() {
-
-        System.out.println("denem: " + line);
         StringBuilder sb = new StringBuilder();
 
         sb.append(fillWithZero(Integer.toBinaryString(opcode), 6))

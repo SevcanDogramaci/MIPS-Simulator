@@ -40,8 +40,6 @@ public class MemoryFile {
         byte[] row = data[index >> 2];
         byte offset = (byte) (index % 4);
 
-        System.out.println("set: " + value + " " + type + " " + offset + " " + (index>>2));
-
         int j = 0;
         for (int i = offset; i < offset + type; i++, j++) {
             row[i] = (byte) (value >> (type-1-j) * 8);

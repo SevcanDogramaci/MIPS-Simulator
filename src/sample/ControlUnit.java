@@ -15,6 +15,7 @@ public class ControlUnit {
     private boolean ALUsrc;  // reg2 or immediate
     private boolean RegWrite;
     private boolean SignExtend;
+    private int branchCode = 0;
 
     public ControlUnit(Instruction instruction) {
 
@@ -32,14 +33,14 @@ public class ControlUnit {
         }
 
         else if (instruction.isIFormat()){
-            System.out.println("Immediate : " + instruction.immediate);
+            //System.out.println("Immediate : " + instruction.immediate);
             if(instruction.opcode > 7 && instruction.opcode < 10){
-                System.out.println("Here1 " + instruction.opcode);
+                //System.out.println("Here1 " + instruction.opcode);
                 ALUsrc = true;
                 RegWrite = true;
             }
             else if(instruction.opcode > 9 && instruction.opcode < 15){
-                System.out.println("Here2 " + instruction.opcode);
+                //System.out.println("Here2 " + instruction.opcode);
                 ALUOp1 = true;
                 ALUsrc = true;
                 RegWrite = true;
@@ -64,6 +65,31 @@ public class ControlUnit {
             else if (instruction.opcode == 5){ // bne
                 BranchNotEqual = true;
                 ALUOp0 = true;
+            }
+            else if (instruction.opcode == 1){
+                ALUOp1 = true;
+                instruction.opcode = 42;
+                System.out.println("rt" + instruction.getTargetReg().getValue());
+                if (instruction.shiftAmount == 1){
+                    instruction.getTargetReg().setValue(0);
+                    branchCode = 1;
+                }
+                else{
+                    branchCode = 4;
+                    instruction.getTargetReg().setValue(1);
+                }
+
+            }
+            else if (instruction.opcode == 7){
+                ALUOp1 = true;
+                instruction.opcode = 42;
+                branchCode = 2;
+            }
+            else if(instruction.opcode == 6){
+                ALUOp1 = true;
+                instruction.opcode = 42;
+                branchCode = 3;
+                instruction.getTargetReg().setValue(1);
             }
         }
 
@@ -126,5 +152,9 @@ public class ControlUnit {
 
     public boolean isSignExtend() {
         return SignExtend;
+    }
+
+    public int getBranchCode() {
+        return branchCode;
     }
 }
