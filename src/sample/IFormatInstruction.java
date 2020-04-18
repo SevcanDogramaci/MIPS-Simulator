@@ -68,13 +68,10 @@ public class IFormatInstruction extends Instruction {
             sourceReg = RegisterFile.getRegister(extractRegisterName(instruction[0]));
 
             if (instruction.length == 2) {
-
+                targetReg = RegisterFile.getRegister("at");
                 if (functionName.equalsIgnoreCase("bgez")) {
-                    targetReg = RegisterFile.getRegister("t1");
-                    assert targetReg != null;
-                    targetReg.setValue(1);
-                } else
-                    targetReg = RegisterFile.getRegister("zero");
+                    shiftAmount = 1;
+                }
 
                 immediate = calculateLabel(instruction[1]);
             } else {

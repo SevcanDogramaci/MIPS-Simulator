@@ -24,9 +24,8 @@ public class Processor {
     }
 
     private void reset() {
-
         pc.reset();
-        registerFile.resetData();
+        RegisterFile.resetData();
         memory.resetData();
     }
 
@@ -38,7 +37,7 @@ public class Processor {
 
         Instruction instruction;
         int alu_out = 0, data_out = 0, regData1 = 0, regData2 = 0,
-                new_pc = pc.get(), branch_pc = new_pc, write_data;
+                new_pc = pc.get(), write_data;
         boolean alu_zero = false;
 
         // fetch instruction
@@ -58,11 +57,6 @@ public class Processor {
         regData1 = registerFile.readData1();
         regData2 = registerFile.readData2();
 
-        //System.out.println("RegData1 : " + regData1 + " RegData2 : " + regData2);
-        //System.out.println("SourceReg:" + sourceReg);
-        //System.out.println("TargetReg:" + targetReg);
-        //System.out.println("DestinationReg:" + destinationReg);
-
         // ALU performs operation
         alu.setOperation(
                 ALUControl.getControl(controlUnit.isALUOp1(), controlUnit.isALUOp0(), instruction.getFunction()),
@@ -70,7 +64,6 @@ public class Processor {
                 regData1, instruction.getShiftAmount());
         alu_out = alu.getOut();
         alu_zero = alu.isZero();
-
 
         // memory operations
         int accessLength = instruction instanceof IFormatInstruction
@@ -88,19 +81,37 @@ public class Processor {
 
 
         // update pc 
-        updatePc(instruction, new_pc, branch_pc, regData1, alu_zero, controlUnit);
+        updatePc(instruction, new_pc, alu_out, regData1, alu_zero, controlUnit);
 
-        //System.out.println("NEW PC : " + pc.get());
     }
 
-    private void updatePc(Instruction instruction, int new_pc, int branch_pc,  int jr_pc, boolean alu_zero, ControlUnit controlUnit) {
+    private boolean getBranch(ControlUnit controlUnit, int out) {
+        boolean b1 = false;
+        System.out.println("branch code: " + controlUnit.getBranchCode());
+        System.out.println("out: " + out);
+
+        switch (controlUnit.getBranchCode()){
+            case 1:
+            case 2:
+                b1 = out != 1;
+                break;
+            case 3:
+            case 4:
+                b1 = out == 1;
+                break;
+        }
+        return b1;
+    }
+
+    private void updatePc(Instruction instruction, int new_pc, int alu_out,  int jr_pc, boolean alu_zero, ControlUnit controlUnit) {
         new_pc += 4;
 
-        branch_pc = new_pc + (instruction.getImmediate() << 2);
+        int branch_pc = new_pc + (instruction.getImmediate() << 2);
+        boolean branch = getBranch(controlUnit, alu_out);
 
-
+        System.out.println("branch: " + branch);
         // update pc if branching or jumping exists
-        new_pc = (int)mux(new_pc, branch_pc, (controlUnit.isBranch() && alu_zero) ||
+        new_pc = (int)mux(new_pc, branch_pc, ((controlUnit.isBranch() && alu_zero) || branch)||
                 (controlUnit.isBranchNotEqual() && !alu_zero) ||
                 controlUnit.isJump());
 
