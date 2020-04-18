@@ -39,6 +39,10 @@ public class ALUControl {
             case 39:
                 System.out.println("NOR");
                 return ALU.NOR;
+            case 38:
+            case 14:
+                System.out.println("XOR");
+                return ALU.XOR;
 
             case 42:
             case 43:
