@@ -108,7 +108,6 @@ public class IFormatInstruction extends Instruction {
                 sourceReg = RegisterFile.getRegister(
                         extractRegisterName(ins.substring(ins.indexOf("(") + 1, ins.indexOf(")"))));
 
-
             } else {
                 sourceReg = RegisterFile.getRegister(extractRegisterName(instruction[1]));
                 immediate = Integer.parseInt(instruction[2].trim());
@@ -157,7 +156,7 @@ public class IFormatInstruction extends Instruction {
         instructionMap.put("lbu", (short) 36);   // +
         instructionMap.put("lh", (short) 33);    // +
         instructionMap.put("lhu", (short) 37);   // +
-        instructionMap.put("lui", (short) 15);
+        instructionMap.put("lui", (short) 15);   // +
         instructionMap.put("lw", (short) 35);    // +
         instructionMap.put("lwcl", (short) 49);  // -
 

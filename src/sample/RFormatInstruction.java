@@ -152,7 +152,7 @@ public class RFormatInstruction extends Instruction {
         instructionMap.put("sll", "000000 1011");   // +
         instructionMap.put("sllv", "000100 1110");  // +
         instructionMap.put("slt", "101010 1110");   // +
-        instructionMap.put("sltu", "101011 1110");  // 
+        instructionMap.put("sltu", "101011 1110");  //
         instructionMap.put("sra", "000011 1011");   // +
         instructionMap.put("srav", "000111 1110");  // +
         instructionMap.put("srl", "000010 1011");   // +
@@ -160,7 +160,7 @@ public class RFormatInstruction extends Instruction {
 
         instructionMap.put("sub", "100010 1110");   // +
         instructionMap.put("subu", "100011 1110");  // +
-        instructionMap.put("syscall", "001100 0000");
+        instructionMap.put("syscall", "001100 0000");// -
         instructionMap.put("xor", "100110 1110");   // +
     }
 }
