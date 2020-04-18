@@ -10,6 +10,7 @@ public class ALU {
     public static final short SLL = 13;
     public static final short SRL = 14;
     public static final short SRA = 15;
+    public static final short XOR = 3;
 
     private int out;
     private boolean zero;
@@ -57,6 +58,9 @@ public class ALU {
                     out = rsv >> srcv;
                 else
                     out = srcv >> shamt;
+                break;
+            case XOR:
+                out = rsv ^ srcv;
         }
     }
 
