@@ -7,11 +7,14 @@ public class ALU {
     public static final short SUBTRACT = 6;
     public static final short SLT = 7;
     public static final short NOR = 12;
+    public static final short SLL = 13;
+    public static final short SRL = 14;
+    public static final short SRA = 15;
 
     private int out;
     private boolean zero;
 
-    public void setOperation(short control, int srcv, int rsv) {
+    public void setOperation(short control, int srcv, int rsv, int shamt) {
         zero = false;
         out = 0;
 
@@ -37,6 +40,17 @@ public class ALU {
             case SLT:
                 out = rsv < srcv ? 1 : 0;
                 break;
+            case SLL:
+                out = srcv << shamt;
+                System.out.println("OUT : " + out);
+                break;
+            case SRL:
+                out = srcv >>> shamt;
+                System.out.println("OUT : " + out);
+                break;
+            case SRA:
+                out = srcv >> shamt;
+                System.out.println("OUT : " + out);
         }
     }
 
