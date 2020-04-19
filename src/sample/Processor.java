@@ -87,8 +87,6 @@ public class Processor {
 
     private boolean getBranch(ControlUnit controlUnit, int out) {
         boolean b1 = false;
-        System.out.println("branch code: " + controlUnit.getBranchCode());
-        System.out.println("out: " + out);
 
         switch (controlUnit.getBranchCode()){
             case 1:
@@ -109,7 +107,6 @@ public class Processor {
         int branch_pc = new_pc + (instruction.getImmediate() << 2);
         boolean branch = getBranch(controlUnit, alu_out);
 
-        System.out.println("branch: " + branch);
         // update pc if branching or jumping exists
         new_pc = (int)mux(new_pc, branch_pc, ((controlUnit.isBranch() && alu_zero) || branch)||
                 (controlUnit.isBranchNotEqual() && !alu_zero) ||

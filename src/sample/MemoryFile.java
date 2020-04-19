@@ -66,12 +66,11 @@ public class MemoryFile {
     public String getMemoryData (){
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Address\tData\n-------\t-------\n");
+        sb.append("Address\t\tData\n---------\t\t-------------------------------\n");
 
 
         for (int i = stackPointer.getValue() >> 2; i < data.length; i++) {
-            //sb.append(Integer.toHexString(i << 2)).append("\t").append(Integer.toHexString(data[i]));
-            sb.append(i << 2).append("\t\t");
+            sb.append(String.format("%6d", i << 2)).append("\t\t");
 
             byte[] row = data[i];
 
