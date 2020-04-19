@@ -15,7 +15,6 @@ public class Register {
         }
         else
             this.value = 0;
-
     }
 
     public void setValue(int value) {
@@ -29,9 +28,9 @@ public class Register {
 
     public int getValue() { return value; }
 
-    public static String extractRegisterName(String name){
-        if(name.contains("$"))
-            name = name.replace("$", "");
+    public static String extractRegisterName(String name) {
+        if (name.contains("$"))
+            name = name.trim().replace("$", "");
         return name;
     }
 }

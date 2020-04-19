@@ -8,7 +8,7 @@ public class MemoryFile {
 
     public MemoryFile(){
         stackPointer = RegisterFile.getRegister("sp");
-        data = new byte[STACK_START<<2][4];
+        data = new byte[STACK_START>>2][4];
     }
 
     public void resetData(){
