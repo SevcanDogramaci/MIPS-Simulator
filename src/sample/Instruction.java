@@ -66,6 +66,8 @@ public abstract class Instruction {
         return line;
     }
 
+    public short getAddress() { return address; }
+
     public abstract String getMachineCode();
 
     public short getAddress() { return address; }
