@@ -57,6 +57,7 @@ public class Controller {
             assemblyCodeArea.setText(parser.getLines());
         }
 
+
         parser.createInstructions();
         assemblyCodeArea.setText(parser.getLines());
 

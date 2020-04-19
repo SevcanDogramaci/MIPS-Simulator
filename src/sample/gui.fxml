@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="window" prefHeight="579.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<VBox fx:id="window" prefHeight="579.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
         <SplitPane dividerPositions="0.705" layoutX="285.0" layoutY="100.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -112,7 +112,7 @@
                </SplitPane>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="577.0" prefWidth="276.0">
-                    <TextArea fx:id="assemblyCodeArea" layoutX="80.0" layoutY="173.0" promptText="Write assembly code here or choose an assembly file" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <TextArea fx:id="assemblyCodeArea" layoutX="80.0" layoutY="173.0" promptText="Write assembly code here or choose an assembly file" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <font>
                      <Font name="Segoe UI" size="12.0" />
                   </font></TextArea>
