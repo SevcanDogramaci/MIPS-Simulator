@@ -74,9 +74,7 @@ public class ALU {
                 break;
 
             case SLTU:
-                byte rsvB = (byte) (((Integer)rsv).byteValue() & 0xFF);
-                byte srcvB = (byte) (((Integer)rsv).byteValue() & 0xFF);
-                out =  rsvB < srcvB ? 1 : 0;
+                out = Math.abs(rsv)  < Math.abs(srcv) ? 1 : 0;
         }
     }
 
