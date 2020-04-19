@@ -14,7 +14,7 @@ public class Processor {
         pc = new ProgramCounter();
         registerFile = new RegisterFile();
         instructionMemoryFile = new InstructionMemoryFile();
-        memory = new MemoryFile(1000);
+        memory = new MemoryFile();
         alu = new ALU();
     }
 
