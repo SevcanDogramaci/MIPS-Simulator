@@ -91,7 +91,6 @@ public class IFormatInstruction extends Instruction {
 
         } else {
             targetReg = RegisterFile.getRegister(extractRegisterName(instruction[0]));
-            System.out.println(targetReg==null ? instruction[0] : targetReg.getValue());
 
             if (instruction.length == 2) {
 

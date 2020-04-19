@@ -60,11 +60,6 @@ public class RFormatInstruction extends Instruction {
                         break;
                 }
             }catch (Exception e){
-                System.out.println(line + " " + instruction[i] + " " +  lastIdx);
-
-                for (char a: registerUsage) {
-                    System.out.print(a);
-                }
                 e.printStackTrace();
             }
         }

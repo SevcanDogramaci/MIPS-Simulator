@@ -58,6 +58,7 @@ public class Controller {
         }
 
         parser.createInstructions();
+        assemblyCodeArea.setText(parser.getLines());
 
         List<Instruction> instructions = parser.getInstructions();
 
@@ -116,7 +117,6 @@ public class Controller {
 
     private void selectLine(int lineNum){
         textSegTable.getSelectionModel().select(lineNum);
-        System.out.println("line num : " + lineNum);
         String txt = assemblyCodeArea.getText();
         int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
         int end = ordinalIndexOf(txt, "\n", lineNum );

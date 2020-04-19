@@ -38,6 +38,7 @@ public class Parser {
                 instructions.add(in);
         }
 
+
     }
 
     private void extractLabels(){
@@ -71,7 +72,6 @@ public class Parser {
     }
 
     public int getLabelAddress(String labelName){
-        System.out.println(labelAddressesMap);
         return this.labelAddressesMap.get(labelName);
     }
 
@@ -119,14 +119,28 @@ public class Parser {
     public String getLines() {
         StringBuilder sb = new StringBuilder();
 
-        for (String s: clearedLines) {
-            sb.append(s);
-            if(s.contains(":") && s.trim().lastIndexOf(":") == s.trim().length() - 1)
-                sb.append(" ");
-            else
-                sb.append("\n");
+        if (instructions == null) {
+            for (String s : clearedLines) {
+                sb.append(s);
+                if (s.contains(":") && s.trim().lastIndexOf(":") == s.trim().length() - 1)
+                    sb.append(" ");
+                else
+                    sb.append("\n");
+            }
+        } else {
+            for (Instruction i : instructions) {
+                String s = i.getLine();
+                sb.append(s);
+                if (s.contains(":") && s.trim().lastIndexOf(":") == s.trim().length() - 1)
+                    sb.append(" ");
+                else
+                    sb.append("\n");
+            }
         }
+
+
         return sb.toString();
+
     }
 
     public List<Instruction> getInstructions() {

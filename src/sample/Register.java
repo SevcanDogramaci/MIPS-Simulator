@@ -12,7 +12,6 @@ public class Register {
 
         if (name.equals("sp")){
             this.value = MemoryFile.STACK_START;
-            System.out.println("sp value: " + value);
         }
         else
             this.value = 0;
