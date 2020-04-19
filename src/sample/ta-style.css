@@ -2,7 +2,7 @@
 .text-input {
     -fx-highlight-fill: paleturquoise;
     -fx-highlight-text-fill: blue;
-    -fx-font-size: 22
+    -fx-font-size: 18
 }
 .text-input:focused {
     -fx-highlight-fill: palegreen;

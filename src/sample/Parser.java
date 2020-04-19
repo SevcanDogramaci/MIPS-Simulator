@@ -32,12 +32,12 @@ public class Parser {
 
         extractLabels();
 
+
         for (int i = 0; i < clearedLines.size(); i++) {
             Instruction in= Instruction.createInstruction(clearedLines.get(i), i, this);
             if(in != null)
                 instructions.add(in);
         }
-
 
     }
 
@@ -127,21 +127,37 @@ public class Parser {
                 else
                     sb.append("\n");
             }
+
         } else {
-            for (Instruction i : instructions) {
-                String s = i.getLine();
-                sb.append(s);
-                if (s.contains(":") && s.trim().lastIndexOf(":") == s.trim().length() - 1)
-                    sb.append(" ");
-                else
-                    sb.append("\n");
+            for (int i = 0; i < instructions.size(); i++) {
+                String s = instructions.get(i).getLine();
+                if (labelAddressesMap.containsValue(i)){
+                    sb.append(getLabelName(i)).append(": ");
+                }
+                sb.append(s).append("\n");
             }
+
+            System.out.println(labelAddressesMap.get("exit"));
+            System.out.println(instructions.size());
+
+            if (labelAddressesMap.containsValue(instructions.size())){
+                sb.append(getLabelName(instructions.size())).append(": ");
+            }
+
         }
 
-
         return sb.toString();
-
     }
+
+    private String getLabelName(int i){
+        final String[] name = new String[1];
+        labelAddressesMap.forEach((k,v) -> {
+            if (v == i)
+                name[0] = k;
+        });
+        return name[0];
+    }
+
 
     public List<Instruction> getInstructions() {
         return this.instructions;
