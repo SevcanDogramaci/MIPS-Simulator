@@ -22,7 +22,6 @@ public class IFormatInstruction extends Instruction {
     }
 
     private Parser parser;
-    private AccessLength accessLength;
     private static final Map<String, Short> instructionMap;
 
     public IFormatInstruction(String line, int i, Parser parser) {
@@ -69,7 +68,7 @@ public class IFormatInstruction extends Instruction {
         instruction[0] = instruction[0].split(" ")[1].trim();
 
         if (functionName.startsWith("b")) {
-            sourceReg = RegisterFile.getRegister(extractRegisterName(instruction[0]));
+            sourceReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
 
             if (instruction.length == 2) {
                 targetReg = RegisterFile.getRegister("at");
@@ -79,7 +78,7 @@ public class IFormatInstruction extends Instruction {
 
                 immediate = calculateLabel(instruction[1]);
             } else {
-                targetReg = RegisterFile.getRegister(extractRegisterName(instruction[1]));
+                targetReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[1]));
 
                 try {
                     immediate = Integer.parseInt(instruction[2].trim());
@@ -90,7 +89,7 @@ public class IFormatInstruction extends Instruction {
             }
 
         } else {
-            targetReg = RegisterFile.getRegister(extractRegisterName(instruction[0]));
+            targetReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
 
             if (instruction.length == 2) {
 
@@ -105,10 +104,10 @@ public class IFormatInstruction extends Instruction {
 
                 immediate = Integer.parseInt(ins.substring(0, ins.indexOf("(")));
                 sourceReg = RegisterFile.getRegister(
-                        extractRegisterName(ins.substring(ins.indexOf("(") + 1, ins.indexOf(")"))));
+                        Register.extractRegisterName(ins.substring(ins.indexOf("(") + 1, ins.indexOf(")"))));
 
             } else {
-                sourceReg = RegisterFile.getRegister(extractRegisterName(instruction[1]));
+                sourceReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[1]));
                 immediate = Integer.parseInt(instruction[2].trim());
             }
         }
@@ -117,12 +116,6 @@ public class IFormatInstruction extends Instruction {
 
     private int calculateLabel(String s) {
         return parser.getLabelAddress(s.trim()) - index - 1;
-    }
-
-    private String extractRegisterName(String name) {
-        if (name.contains("$"))
-            name = name.trim().replace("$", "");
-        return name;
     }
 
     public short getAccessLength() {

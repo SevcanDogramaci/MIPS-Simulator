@@ -38,28 +38,27 @@ public class RFormatInstruction extends Instruction {
 
         instruction[0] = temp[1].trim();
 
-
         int lastIdx = -1;
 
-        for(int i = 0; i < instruction.length; i++){
+        for (String s : instruction) {
             try {
                 lastIdx = getNextRegister(registerUsage, lastIdx);
 
                 switch (lastIdx) {
                     case 0:
-                        destinationReg = RegisterFile.getRegister(extractRegisterName(instruction[i]));
+                        destinationReg = RegisterFile.getRegister(Register.extractRegisterName(s));
                         break;
                     case 1:
-                        sourceReg = RegisterFile.getRegister(extractRegisterName(instruction[i]));
+                        sourceReg = RegisterFile.getRegister(Register.extractRegisterName(s));
                         break;
                     case 2:
-                        targetReg = RegisterFile.getRegister(extractRegisterName(instruction[i]));
+                        targetReg = RegisterFile.getRegister(Register.extractRegisterName(s));
                         break;
                     case 3:
-                        shiftAmount = Short.parseShort(instruction[i].trim());
+                        shiftAmount = Short.parseShort(s.trim());
                         break;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -115,16 +114,10 @@ public class RFormatInstruction extends Instruction {
         return -1;
     }
 
-    private String extractRegisterName(String name){
-        if(name.contains("$"))
-            name = name.trim().replace("$", "");
-        return name;
-    }
-
     static {
         instructionMap = new HashMap<>();
-        // put instructions;
 
+        // put instructions;
         instructionMap.put("add", "100000 1110");   // +
         instructionMap.put("addu", "100001 1110");  // +
         instructionMap.put("and", "100100 1110");   // +

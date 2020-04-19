@@ -24,18 +24,6 @@ public abstract class Instruction {
 
     abstract void parseInstruction (String line) throws Exception;
 
-    public boolean isRegSource() {
-        return sourceReg != null;
-    }
-
-    public boolean isRegTarget() {
-        return targetReg != null;
-    }
-
-    public boolean isRegDest () {
-        return destinationReg != null;
-    }
-
     public Register getSourceReg() { return sourceReg; }
 
     public Register getTargetReg() { return targetReg; }
@@ -66,9 +54,9 @@ public abstract class Instruction {
         return line;
     }
 
-    public abstract String getMachineCode();
-
     public short getAddress() { return address; }
+
+    public abstract String getMachineCode();
 
     protected String fillWithZero(String s, int expectedLen){
         StringBuilder sBuilder = new StringBuilder(s);

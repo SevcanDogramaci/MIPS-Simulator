@@ -4,16 +4,11 @@ public class MemoryFile {
 
     public static final int STACK_START = 4000;
     private Register stackPointer;
-
-    //private int data[];
-
     private byte data[][];
 
-    public MemoryFile(int size){
+    public MemoryFile(){
         stackPointer = RegisterFile.getRegister("sp");
-
-        data = new byte[1000][4];
-        // data = new int[size];
+        data = new byte[STACK_START>>2][4];
     }
 
     public void resetData(){
@@ -62,27 +57,19 @@ public class MemoryFile {
         return ret;
     }
 
-
     public String getMemoryData (){
         StringBuilder sb = new StringBuilder();
-
         sb.append("Address\t\tData\n---------\t\t-------------------------------\n");
-
 
         for (int i = stackPointer.getValue() >> 2; i < data.length; i++) {
             sb.append(String.format("%6d", i << 2)).append("\t\t");
-
             byte[] row = data[i];
-
             for (int j = 0; j < row.length; j++) {
-
-                sb.append(String.format("%8s", Integer.toBinaryString(row[j] & 0xFF)).replace(' ', '0'))
-                        .append(" ");
+                sb.append(String.format("%8s", Integer.toBinaryString(row[j] & 0xFF))
+                        .replace(' ', '0')).append(" ");
             }
-
             sb.append("\n");
         }
-
         return sb.toString();
     }
 

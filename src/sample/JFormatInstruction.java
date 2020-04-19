@@ -40,7 +40,6 @@ public class JFormatInstruction extends Instruction {
 
     @Override
     public String getMachineCode() {
-
         StringBuilder sb = new StringBuilder();
 
         sb.append(fillWithZero(Integer.toBinaryString(opcode), 6))
@@ -56,7 +55,6 @@ public class JFormatInstruction extends Instruction {
     // instructions
     static {
         instructionMap = new HashMap<>();
-
         instructionMap.put("j", (short)2);  // +
         instructionMap.put("jal", (short)3);// +
     }

@@ -90,13 +90,4 @@ public class RegisterFile {
                 setRegisterData(wr.getNo(), dataValue);
         }
     }
-
-    public int[] getData(){
-        int[] registerData = new int[registers.size()];
-
-        for(int i = 0; i < registers.size(); i++) {
-            registerData[i] = registers.get(i).getValue();
-        }
-        return registerData;
-    }
 }
