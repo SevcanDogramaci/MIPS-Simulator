@@ -68,7 +68,7 @@ public class ALU {
                 else
                     out = srcv >> shamt;
                 break;
-                
+
             case XOR:
                 out = rsv ^ srcv;
                 break;
