@@ -5,6 +5,7 @@ public class ALU {
     public static final short OR = 1;
     public static final short ADD = 2;
     public static final short XOR = 3;
+    public static final short SLTU = 4;
     public static final short SUBTRACT = 6;
     public static final short SLT = 7;
     public static final short NOR = 12;
@@ -62,6 +63,11 @@ public class ALU {
                 break;
             case XOR:
                 out = rsv ^ srcv;
+                break;
+            case SLTU:
+                byte rsvB = (byte) (((Integer)rsv).byteValue() & 0xFF);
+                byte srcvB = (byte) (((Integer)rsv).byteValue() & 0xFF);
+                out =  rsvB < srcvB ? 1 : 0;
         }
     }
 

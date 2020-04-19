@@ -45,7 +45,6 @@ public class ALUControl {
                 return ALU.XOR;
 
             case 42:
-            case 43:
                 System.out.println("SLT");
                 return ALU.SLT;
 
@@ -64,6 +63,10 @@ public class ALUControl {
             case 7:
                 System.out.println("SRA");
                 return ALU.SRA;
+
+            case 43:
+                System.out.println("SLTU");
+                return ALU.SLTU;
         }
 
         System.out.println("NO RESULT");
