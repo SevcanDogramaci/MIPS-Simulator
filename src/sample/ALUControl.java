@@ -30,12 +30,12 @@ public class ALUControl {
 
             case 39:
                 return ALU.NOR;
+
             case 38:
             case 14:
                 return ALU.XOR;
 
             case 42:
-            case 43:
                 return ALU.SLT;
 
             case 0:
@@ -50,9 +50,11 @@ public class ALUControl {
             case 3:
             case 7:
                 return ALU.SRA;
+
+            case 43:
+                return ALU.SLTU;
         }
 
-        assert false;
         return 0;
     }
 }
