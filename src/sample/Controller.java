@@ -75,6 +75,7 @@ public class Controller {
         List<Instruction> instructions = parser.getInstructions();
         processor = new Processor();
         processor.loadInstructionsToMemory(instructions);
+        rTable.refresh();
         setupTextSegmentTable();
         selectLine(0);
     }
@@ -149,7 +150,7 @@ public class Controller {
     }
 
     @FXML
-    public void restartApplication() {
+    public void resetApplication() {
         assemblyCodeArea.setText("");
         assemblyCodeArea.setEditable(true);
         btnRun.setDisable(false);
@@ -158,6 +159,7 @@ public class Controller {
         parser = null;
         textSegTable.setItems(null);
         RegisterFile.resetData();
+        rTable.refresh();
         sTable.setText("");
     }
 

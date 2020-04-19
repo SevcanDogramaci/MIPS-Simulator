@@ -38,7 +38,7 @@
                                                     <Font name="Segoe UI" size="12.0" />
                                                 </font>
                                             </Button>
-                                    <Button fx:id="btnReset" defaultButton="true" layoutX="88.0" layoutY="8.0" mnemonicParsing="false" onAction="#restartApplication" prefHeight="23.0" prefWidth="47.0" scaleShape="false" text="Reset" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="8.0">
+                                    <Button fx:id="btnReset" defaultButton="true" layoutX="88.0" layoutY="8.0" mnemonicParsing="false" onAction="#resetApplication" prefHeight="23.0" prefWidth="47.0" scaleShape="false" text="Reset" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="8.0">
                                        <font>
                                           <Font name="Segoe UI" size="12.0" />
                                        </font>
