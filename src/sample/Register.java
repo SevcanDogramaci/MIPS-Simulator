@@ -18,10 +18,6 @@ public class Register {
 
     }
 
-    public void setNo(int no) { this.no = no; }
-
-    public void setName(String name) { this.name = name;    }
-
     public void setValue(int value) {
         if (!name.equalsIgnoreCase("zero"))
             this.value = value;
