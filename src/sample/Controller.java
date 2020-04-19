@@ -47,8 +47,10 @@ public class Controller {
     @FXML
     public void runPressed(ActionEvent event) throws Exception {
 
-        if(assemblyCodeArea.getText().equals("") && parser == null)
+        if(assemblyCodeArea.getText().equals("") && parser == null) {
             return;
+        }
+
 
         btnRun.setDisable(true);
         btnStep.setDisable(false);
