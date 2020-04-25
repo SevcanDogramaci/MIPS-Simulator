@@ -113,10 +113,6 @@ public class Parser {
                     .replace(", ", ",").replace(",", ", ")
                     .trim().replaceAll(" +", " "); // transform into required format.
 
-
-            // for empty lines.
-            // if(line.length()< 1) continue;
-
             // eliminate comment part of the line
             if (line.contains("#")){
                 line = line.substring(0, line.indexOf("#")).trim();
