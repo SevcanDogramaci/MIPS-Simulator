@@ -36,6 +36,7 @@ public class ALUControl {
                 return ALU.XOR;
 
             case 42:
+            case 10:
                 return ALU.SLT;
 
             case 0:
