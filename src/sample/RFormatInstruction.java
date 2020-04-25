@@ -62,7 +62,7 @@ public class RFormatInstruction extends Instruction {
                         break;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new Exception("Error occurred while parsing instruction!\nCheck instruction format : " + line);
             }
         }
     }
@@ -72,9 +72,10 @@ public class RFormatInstruction extends Instruction {
     }
 
     @Override
-    public String getMachineCode() {
+    public String getMachineCode() throws Exception {
         StringBuilder sb = new StringBuilder();
 
+        try{
         sb.append(fillWithZero(Integer.toBinaryString(opcode), 6))
                 .append(" ");
 
@@ -104,7 +105,10 @@ public class RFormatInstruction extends Instruction {
         else
             sb.append(fillWithZero("", 5));
 
-        sb.append(" ").append(fillWithZero(Integer.toBinaryString(functionCode), 6));
+        sb.append(" ").append(fillWithZero(Integer.toBinaryString(functionCode), 6));}
+        catch (Exception exception){
+            throw new Exception("Error occurred while generating machine code!\nCheck instruction format : " + line);
+        }
 
         return sb.toString();
     }
@@ -143,6 +147,7 @@ public class RFormatInstruction extends Instruction {
         instructionMap.put("srl", "000010 1011");   // +
         instructionMap.put("srlv", "000110 1110");  // +
 
+        // excluded instructions
         instructionMap.put("break", "00001101 0000");// -
         instructionMap.put("syscall", "001100 0000");// -
 

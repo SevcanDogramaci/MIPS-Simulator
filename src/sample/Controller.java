@@ -55,7 +55,7 @@ public class Controller {
         btnStep.setDisable(false);
 
         if(assemblyCodeArea.editableProperty().getValue()) {
-            parser = new Parser(assemblyCodeArea.getText(), this);
+            parser = new Parser(assemblyCodeArea.getText());
             assemblyCodeArea.setText(parser.getLines());
         }
 
@@ -69,7 +69,7 @@ public class Controller {
             processor.loadInstructionsToMemory(instructions);
             setupTextSegmentTable();
             selectLine(0);
-        }catch (Exception e){
+        } catch (Exception e){
             showAlertDialog("Error", e.getMessage(), true);
         }
 
@@ -93,15 +93,10 @@ public class Controller {
                 sTable.setText(processor.getStackData());
                 selectLine(processor.getIndex());
             } else
-                alertProgramFinish(event);
+                showAlertDialog("The program has finished!", "Do you want to run again ?", false);
         } catch (Exception e){
             showAlertDialog("Problem at line " + (processor.getIndex() + 1), e.getMessage(), false);
         }
-    }
-
-    private void alertProgramFinish(ActionEvent event) throws Exception {
-
-        showAlertDialog("The program has finished!", "Do you want to run again ?", false);
     }
 
     private int ordinalIndexOf(String str, String substr, int n) {
@@ -115,8 +110,10 @@ public class Controller {
     private void selectLine(int lineNum){
         textSegTable.getSelectionModel().select(lineNum);
         String txt = assemblyCodeArea.getText();
+
         int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
         int end = ordinalIndexOf(txt, "\n", lineNum );
+
         assemblyCodeArea.selectRange(start, end);
     }
 

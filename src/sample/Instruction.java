@@ -70,7 +70,7 @@ public abstract class Instruction {
         return line;
     }
 
-    public abstract String getMachineCode();
+    public abstract String getMachineCode() throws Exception;
 
     // helper function for machine code generation
     protected String fillWithZero(String s, int expectedLen){

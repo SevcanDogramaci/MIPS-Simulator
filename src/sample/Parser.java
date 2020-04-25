@@ -20,7 +20,7 @@ public class Parser {
         clearComments(inputLines);
     }
 
-    public Parser(String text, Controller controller) {
+    public Parser(String text) {
         inputLines = new ArrayList<>(Arrays.asList(text.split("\n")));
         clearComments(inputLines); // eliminate undesired parts, try to get instructions into required format
     }
@@ -149,9 +149,6 @@ public class Parser {
                 }
                 sb.append(s).append("\n");
             }
-
-            System.out.println(labelAddressesMap.get("exit"));
-            System.out.println(instructions.size());
 
             if (labelAddressesMap.containsValue(instructions.size())){
                 sb.append(getLabelName(instructions.size())).append(": ");
