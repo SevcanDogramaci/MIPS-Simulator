@@ -8,7 +8,7 @@ public class JFormatInstruction extends Instruction {
     private static final Map<String, Short> instructionMap;
     private Parser parser;
 
-    public JFormatInstruction(String line, int i, Parser parser) {
+    public JFormatInstruction(String line, int i, Parser parser) throws Exception {
         this.parser = parser;
         index = i;
         this.line = line;
@@ -23,7 +23,7 @@ public class JFormatInstruction extends Instruction {
     }
 
     @Override
-    void parseInstruction(String line) {
+    void parseInstruction(String line) throws Exception {
         String[] instruction = line.split(" ");
 
         // extract function name and offset
@@ -47,7 +47,7 @@ public class JFormatInstruction extends Instruction {
         return sb.toString();
     }
 
-    private int calculateLabel(String s) {
+    private int calculateLabel(String s) throws Exception {
         // get label address from label address map
         return parser.getLabelAddress(s.trim()) - index - 1;
     }

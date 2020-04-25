@@ -10,7 +10,7 @@ public class Processor {
     private MemoryFile memory;
     private ALU alu;
 
-    public Processor() {
+    public Processor() { // Initialize components that are connected to processor.
         pc = new ProgramCounter();
         registerFile = new RegisterFile();
         instructionMemoryFile = new InstructionMemoryFile();
@@ -18,6 +18,7 @@ public class Processor {
         alu = new ALU();
     }
 
+    // Load extracted instructions to instruction memory.
     public void loadInstructionsToMemory(List<Instruction> instructions) {
         this.instructionMemoryFile.load(instructions);
         reset();
@@ -38,7 +39,7 @@ public class Processor {
         Instruction instruction;
         int alu_out = 0, data_out = 0, regData1 = 0, regData2 = 0,
                 new_pc = pc.get(), write_data;
-        boolean alu_zero = false;
+        boolean alu_zero;
 
         // fetch instruction
         instruction = instructionMemoryFile.fetch(pc);
@@ -85,22 +86,6 @@ public class Processor {
 
     }
 
-    private boolean getBranch(ControlUnit controlUnit, int out) {
-        boolean b1 = false;
-
-        switch (controlUnit.getBranchCode()){
-            case 1:
-            case 2:
-                b1 = out != 1;
-                break;
-            case 3:
-            case 4:
-                b1 = out == 1;
-                break;
-        }
-        return b1;
-    }
-
     private void updatePc(Instruction instruction, int new_pc, int alu_out,  int jr_pc, boolean alu_zero, ControlUnit controlUnit) {
         new_pc += 4;
 
@@ -117,11 +102,28 @@ public class Processor {
         pc.set(new_pc);
     }
 
+    // 2to1 Multiplexer.
     private Object mux (Object value1, Object value2, boolean getSecond) {
         if(getSecond) {
             return value2;
         }
         return value1;
+    }
+
+    private boolean getBranch(ControlUnit controlUnit, int out) {
+        boolean b1 = false;
+
+        switch (controlUnit.getBranchCode()){
+            case 1:
+            case 2:
+                b1 = out != 1;
+                break;
+            case 3:
+            case 4:
+                b1 = out == 1;
+                break;
+        }
+        return b1;
     }
 
     public boolean isDone() {

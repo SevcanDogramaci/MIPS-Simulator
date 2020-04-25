@@ -45,7 +45,7 @@ public class Controller {
     }
 
     @FXML
-    public void runPressed(ActionEvent event) throws Exception {
+    public void runPressed(ActionEvent event) {
 
         if(assemblyCodeArea.getText().equals("") && parser == null) {
             return;
@@ -59,15 +59,21 @@ public class Controller {
             assemblyCodeArea.setText(parser.getLines());
         }
 
-        parser.createInstructions();
-        assemblyCodeArea.setText(parser.getLines());
+        try{
+            parser.createInstructions();
+            assemblyCodeArea.setText(parser.getLines());
 
-        List<Instruction> instructions = parser.getInstructions();
+            List<Instruction> instructions = parser.getInstructions();
 
-        processor = new Processor();
-        processor.loadInstructionsToMemory(instructions);
-        setupTextSegmentTable();
-        selectLine(0);
+            processor = new Processor();
+            processor.loadInstructionsToMemory(instructions);
+            setupTextSegmentTable();
+            selectLine(0);
+        }
+        catch (Exception e){
+            showAlertDialog("Error", e.getMessage(), true);
+        }
+
     }
 
     private void startAgain () {
@@ -80,34 +86,18 @@ public class Controller {
     }
 
     @FXML
-    public void onStep(ActionEvent event) throws Exception {
-        if(!processor.isDone()){
-            processor.step();
-            rTable.refresh();
-            sTable.setText(processor.getStackData());
-            selectLine(processor.getIndex());
+    public void onStep(ActionEvent event) {
+        try {
+            if (!processor.isDone()) {
+                processor.step();
+                rTable.refresh();
+                sTable.setText(processor.getStackData());
+                selectLine(processor.getIndex());
+            } else
+                showAlertDialog("The program has finished!", "Do you want to run again ?", false);
+        } catch (Exception e){
+            showAlertDialog("Problem at line " + (processor.getIndex() + 1), e.getMessage(), false);
         }
-        else
-            alertProgramFinish(event);
-    }
-
-    private void alertProgramFinish(ActionEvent event) throws Exception {
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setHeaderText("The program has finished!");
-        alert.setContentText("Do you want to run again ?");
-
-        ButtonType btnExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
-        ButtonType btnStartAgain = new ButtonType("Start Again", ButtonBar.ButtonData.OK_DONE);
-        alert.getButtonTypes().setAll(btnStartAgain, btnExit);
-
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.get() == btnStartAgain)
-            startAgain();
-        else
-            System.exit(0);
     }
 
     private int ordinalIndexOf(String str, String substr, int n) {
@@ -166,4 +156,27 @@ public class Controller {
         sTable.setText("");
     }
 
+    public void showAlertDialog(String header, String content, boolean isResetApplication) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+
+        ButtonType btnExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType btnOK =
+                isResetApplication ?
+                        new ButtonType("Reset", ButtonBar.ButtonData.OK_DONE):
+                        new ButtonType("Start Again", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(btnOK, btnExit);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == btnOK) {
+            if (isResetApplication)
+                resetApplication();
+            else
+                startAgain();
+        } else
+            System.exit(0);
+    }
 }

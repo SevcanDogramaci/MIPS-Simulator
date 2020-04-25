@@ -4,11 +4,11 @@ public class MemoryFile {
 
     public static final int STACK_START = 4000;
     private Register stackPointer;
-    private byte data[][];
+    private byte data[][]; // two dimensional byte array used to reflect two aligned memory.
 
     public MemoryFile(){
         stackPointer = RegisterFile.getRegister("sp");
-        data = new byte[STACK_START>>2][4];
+        data = new byte[STACK_START >> 2][4];
     }
 
     public void resetData(){
@@ -19,6 +19,7 @@ public class MemoryFile {
         }
     }
 
+    // Do read or write operation if required according to flags.
     public int cycle(boolean read, boolean write, int index, int writeValue, int accessLength, boolean signed){
 
         if (read){
@@ -31,6 +32,7 @@ public class MemoryFile {
         return 0;
     }
 
+    // writes value to memory, (aligned)
     private void set(int index, int value, int type){
         byte[] row = data[index >> 2];
         byte offset = (byte) (index % 4);
@@ -41,6 +43,7 @@ public class MemoryFile {
         }
     }
 
+    // reads value from memory, (aligned)
     private int get(int index, int type, boolean signed){
         byte[] row = data[index >> 2];
         byte offset = (byte) (index % 4);
