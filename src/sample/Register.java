@@ -15,7 +15,6 @@ public class Register {
         }
         else
             this.value = 0;
-
     }
 
     public void setValue(int value) {

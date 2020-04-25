@@ -99,7 +99,8 @@ public class Parser {
 
         for (String line : lines){
 
-            line = line.replace("\t", " ").trim(); // transform into required format.
+            line = line.replace("\t", " ").replace(", ", ",").replace(",", ", ").trim(); // transform into required format.
+
 
             // for empty lines.
             if(line.length()< 2) continue;

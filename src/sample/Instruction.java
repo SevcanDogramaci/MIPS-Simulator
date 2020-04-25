@@ -24,6 +24,18 @@ public abstract class Instruction {
 
     abstract void parseInstruction (String line) throws Exception;
 
+    public boolean isRegSource() {
+        return sourceReg != null;
+    }
+
+    public boolean isRegTarget() {
+        return targetReg != null;
+    }
+
+    public boolean isRegDest () {
+        return destinationReg != null;
+    }
+
     public Register getSourceReg() { return sourceReg; }
 
     public Register getTargetReg() { return targetReg; }

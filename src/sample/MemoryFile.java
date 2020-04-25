@@ -51,7 +51,7 @@ public class MemoryFile {
             if(i == offset && signed)
                 ret += (row[i]<< (type-1-i) * 8);
             else
-                ret += (unsignedToBytes(row[i])<< (type-1-j) * 8);
+                ret += (unsignedToBytes(row[i]) << (type-1-j) * 8);
         }
 
         return ret;

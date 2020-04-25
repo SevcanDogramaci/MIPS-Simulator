@@ -57,8 +57,13 @@ public class RegisterFile {
 
     public static Register getRegister(String name) {
         for (Register r: registers) {
-            if (r.getName().equalsIgnoreCase(name))
-                return r;
+            try {
+                if (r.getNo() == Integer.parseInt(name))
+                    return r;
+            } catch (Exception e) {
+                if (r.getName().equalsIgnoreCase(name))
+                    return r;
+            }
         }
         return null;
     }
