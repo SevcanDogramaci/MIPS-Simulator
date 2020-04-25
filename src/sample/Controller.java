@@ -51,14 +51,12 @@ public class Controller {
             return;
         }
 
-
         btnRun.setDisable(true);
         btnStep.setDisable(false);
         if(assemblyCodeArea.editableProperty().getValue()) {
             parser = new Parser(assemblyCodeArea.getText());
             assemblyCodeArea.setText(parser.getLines());
         }
-
 
         parser.createInstructions();
         assemblyCodeArea.setText(parser.getLines());

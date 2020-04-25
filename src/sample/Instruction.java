@@ -70,8 +70,6 @@ public abstract class Instruction {
 
     public abstract String getMachineCode();
 
-    public short getAddress() { return address; }
-
     protected String fillWithZero(String s, int expectedLen){
         StringBuilder sBuilder = new StringBuilder(s);
         for (int i = expectedLen - sBuilder.length(); i > 0; i--){
