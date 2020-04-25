@@ -99,8 +99,8 @@ public class Parser {
 
         for (String line : lines){
 
-            line = line.replace("\t", " ").
-                    replace(", ", ",").replace(",", ", ")
+            line = line.replace("\t", " ").toLowerCase()
+                    .replace(", ", ",").replace(",", ", ")
                     .trim().replaceAll(" +", " "); // transform into required format.
 
 
