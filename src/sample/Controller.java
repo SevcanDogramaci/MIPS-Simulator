@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
-public class Controller implements AbstractControllerInterface{
+public class Controller {
 
     @FXML private Button btnRun, btnStep, btnChoose;
     @FXML private TextArea assemblyCodeArea, sTable;
@@ -55,7 +55,7 @@ public class Controller implements AbstractControllerInterface{
         btnStep.setDisable(false);
 
         if(assemblyCodeArea.editableProperty().getValue()) {
-            parser = new Parser(assemblyCodeArea.getText(), this);
+            parser = new Parser(assemblyCodeArea.getText());
             assemblyCodeArea.setText(parser.getLines());
         }
 
@@ -93,7 +93,21 @@ public class Controller implements AbstractControllerInterface{
 
     private void alertProgramFinish(ActionEvent event) throws Exception {
 
-        showAlertDialog("The program has finished!", "Do you want to run again ?", false);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setHeaderText("The program has finished!");
+        alert.setContentText("Do you want to run again ?");
+
+        ButtonType btnExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType btnStartAgain = new ButtonType("Start Again", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(btnStartAgain, btnExit);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == btnStartAgain)
+            startAgain();
+        else
+            System.exit(0);
     }
 
     private int ordinalIndexOf(String str, String substr, int n) {
@@ -129,7 +143,7 @@ public class Controller implements AbstractControllerInterface{
 
         assemblyCodeArea.setEditable(false);
 
-        parser = new Parser(selectedFile, this);
+        parser = new Parser(selectedFile);
 
         assemblyCodeArea.setText(parser.getLines());
     }
@@ -152,27 +166,4 @@ public class Controller implements AbstractControllerInterface{
         sTable.setText("");
     }
 
-    @Override
-    public void showAlertDialog(String header, String content, boolean isResetApplication) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-
-        ButtonType btnExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
-        ButtonType btnOK =
-                isResetApplication ?
-                        new ButtonType("Reset", ButtonBar.ButtonData.OK_DONE):
-                        new ButtonType("Start Again", ButtonBar.ButtonData.OK_DONE);
-        alert.getButtonTypes().setAll(btnOK, btnExit);
-
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.get() == btnOK) {
-            if (isResetApplication)
-                resetApplication();
-            startAgain();
-        } else
-            System.exit(0);
-    }
 }
