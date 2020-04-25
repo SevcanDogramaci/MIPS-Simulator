@@ -115,7 +115,7 @@ public class Parser {
 
 
             // for empty lines.
-            if(line.length()< 2) continue;
+            // if(line.length()< 1) continue;
 
             // eliminate comment part of the line
             if (line.contains("#")){
@@ -123,7 +123,7 @@ public class Parser {
             }
             line = line.trim();
 
-            if (line.length()>1 && !line.contains(".")){
+            if (line.length()>=1 && !line.contains(".")){
                 clearedLines.add(line);
             }
         }
