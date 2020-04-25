@@ -23,11 +23,13 @@ public class RFormatInstruction extends Instruction {
 
     @Override
     void parseInstruction(String line) throws Exception {
+        // split instruction and extract function.
         String[] instruction = line.split(",");
         String functionName = instruction[0].split(" ")[0];
 
         String code = instructionMap.get(functionName);
 
+        // decode function code and registers which are being used.
         this.functionCode = Short.parseShort(code.substring(0, 6), 2);
         char[] registerUsage = code.substring(7).toCharArray();
 
@@ -40,6 +42,7 @@ public class RFormatInstruction extends Instruction {
 
         int lastIdx = -1;
 
+        // assign instructions' registers.
         for (String s : instruction) {
             try {
                 lastIdx = getNextRegister(registerUsage, lastIdx);

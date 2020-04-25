@@ -25,7 +25,7 @@ public class IFormatInstruction extends Instruction {
     private Parser parser;
     private static final Map<String, Short> instructionMap;
 
-    public IFormatInstruction(String line, int i, Parser parser) {
+    public IFormatInstruction(String line, int i, Parser parser) throws Exception {
         this.parser = parser;
         index = i;
         this.line = line;
@@ -62,7 +62,7 @@ public class IFormatInstruction extends Instruction {
     }
 
     @Override
-    void parseInstruction(String line) {
+    void parseInstruction(String line) throws Exception {
 
         String[] instruction = line.split(",");
         String functionName = instruction[0].split(" ")[0];
@@ -129,7 +129,7 @@ public class IFormatInstruction extends Instruction {
 
     }
 
-    private int calculateLabel(String label) {
+    private int calculateLabel(String label) throws Exception {
         // get label address from label address map
         return parser.getLabelAddress(label.trim()) - index - 1;
     }

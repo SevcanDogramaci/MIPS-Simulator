@@ -1,5 +1,6 @@
 package sample;
 
+
 public class Register {
 
     private String name;
@@ -10,9 +11,8 @@ public class Register {
         this.no = no;
         this.name = name;
 
-        if (name.equals("sp")){
+        if (name.equals("sp")) // start sp from stack start.
             this.value = MemoryFile.STACK_START;
-        }
         else
             this.value = 0;
     }

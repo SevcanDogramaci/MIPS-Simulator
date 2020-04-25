@@ -12,33 +12,38 @@ public class Parser {
     private ArrayList<String> inputLines;
     private ArrayList<String> clearedLines;
     private Map<String, Integer> labelAddressesMap;
-    private static ControllerInterface controllerInterface;
     private ArrayList<Instruction> instructions;
 
-    public Parser(File file, Controller controller) throws Exception {
+    public Parser(File file) {
         this.file = file;
-        this.controllerInterface = new ControllerInterface(controller);
         readFile();
         clearComments(inputLines);
     }
 
-    public Parser(String text, Controller controller) throws Exception {
-        this.controllerInterface = new ControllerInterface(controller);
+    public Parser(String text, Controller controller) {
         inputLines = new ArrayList<>(Arrays.asList(text.split("\n")));
-        clearComments(inputLines);
+        clearComments(inputLines); // eliminate undesired parts, try to get instructions into required format
     }
 
     public void createInstructions() throws Exception {
         instructions = new ArrayList<>();
         labelAddressesMap = new HashMap<>();
 
-        extractLabels();
-
+        extractLabels(); // Extracts labels and stores them into a map with their index.
 
         for (int i = 0; i < clearedLines.size(); i++) {
-            Instruction in= Instruction.createInstruction(clearedLines.get(i), i, this);
-            if(in != null)
-                instructions.add(in);
+            try {
+                Instruction in = Instruction.createInstruction(clearedLines.get(i), i, this);
+                if(in != null)
+                    instructions.add(in);
+                else
+                    throw new Exception("Instruction not supported: " + clearedLines.get(i));
+            }catch (Exception e){
+                if (e.getMessage() == null)
+                    throw new Exception("Instruction not supported: " + clearedLines.get(i));
+                else
+                    throw new Exception(e.getMessage());
+            }
         }
 
     }
@@ -73,13 +78,11 @@ public class Parser {
         }
     }
 
-    public int getLabelAddress(String labelName){
-        try{
+    public int getLabelAddress(String labelName) throws Exception {
+        if (labelAddressesMap.get(labelName) != null)
             return labelAddressesMap.get(labelName);
-        } catch (Exception exception){
-            controllerInterface.showAlertDialog(labelName + " is not defined!", null, true);
-        }
-        return -1;
+        else
+            throw new Exception(labelName + " is not defined!");
     }
 
     private void readFile(){

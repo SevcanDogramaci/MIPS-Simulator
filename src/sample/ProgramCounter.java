@@ -3,7 +3,7 @@ package sample;
 public class ProgramCounter {
     private int value;
     public ProgramCounter() {
-        value = 0;
+        value = 0; // start from 0
     }
 
     public void set(int value) {

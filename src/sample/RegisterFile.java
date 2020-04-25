@@ -55,19 +55,6 @@ public class RegisterFile {
         registers.get(index).setValue(dataValue);
     }
 
-    public static Register getRegister(String name) {
-        for (Register r: registers) {
-            try {
-                if (r.getNo() == Integer.parseInt(name))
-                    return r;
-            } catch (Exception e) {
-                if (r.getName().equalsIgnoreCase(name))
-                    return r;
-            }
-        }
-        return null;
-    }
-
     public static ObservableList<Register> getRegisters(){
         return FXCollections.observableArrayList(registers);
     }
@@ -79,6 +66,7 @@ public class RegisterFile {
         }
     }
 
+    // Set current instruction's registers.
     public void setRegisters(Register rr1, Register rr2, Register wr) {
         this.rr1 = rr1;
         this.rr2 = rr2;
@@ -89,10 +77,25 @@ public class RegisterFile {
 
     public int readData2() { return  rr2 == null ? 0 : rr2.getValue(); }
 
+    // Regwrite
     public void write(boolean regWrite, int dataValue) {
         if(regWrite) {
             if(wr != null)
                 setRegisterData(wr.getNo(), dataValue);
         }
+    }
+
+    // get register with respect to name or register number.
+    public static Register getRegister(String name) {
+        for (Register r: registers) {
+            try {
+                if (r.getNo() == Integer.parseInt(name))
+                    return r;
+            } catch (Exception e) {
+                if (r.getName().equalsIgnoreCase(name))
+                    return r;
+            }
+        }
+        return null;
     }
 }

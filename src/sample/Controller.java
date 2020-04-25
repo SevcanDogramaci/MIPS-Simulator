@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
-public class Controller implements AbstractControllerInterface{
+public class Controller {
 
     @FXML private Button btnRun, btnStep, btnChoose;
     @FXML private TextArea assemblyCodeArea, sTable;
@@ -45,7 +45,7 @@ public class Controller implements AbstractControllerInterface{
     }
 
     @FXML
-    public void runPressed(ActionEvent event) throws Exception {
+    public void runPressed(ActionEvent event) {
 
         if(assemblyCodeArea.getText().equals("") && parser == null) {
             return;
@@ -59,15 +59,20 @@ public class Controller implements AbstractControllerInterface{
             assemblyCodeArea.setText(parser.getLines());
         }
 
-        parser.createInstructions();
-        assemblyCodeArea.setText(parser.getLines());
+        try{
+            parser.createInstructions();
+            assemblyCodeArea.setText(parser.getLines());
 
-        List<Instruction> instructions = parser.getInstructions();
+            List<Instruction> instructions = parser.getInstructions();
 
-        processor = new Processor();
-        processor.loadInstructionsToMemory(instructions);
-        setupTextSegmentTable();
-        selectLine(0);
+            processor = new Processor();
+            processor.loadInstructionsToMemory(instructions);
+            setupTextSegmentTable();
+            selectLine(0);
+        }catch (Exception e){
+            showAlertDialog("Error", e.getMessage(), true);
+        }
+
     }
 
     private void startAgain () {
@@ -80,15 +85,18 @@ public class Controller implements AbstractControllerInterface{
     }
 
     @FXML
-    public void onStep(ActionEvent event) throws Exception {
-        if(!processor.isDone()){
-            processor.step();
-            rTable.refresh();
-            sTable.setText(processor.getStackData());
-            selectLine(processor.getIndex());
+    public void onStep(ActionEvent event) {
+        try {
+            if (!processor.isDone()) {
+                processor.step();
+                rTable.refresh();
+                sTable.setText(processor.getStackData());
+                selectLine(processor.getIndex());
+            } else
+                alertProgramFinish(event);
+        } catch (Exception e){
+            showAlertDialog("Problem at line " + (processor.getIndex() + 1), e.getMessage(), false);
         }
-        else
-            alertProgramFinish(event);
     }
 
     private void alertProgramFinish(ActionEvent event) throws Exception {
@@ -129,7 +137,7 @@ public class Controller implements AbstractControllerInterface{
 
         assemblyCodeArea.setEditable(false);
 
-        parser = new Parser(selectedFile, this);
+        parser = new Parser(selectedFile);
 
         assemblyCodeArea.setText(parser.getLines());
     }
@@ -152,7 +160,6 @@ public class Controller implements AbstractControllerInterface{
         sTable.setText("");
     }
 
-    @Override
     public void showAlertDialog(String header, String content, boolean isResetApplication) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
@@ -171,7 +178,8 @@ public class Controller implements AbstractControllerInterface{
         if (result.get() == btnOK) {
             if (isResetApplication)
                 resetApplication();
-            startAgain();
+            else
+                startAgain();
         } else
             System.exit(0);
     }
