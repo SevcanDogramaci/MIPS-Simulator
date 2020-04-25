@@ -12,12 +12,15 @@ public class InstructionMemoryFile {
         this.instructions = new Instruction[instructions.size()];
 
         for(int i = 0; i <instructions.size(); i++){
+            // set memory address for instructions
             instructions.get(i).setAddress((short)i);
         }
 
+        // load instructions into instruction memory
         this.instructions = instructions.toArray(this.instructions);
     }
 
+    // fetch instruction from instruction memory with pc
     public Instruction fetch(ProgramCounter pc) {
         return instructions[pc.get()/4];
     }

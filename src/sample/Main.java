@@ -8,10 +8,14 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    private static String appName = "MIPS Simulator";
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        // construct GUI
         Parent root = FXMLLoader.load(getClass().getResource("gui.fxml"));
-        primaryStage.setTitle("MIPS Simulator");
+        primaryStage.setTitle(appName);
         primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.show();
     }

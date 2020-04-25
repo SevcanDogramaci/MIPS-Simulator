@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
-public class Controller {
+public class Controller implements AbstractControllerInterface{
 
     @FXML private Button btnRun, btnStep, btnChoose;
     @FXML private TextArea assemblyCodeArea, sTable;
@@ -53,8 +53,9 @@ public class Controller {
 
         btnRun.setDisable(true);
         btnStep.setDisable(false);
+
         if(assemblyCodeArea.editableProperty().getValue()) {
-            parser = new Parser(assemblyCodeArea.getText());
+            parser = new Parser(assemblyCodeArea.getText(), this);
             assemblyCodeArea.setText(parser.getLines());
         }
 
@@ -92,21 +93,7 @@ public class Controller {
 
     private void alertProgramFinish(ActionEvent event) throws Exception {
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setHeaderText("The program has finished!");
-        alert.setContentText("Do you want to run again ?");
-
-        ButtonType btnExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
-        ButtonType btnStartAgain = new ButtonType("Start Again", ButtonBar.ButtonData.OK_DONE);
-        alert.getButtonTypes().setAll(btnStartAgain, btnExit);
-
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.get() == btnStartAgain)
-            startAgain();
-        else
-            System.exit(0);
+        showAlertDialog("The program has finished!", "Do you want to run again ?", false);
     }
 
     private int ordinalIndexOf(String str, String substr, int n) {
@@ -142,23 +129,50 @@ public class Controller {
 
         assemblyCodeArea.setEditable(false);
 
-        parser = new Parser(selectedFile);
+        parser = new Parser(selectedFile, this);
 
         assemblyCodeArea.setText(parser.getLines());
     }
 
     @FXML
     public void resetApplication() {
+
         assemblyCodeArea.setText("");
         assemblyCodeArea.setEditable(true);
+
         btnRun.setDisable(false);
         btnStep.setDisable(true);
         btnChoose.setDisable(false);
+
         parser = null;
         textSegTable.setItems(null);
+
         RegisterFile.resetData();
         rTable.refresh();
         sTable.setText("");
     }
 
+    @Override
+    public void showAlertDialog(String header, String content, boolean isResetApplication) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+
+        ButtonType btnExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType btnOK =
+                isResetApplication ?
+                        new ButtonType("Reset", ButtonBar.ButtonData.OK_DONE):
+                        new ButtonType("Start Again", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(btnOK, btnExit);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == btnOK) {
+            if (isResetApplication)
+                resetApplication();
+            startAgain();
+        } else
+            System.exit(0);
+    }
 }

@@ -117,16 +117,31 @@ public class RFormatInstruction extends Instruction {
     static {
         instructionMap = new HashMap<>();
 
-        // put instructions;
+        // put instructions
         instructionMap.put("add", "100000 1110");   // +
         instructionMap.put("addu", "100001 1110");  // +
+        instructionMap.put("sub", "100010 1110");   // +
+        instructionMap.put("subu", "100011 1110");  // +
+
         instructionMap.put("and", "100100 1110");   // +
-        instructionMap.put("break", "00001101 0000");
-        instructionMap.put("div", "011010 0110");   // -
-        instructionMap.put("divu", "011011 0110");  // -
+        instructionMap.put("xor", "100110 1110");   // +
+        instructionMap.put("nor", "100111 1110");   // +
+        instructionMap.put("or", "100101 1110");    // +
 
         instructionMap.put("jalr", "001001 1100");  // +
         instructionMap.put("jr", "001000 0100");    // +
+
+        instructionMap.put("sll", "000000 1011");   // +
+        instructionMap.put("sllv", "000100 1110");  // +
+        instructionMap.put("slt", "101010 1110");   // +
+        instructionMap.put("sltu", "101011 1110");  // +
+        instructionMap.put("sra", "000011 1011");   // +
+        instructionMap.put("srav", "000111 1110");  // +
+        instructionMap.put("srl", "000010 1011");   // +
+        instructionMap.put("srlv", "000110 1110");  // +
+
+        instructionMap.put("break", "00001101 0000");// -
+        instructionMap.put("syscall", "001100 0000");// -
 
         instructionMap.put("mfhi", "010000 1000");  // -
         instructionMap.put("mflo", "010010 1000");  // -
@@ -134,21 +149,7 @@ public class RFormatInstruction extends Instruction {
         instructionMap.put("mtlo", "010011 0100");  // -
         instructionMap.put("mult", "011000 0110");  // -
         instructionMap.put("multu", "011001 0110"); // -
-        instructionMap.put("nor", "100111 1110");   // +
-        instructionMap.put("or", "100101 1110");    // +
-
-        instructionMap.put("sll", "000000 1011");   // +
-        instructionMap.put("sllv", "000100 1110");  // +
-        instructionMap.put("slt", "101010 1110");   // +
-        instructionMap.put("sltu", "101011 1110");  //
-        instructionMap.put("sra", "000011 1011");   // +
-        instructionMap.put("srav", "000111 1110");  // +
-        instructionMap.put("srl", "000010 1011");   // +
-        instructionMap.put("srlv", "000110 1110");  // +
-
-        instructionMap.put("sub", "100010 1110");   // +
-        instructionMap.put("subu", "100011 1110");  // +
-        instructionMap.put("syscall", "001100 0000");// -
-        instructionMap.put("xor", "100110 1110");   // +
+        instructionMap.put("div", "011010 0110");   // -
+        instructionMap.put("divu", "011011 0110");  // -
     }
 }

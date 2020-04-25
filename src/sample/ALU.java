@@ -20,6 +20,7 @@ public class ALU {
         zero = false;
         out = 0;
 
+        // perform operation with function, source values and shift amount
         switch(control) {
             case ADD:
                 out =  rsv + srcv;
@@ -78,10 +79,12 @@ public class ALU {
         }
     }
 
+    // get result of operation
     public int getOut() {
         return out;
     }
 
+    // get zero value
     public boolean isZero() {
         return zero;
     }

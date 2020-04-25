@@ -12,16 +12,18 @@ public class Parser {
     private ArrayList<String> inputLines;
     private ArrayList<String> clearedLines;
     private Map<String, Integer> labelAddressesMap;
-
+    private static ControllerInterface controllerInterface;
     private ArrayList<Instruction> instructions;
 
-    public Parser(File file) throws Exception {
+    public Parser(File file, Controller controller) throws Exception {
         this.file = file;
+        this.controllerInterface = new ControllerInterface(controller);
         readFile();
         clearComments(inputLines);
     }
 
-    public Parser(String text) throws Exception {
+    public Parser(String text, Controller controller) throws Exception {
+        this.controllerInterface = new ControllerInterface(controller);
         inputLines = new ArrayList<>(Arrays.asList(text.split("\n")));
         clearComments(inputLines);
     }
@@ -72,7 +74,12 @@ public class Parser {
     }
 
     public int getLabelAddress(String labelName){
-        return this.labelAddressesMap.get(labelName);
+        try{
+            return labelAddressesMap.get(labelName);
+        } catch (Exception exception){
+            controllerInterface.showAlertDialog(labelName + " is not defined!", null, true);
+        }
+        return -1;
     }
 
     private void readFile(){
@@ -99,7 +106,7 @@ public class Parser {
 
         for (String line : lines){
 
-            line = line.replace("\t", " ").toLowerCase()
+            line = line.replace("\t", " ")
                     .replace(", ", ",").replace(",", ", ")
                     .trim().replaceAll(" +", " "); // transform into required format.
 
