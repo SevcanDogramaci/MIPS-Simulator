@@ -26,6 +26,9 @@ public class JFormatInstruction extends Instruction {
     void parseInstruction(String line) throws Exception {
         String[] instruction = line.split(" ");
 
+        if (instruction.length > 2)
+            throw new Exception("Check instruction format : " + line);
+
         // extract function name and offset
         String functionName, offset;
         functionName = instruction[0];
@@ -38,12 +41,17 @@ public class JFormatInstruction extends Instruction {
     }
 
     @Override
-    public String getMachineCode() {
+    public String getMachineCode() throws Exception {
         StringBuilder sb = new StringBuilder();
 
+        try{
         sb.append(fillWithZero(Integer.toBinaryString(opcode), 6))
                 .append(" ")
-                .append(fillWithZero(Integer.toBinaryString(immediate), 26));
+                .append(fillWithZero(Integer.toBinaryString(immediate), 26));}
+        catch (Exception exception){
+            throw new Exception("Error occurred while generating machine code!\nCheck instruction format : " + line);
+        }
+
         return sb.toString();
     }
 

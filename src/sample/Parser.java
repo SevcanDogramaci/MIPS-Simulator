@@ -150,9 +150,6 @@ public class Parser {
                 sb.append(s).append("\n");
             }
 
-            System.out.println(labelAddressesMap.get("exit"));
-            System.out.println(instructions.size());
-
             if (labelAddressesMap.containsValue(instructions.size())){
                 sb.append(getLabelName(instructions.size())).append(": ");
             }

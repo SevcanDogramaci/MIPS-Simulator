@@ -40,7 +40,7 @@ public class IFormatInstruction extends Instruction {
     public int getImmediate() { return immediate; }
 
     @Override
-    public String getMachineCode() {
+    public String getMachineCode() throws Exception {
         StringBuilder sb = new StringBuilder();
 
         try {
@@ -49,8 +49,7 @@ public class IFormatInstruction extends Instruction {
                     .append(fillWithZero(Integer.toBinaryString(targetReg.getNo()), 5)).append(" ")
                     .append(fillWithZero(Integer.toBinaryString(immediate), 16));
         }catch (Exception e){
-            System.out.println("Please check instruction format : " + line);
-            //e.printStackTrace();
+            throw new Exception("Error occurred while generating machine code!\nCheck instruction format : " + line);
         }
 
         return sb.toString();

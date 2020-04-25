@@ -69,8 +69,7 @@ public class Controller {
             processor.loadInstructionsToMemory(instructions);
             setupTextSegmentTable();
             selectLine(0);
-        }
-        catch (Exception e){
+        } catch (Exception e){
             showAlertDialog("Error", e.getMessage(), true);
         }
 
@@ -111,8 +110,10 @@ public class Controller {
     private void selectLine(int lineNum){
         textSegTable.getSelectionModel().select(lineNum);
         String txt = assemblyCodeArea.getText();
+
         int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
         int end = ordinalIndexOf(txt, "\n", lineNum );
+
         assemblyCodeArea.selectRange(start, end);
     }
 
