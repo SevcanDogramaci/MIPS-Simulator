@@ -12,16 +12,18 @@ public class Parser {
     private ArrayList<String> inputLines;
     private ArrayList<String> clearedLines;
     private Map<String, Integer> labelAddressesMap;
-
+    private static ControllerInterface controllerInterface;
     private ArrayList<Instruction> instructions;
 
-    public Parser(File file) throws Exception {
+    public Parser(File file, Controller controller) throws Exception {
         this.file = file;
+        this.controllerInterface = new ControllerInterface(controller);
         readFile();
         clearComments(inputLines);
     }
 
-    public Parser(String text) throws Exception {
+    public Parser(String text, Controller controller) throws Exception {
+        this.controllerInterface = new ControllerInterface(controller);
         inputLines = new ArrayList<>(Arrays.asList(text.split("\n")));
         clearComments(inputLines);
     }
@@ -75,7 +77,7 @@ public class Parser {
         try{
             return labelAddressesMap.get(labelName);
         } catch (Exception exception){
-            System.out.println(labelName + " is not defined !");
+            controllerInterface.showAlertDialog(labelName + " is not defined!", null, true);
         }
         return -1;
     }
