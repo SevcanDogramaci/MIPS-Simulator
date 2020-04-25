@@ -53,6 +53,7 @@ public class Controller {
 
         btnRun.setDisable(true);
         btnStep.setDisable(false);
+
         if(assemblyCodeArea.editableProperty().getValue()) {
             parser = new Parser(assemblyCodeArea.getText());
             assemblyCodeArea.setText(parser.getLines());
@@ -149,13 +150,17 @@ public class Controller {
 
     @FXML
     public void resetApplication() {
+
         assemblyCodeArea.setText("");
         assemblyCodeArea.setEditable(true);
+
         btnRun.setDisable(false);
         btnStep.setDisable(true);
         btnChoose.setDisable(false);
+
         parser = null;
         textSegTable.setItems(null);
+
         RegisterFile.resetData();
         rTable.refresh();
         sTable.setText("");

@@ -4,6 +4,7 @@ public class ALUControl {
 
     public static short getControl(boolean ALUOp1, boolean ALUOp0, short funct) {
 
+        // determine operation with ALUOp0, ALUOp1 control lines
         if(!ALUOp1 && !ALUOp0) {
                 return ALU.ADD;
         }
@@ -11,6 +12,7 @@ public class ALUControl {
             return ALU.SUBTRACT;
         }
 
+        // determine operation with function code
         switch(funct & 63) {
             case 32:
             case 33:

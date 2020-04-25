@@ -2,23 +2,25 @@ package sample;
 
 public class ControlUnit {
 
-    private boolean RegDst; // rt or rd for write
+    // control lines
+    private boolean RegDst;     // rt or rd for write
     private boolean Branch;
     private boolean BranchNotEqual;
     private boolean Jump;
-    private boolean JumpReg;
-    private boolean MemRead;
-    private boolean MemtoReg;
+    private boolean JumpReg;    // jump to register
+    private boolean MemRead;    // memory read
+    private boolean MemtoReg;   // memory to register
     private boolean ALUOp1;
     private boolean ALUOp0;
-    private boolean MemWrite;
-    private boolean ALUsrc;  // reg2 or immediate
-    private boolean RegWrite;
+    private boolean MemWrite;   // memory write
+    private boolean ALUsrc;     // reg2 or immediate
+    private boolean RegWrite;   // register write
     private boolean SignExtend;
     private int branchCode = 0;
 
     public ControlUnit(Instruction instruction) {
 
+        // specify control lines for R format instructions
         if (instruction.isRFormat()){
             if(instruction.getFunction() == 8){ // jr
                 JumpReg = true;
@@ -32,27 +34,29 @@ public class ControlUnit {
             ALUOp1 = true;
         }
 
+        // specify control lines for I format instructions
         else if (instruction.isIFormat()){
 
-            if(instruction.opcode > 7 && instruction.opcode < 10){
+            if(instruction.opcode > 7 && instruction.opcode < 10){  // add
                 ALUsrc = true;
                 RegWrite = true;
             }
-            else if(instruction.opcode > 9 && instruction.opcode <= 15){
+            else if(instruction.opcode > 9 && instruction.opcode <= 15){  //and, or, xor, lui, slti
                 ALUOp1 = true;
                 ALUsrc = true;
                 RegWrite = true;
             }
-            else if (instruction.opcode >= 32 && instruction.opcode <= 37){ // lw
+            else if (instruction.opcode >= 32 && instruction.opcode <= 37){ // load
                 MemRead = true;
                 MemtoReg = true;
                 RegWrite = true;
                 ALUsrc = true;
                 SignExtend = true;
-                if(instruction.opcode == 36 || instruction.opcode == 37){
+                if(instruction.opcode == 36 || instruction.opcode == 37){   // unsigned load
                     SignExtend = false;
                 }
-            } else if(instruction.opcode >= 40 && instruction.opcode <= 43){ // sw
+            }
+            else if(instruction.opcode >= 40 && instruction.opcode <= 43){ // store
                 MemWrite = true;
                 ALUsrc = true;
             }
@@ -64,9 +68,11 @@ public class ControlUnit {
                 BranchNotEqual = true;
                 ALUOp0 = true;
             }
-            else if (instruction.opcode == 1){ // bgez
+            else if (instruction.opcode == 1){ // bgez, bltz
                 ALUOp1 = true;
                 instruction.opcode = 42;
+
+                // identify function with temporary shift amount value
                 if (instruction.shiftAmount == 1){
                     instruction.getTargetReg().setValue(0);
                     branchCode = 1;
@@ -76,12 +82,12 @@ public class ControlUnit {
                     instruction.getTargetReg().setValue(1);
                 }
             }
-            else if (instruction.opcode == 7){
+            else if (instruction.opcode == 7){  // bgtz
                 ALUOp1 = true;
                 instruction.opcode = 42;
                 branchCode = 2;
             }
-            else if(instruction.opcode == 6){
+            else if(instruction.opcode == 6){   // blez
                 ALUOp1 = true;
                 instruction.opcode = 42;
                 branchCode = 3;
@@ -89,10 +95,11 @@ public class ControlUnit {
             }
         }
 
+        // specify control lines for J format instructions
         else if (instruction.isJFormat()){
             Jump = true;
             ALUOp0 = true;
-            if (instruction.opcode == 3){
+            if (instruction.opcode == 3){ // jal
                 RegWrite = true;
             }
         }

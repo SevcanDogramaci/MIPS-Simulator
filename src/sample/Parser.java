@@ -72,7 +72,12 @@ public class Parser {
     }
 
     public int getLabelAddress(String labelName){
-        return this.labelAddressesMap.get(labelName);
+        try{
+            return labelAddressesMap.get(labelName);
+        } catch (Exception exception){
+            System.out.println(labelName + " is not defined !");
+        }
+        return -1;
     }
 
     private void readFile(){
@@ -99,7 +104,7 @@ public class Parser {
 
         for (String line : lines){
 
-            line = line.replace("\t", " ").toLowerCase()
+            line = line.replace("\t", " ")
                     .replace(", ", ",").replace(",", ", ")
                     .trim().replaceAll(" +", " "); // transform into required format.
 

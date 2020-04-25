@@ -8,7 +8,7 @@ public class JFormatInstruction extends Instruction {
     private static final Map<String, Short> instructionMap;
     private Parser parser;
 
-    public JFormatInstruction(String line, int i, Parser parser) throws Exception {
+    public JFormatInstruction(String line, int i, Parser parser) {
         this.parser = parser;
         index = i;
         this.line = line;
@@ -18,24 +18,23 @@ public class JFormatInstruction extends Instruction {
     }
 
     public static boolean checkFormat(String functionName) {
+        // check if instruction map contains the function
         return instructionMap.containsKey(functionName);
     }
 
     @Override
-    void parseInstruction(String line) throws Exception {
+    void parseInstruction(String line) {
         String[] instruction = line.split(" ");
 
+        // extract function name and offset
         String functionName, offset;
         functionName = instruction[0];
         offset = instruction[1];
 
-        if(checkFormat(functionName)){
-            this.opcode = instructionMap.get(functionName);
-            this.immediate = calculateLabel(offset);
-            this.targetReg = RegisterFile.getRegister("ra");
-        }
-        else
-            throw new Exception();
+        // specify instruction fields
+        this.opcode = instructionMap.get(functionName);
+        this.immediate = calculateLabel(offset);
+        this.targetReg = RegisterFile.getRegister("ra");
     }
 
     @Override
@@ -49,10 +48,10 @@ public class JFormatInstruction extends Instruction {
     }
 
     private int calculateLabel(String s) {
+        // get label address from label address map
         return parser.getLabelAddress(s.trim()) - index - 1;
     }
 
-    // instructions
     static {
         instructionMap = new HashMap<>();
 
