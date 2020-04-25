@@ -61,7 +61,7 @@ public class IFormatInstruction extends Instruction {
 
     @Override
     void parseInstruction(String line) {
-        String[] instruction = line.toLowerCase().split(",");
+        String[] instruction = line.split(",");
         String functionName = instruction[0].split(" ")[0];
 
         opcode = instructionMap.get(functionName);
