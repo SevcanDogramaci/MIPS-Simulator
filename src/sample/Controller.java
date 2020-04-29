@@ -4,8 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.Optional;
 
 public class Controller {
 
-    @FXML private Button btnRun, btnStep, btnChoose;
+    @FXML private Button btnRun, btnStep, btnChoose, btnReset;
     @FXML private TextArea assemblyCodeArea, sTable;
     @FXML private TableView<Register> rTable;
     @FXML private TableColumn<Register, Integer> rNo;
@@ -28,7 +30,23 @@ public class Controller {
 
     @FXML
     public void initialize(){
-        setupRegisterTable();
+
+        Tooltip runTip = new Tooltip("Run");
+        runTip.setShowDelay(Duration.millis(10));
+        Tooltip.install(btnRun, runTip);
+
+        Tooltip chooseTip = new Tooltip("Choose File");
+        chooseTip.setShowDelay(Duration.millis(10));
+        Tooltip.install(btnChoose, chooseTip);
+
+        Tooltip resetTip = new Tooltip("Reset");
+        resetTip.setShowDelay(Duration.millis(10));
+        Tooltip.install(btnReset, resetTip);
+
+        Tooltip stepTip = new Tooltip("Step");
+        stepTip.setShowDelay(Duration.millis(10));
+        Tooltip.install(btnStep, stepTip);
+
     }
 
     private void setupRegisterTable() {

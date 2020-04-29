@@ -42,7 +42,7 @@ public class Parser {
                 if (e.getMessage() == null)
                     throw new Exception("Instruction not supported: " + clearedLines.get(i));
                 else
-                    throw new Exception(e.getMessage());
+                    throw new Exception(e.getMessage() + "\nInstruction not supported: " + clearedLines.get(i));
             }
         }
 
