@@ -20,45 +20,26 @@
                         <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                 <children>
-                                    <SplitPane dividerPositions="0.08" orientation="VERTICAL" prefHeight="575.0" prefWidth="285.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <SplitPane orientation="VERTICAL" prefHeight="575.0" prefWidth="285.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <items>
-                                            <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" SplitPane.resizableWithParent="false">
-                                                <Button fx:id="btnChoose" defaultButton="true" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#chooseFilePressed" prefHeight="25.0" prefWidth="25.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0">
-                                                    <font>
-                                                        <Font name="Segoe UI" size="12.0" />
-                                                    </font>
-                                                </Button>
-                                                <Button fx:id="btnRun" defaultButton="true" layoutX="146.0" layoutY="8.0" mnemonicParsing="false" onAction="#runPressed" prefHeight="20.0" prefWidth="18.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="8.0">
-                                                    <font>
-                                                        <Font name="Segoe UI" size="12.0" />
-                                                    </font>
-                                                </Button>
-                                                <Button fx:id="btnStep" disable="true" layoutX="358.0" layoutY="9.0" mnemonicParsing="false" onAction="#onStep" prefHeight="18.0" prefWidth="30.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
-                                                    <font>
-                                                        <Font name="Segoe UI" size="12.0" />
-                                                    </font>
-                                                </Button>
-                                                <Button fx:id="btnReset" defaultButton="true" layoutX="88.0" layoutY="8.0" mnemonicParsing="false" onAction="#resetApplication" prefHeight="18.0" prefWidth="18.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="4.0">
-                                                    <font>
-                                                        <Font name="Segoe UI" size="12.0" />
-                                                    </font>
-                                                </Button>
-                                            </AnchorPane>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                <Label fx:id="rLabel" alignment="CENTER" prefHeight="45.0" prefWidth="322.0" text="Registers" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="594.0" prefWidth="200.0">
+                                                <Label fx:id="rLabel" alignment="CENTER" prefHeight="45.0" prefWidth="246.0" text="Registers" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                     <font>
                                                         <Font name="Segoe UI Bold" size="17.0" />
                                                     </font>
                                                 </Label>
-                                                <SplitPane layoutX="53.0" layoutY="65.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+                                                <SplitPane layoutX="53.0" layoutY="65.0" prefHeight="160.0" prefWidth="200.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
                                                     <items>
-                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                                            <TableView fx:id="rTable" layoutX="-4.0" prefHeight="470.0" prefWidth="344.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
+                                                            <TableView fx:id="rTable" layoutX="-4.0" prefHeight="547.0" prefWidth="246.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                 <columns>
-                                                                    <TableColumn fx:id="rNo" editable="false" minWidth="-Infinity" prefWidth="46.0" resizable="false" text="No" />
-                                                                    <TableColumn fx:id="rName" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="76.0" resizable="false" sortable="false" text="Name" />
-                                                                    <TableColumn fx:id="rValue" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="202.0" sortable="false" text="Value" />
+                                                                    <TableColumn fx:id="rNo" editable="false" maxWidth="1500.0" minWidth="-Infinity" prefWidth="65.0" text="No" />
+                                                                    <TableColumn fx:id="rName" editable="false" maxWidth="2000.0" minWidth="-Infinity" prefWidth="75.0" sortable="false" text="Name" />
+                                                                    <TableColumn fx:id="rValue" editable="false" maxWidth="4000.0" minWidth="-Infinity" prefWidth="180.0" sortable="false" text="Value" />
                                                                 </columns>
+                                                <columnResizePolicy>
+                                                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                </columnResizePolicy>
                                                             </TableView>
                                                         </AnchorPane>
                                                     </items>
@@ -70,20 +51,52 @@
                             </AnchorPane>
                             <AnchorPane fx:id="deneme" minHeight="0.0" minWidth="0.0" prefHeight="596.0" prefWidth="295.0">
                                 <children>
-                                    <TextArea fx:id="assemblyCodeArea" layoutX="80.0" layoutY="173.0" promptText="Write assembly code here or choose an assembly file" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                        <font>
-                                            <Font name="Segoe UI" size="12.0" />
-                                        </font>
-                                        <padding>
-                                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                                        </padding>
-                                    </TextArea>
+                           <SplitPane dividerPositions="0.0707070707070707" orientation="VERTICAL" prefHeight="575.0" prefWidth="285.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <items>
+                                 <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" stylesheets="@ta-style.css" SplitPane.resizableWithParent="false">
+                                    <children>
+                                       <Button id="btnChoose" fx:id="btnChoose" defaultButton="true" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#chooseFilePressed" prefHeight="25.0" prefWidth="25.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                          <font>
+                                             <Font name="Segoe UI" size="12.0" />
+                                          </font>
+                                       </Button>
+                                       <Button id="btnRun" fx:id="btnRun" defaultButton="true" layoutX="146.0" layoutY="8.0" mnemonicParsing="false" onAction="#runPressed" prefHeight="18.0" prefWidth="18.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="8.0">
+                                          <font>
+                                             <Font name="Segoe UI" size="12.0" />
+                                          </font>
+                                       </Button>
+                                       <Button id="btnStep" fx:id="btnStep" disable="true" layoutX="358.0" layoutY="9.0" mnemonicParsing="false" onAction="#onStep" prefHeight="18.0" prefWidth="30.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                          <font>
+                                             <Font name="Segoe UI" size="12.0" />
+                                          </font>
+                                       </Button>
+                                       <Button id="btnReset" fx:id="btnReset" defaultButton="true" layoutX="88.0" layoutY="8.0" mnemonicParsing="false" onAction="#resetApplication" prefHeight="18.0" prefWidth="18.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="4.0">
+                                          <font>
+                                             <Font name="Segoe UI" size="12.0" />
+                                          </font>
+                                       </Button>
+                                    </children>
+                                 </AnchorPane>
+                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                    <children>
+                                                <TextArea fx:id="assemblyCodeArea" promptText="Write assembly code here or choose an assembly file" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <font>
+                                                        <Font name="Segoe UI" size="12.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                    </padding>
+                                                </TextArea>
+                                    </children>
+                                 </AnchorPane>
+                              </items>
+                           </SplitPane>
                                 </children>
                             </AnchorPane>
                         </items>
                     </SplitPane>
                 </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="575.0" prefWidth="284.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="575.0" prefWidth="284.0" SplitPane.resizableWithParent="false">
                     <children>
                         <Label fx:id="mLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" prefHeight="45.0" prefWidth="292.0" text="Memory" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <font>
@@ -98,11 +111,14 @@
                                 <columns>
                                   <TableColumn prefWidth="300.0" text="Stack">
                                        <columns>
-                                        <TableColumn fx:id="sAddress" prefWidth="100.0" text="Address" />
+                                        <TableColumn fx:id="sAddress" maxWidth="1500.0" prefWidth="100.0" text="Address" />
                                           <TableColumn fx:id="sValue" prefWidth="232.0" text="Value" />
                                        </columns>
                                     </TableColumn>
                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
                               </TableView>
                                     </children>
                                 </AnchorPane>
@@ -110,13 +126,16 @@
                                     <children>
                                         <TableView fx:id="textSegTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" prefWidth="284.0" resizable="false" text="Text Segment">
+                                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" prefWidth="284.0" text="Text Segment">
                                                     <columns>
-                                                        <TableColumn fx:id="textSegAddress" maxWidth="1.7976931348623157E308" prefWidth="100.0" resizable="false" text="Address" />
-                                                        <TableColumn fx:id="textSegValue" editable="false" maxWidth="500.0" minWidth="-Infinity" prefWidth="232.0" resizable="false" sortable="false" text="Value" />
+                                                        <TableColumn fx:id="textSegAddress" editable="false" maxWidth="1500.0" prefWidth="100.0" sortType="DESCENDING" text="Address" />
+                                                        <TableColumn fx:id="textSegValue" editable="false" minWidth="-Infinity" prefWidth="232.0" sortable="false" text="Value" />
                                                     </columns>
                                                 </TableColumn>
                                             </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
                                         </TableView>
                                     </children>
                                 </AnchorPane>
