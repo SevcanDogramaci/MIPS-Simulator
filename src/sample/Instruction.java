@@ -1,11 +1,11 @@
 package sample;
 
-public abstract class Instruction {
+public abstract class Instruction extends Data{
 
-    protected short opcode, address;
+    protected short opcode;
     protected int index, shiftAmount, immediate;
     protected Register sourceReg, targetReg, destinationReg;
-    protected String line, machineCode;
+    protected String line;
 
     public static Instruction createInstruction(String line, int i, Parser parser) throws Exception {
 
@@ -49,7 +49,7 @@ public abstract class Instruction {
     }
 
     // setters
-    public void setAddress(short address) { this.address = address; }
+    //public void setAddress(short address) { this.address = address; }
 
     // getters
     public Register getDestinationReg() { return destinationReg; }
@@ -62,7 +62,7 @@ public abstract class Instruction {
 
     public int getImmediate() { return immediate; }
 
-    public short getAddress() { return address; }
+    //public short getAddress() { return address; }
 
     public short getFunction() { return opcode; }
 

@@ -18,14 +18,10 @@ public class Controller {
     @FXML private Button btnRun, btnStep, btnChoose, btnReset;
     @FXML private TextArea assemblyCodeArea;
     @FXML private TableView<Register> rTable;
-    @FXML private TableColumn<Register, Integer> rNo;
-    @FXML private TableColumn<Register, Integer> rValue;
+    @FXML private TableColumn<Register, Integer> rNo, rValue;
     @FXML private TableColumn<Register, String > rName;
-
-    @FXML private TableColumn<Data, String > textSegAddress, textSegValue;
-    @FXML private TableView<Data> textSegTable;
-    @FXML private TableView<Data> sTable;
-    @FXML private TableColumn<Data, String> sAddress, sValue;
+    @FXML private TableColumn<Data, String > textSegAddress, textSegValue, sAddress, sValue;
+    @FXML private TableView<Data> textSegTable, sTable;
 
     private Parser parser;
     private Processor processor;
@@ -126,8 +122,6 @@ public class Controller {
                 processor.step();
                 rTable.refresh();
                 setupStackTable(processor.getStackData());
-                //sTable.refresh();
-                //sTable.setText(processor.getStackData());
                 selectLine(processor.getIndex());
             } else
                 showAlertDialog("The program has finished!", "Do you want to run again ?", false);
@@ -192,9 +186,13 @@ public class Controller {
         RegisterFile.resetData();
         rTable.refresh();
 
-        MemoryFile.resetData();
+        try {
+            MemoryFile.resetData();
+        } catch (Exception e){
+
+        }
+
         sTable.setItems(null);
-        //sTable.setText("");
     }
 
     public void showAlertDialog(String header, String content, boolean isResetApplication) throws Exception {

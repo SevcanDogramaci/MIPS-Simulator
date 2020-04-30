@@ -14,7 +14,7 @@ public class InstructionMemoryFile {
 
         for(int i = 0; i <instructions.size(); i++){
             // set memory address for instructions
-            instructions.get(i).setAddress((short)i);
+            instructions.get(i).setAddress(i);
         }
 
         // load instructions into instruction memory

@@ -34,7 +34,7 @@ public class IFormatInstruction extends Instruction {
         parseInstruction(line);
 
         // produce machine code
-        machineCode = getMachineCode();
+        value = getMachineCode();
     }
 
     public int getImmediate() { return immediate; }
