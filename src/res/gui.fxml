@@ -111,7 +111,7 @@
                                 <columns>
                                   <TableColumn prefWidth="300.0" text="Stack">
                                        <columns>
-                                        <TableColumn fx:id="sAddress" maxWidth="1500.0" prefWidth="100.0" text="Address" />
+                                        <TableColumn fx:id="sAddress" editable="false" maxWidth="1500.0" prefWidth="100.0" sortType="DESCENDING" text="Address" />
                                           <TableColumn fx:id="sValue" prefWidth="232.0" text="Value" />
                                        </columns>
                                     </TableColumn>
