@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.ObservableList;
+
 import java.util.List;
 
 public class Processor {
@@ -134,7 +136,7 @@ public class Processor {
         return pc.get()/4;
     }
 
-    public String getStackData(){
+    public ObservableList<Data> getStackData(){
         return memory.getMemoryData();
     }
 }

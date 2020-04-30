@@ -1,17 +1,23 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MemoryFile {
 
     public static final int STACK_START = 4000;
     private Register stackPointer;
-    private byte data[][]; // two dimensional byte array used to reflect two aligned memory.
+    private static byte data[][]; // two dimensional byte array used to reflect two aligned memory.
 
     public MemoryFile(){
         stackPointer = RegisterFile.getRegister("sp");
         data = new byte[STACK_START >> 2][4];
     }
 
-    public void resetData(){
+    public static void resetData(){
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < 4; j++) {
                 data[i][j] = 0;
@@ -60,20 +66,32 @@ public class MemoryFile {
         return ret;
     }
 
-    public String getMemoryData (){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Address\t\tData\n---------\t\t-------------------------------\n");
+    public ObservableList<Data> getMemoryData (){
+
+        //sb.append("Address\t\tData\n---------\t\t-------------------------------\n");
+
+        List<Data> memoryData = new ArrayList<>();
 
         for (int i = stackPointer.getValue() >> 2; i < data.length; i++) {
-            sb.append(String.format("%6d", i << 2)).append("\t\t");
+
+            //sb.append(String.format("%6d", i << 2)).append("\t\t");
+
+            String address = String.format("%6d", i << 2);
+            StringBuilder val = new StringBuilder();
             byte[] row = data[i];
             for (int j = 0; j < row.length; j++) {
-                sb.append(String.format("%8s", Integer.toBinaryString(row[j] & 0xFF))
+                val.append(String.format("%8s", Integer.toBinaryString(row[j] & 0xFF))
                         .replace(' ', '0')).append(" ");
             }
-            sb.append("\n");
+
+            Data datum = new Data(address, val.toString());
+            memoryData.add(datum);
+            //sb.append("\n");
+
         }
-        return sb.toString();
+        //return sb.toString();
+
+        return FXCollections.observableArrayList(memoryData);
     }
 
     public static int unsignedToBytes(byte b) {
