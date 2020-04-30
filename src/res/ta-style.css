@@ -1,6 +1,6 @@
 .text-input {
     -fx-highlight-fill: paleturquoise;
-    -fx-font-size: 14;
+    -fx-font-size: 13;
 }
 
 .button  {
@@ -10,7 +10,7 @@
     -fx-background-color: transparent;
 }
 #btnRun {
-    -fx-background-size: 18px 20px;
+    -fx-background-size: 16px 18px;
     -fx-background-image: url("runIcon.png");
 }
 

@@ -16,7 +16,7 @@ public class Main extends Application {
         // construct GUI
         Parent root = FXMLLoader.load(getClass().getResource("/res/gui.fxml"));
         primaryStage.setTitle(appName);
-        primaryStage.setScene(new Scene(root, 1000, 600));
+        primaryStage.setScene(new Scene(root, 900, 600));
         primaryStage.resizableProperty().setValue(true);
         primaryStage.show();
     }
