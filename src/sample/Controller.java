@@ -21,16 +21,16 @@ public class Controller {
     @FXML private TableColumn<Register, Integer> rNo;
     @FXML private TableColumn<Register, Integer> rValue;
     @FXML private TableColumn<Register, String > rName;
-    @FXML private TableColumn<Instruction, Short > textSegAddress;
-    @FXML private TableColumn<Instruction, String > textSegValue;
-    @FXML private TableView<Instruction> textSegTable;
+    @FXML private TableColumn<Instruction, Short > textSegAddress, stackAddress;
+    @FXML private TableColumn<Instruction, String > textSegValue, stackValue;
+    @FXML private TableView<Instruction> textSegTable, stackTable;
 
     private Parser parser;
     private Processor processor;
 
     @FXML
     public void initialize(){
-
+        setupRegisterTable();
         Tooltip runTip = new Tooltip("Run");
         runTip.setShowDelay(Duration.millis(10));
         Tooltip.install(btnRun, runTip);

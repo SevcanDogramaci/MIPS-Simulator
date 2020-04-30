@@ -56,7 +56,7 @@
                                             <SplitPane layoutX="53.0" layoutY="65.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
                                                 <items>
                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                                        <TableView fx:id="rTable" layoutX="1.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <TableView fx:id="rTable" layoutX="1.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <columns>
                                                                 <TableColumn fx:id="rNo" editable="false" minWidth="-Infinity" prefWidth="46.0" resizable="false" text="No" />
                                                    <TableColumn fx:id="rName" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="76.0" resizable="false" sortable="false" text="Name" />
@@ -110,7 +110,7 @@
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <TableView fx:id="textSegTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="textSegTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
                                     <TableColumn maxWidth="1.7976931348623157E308" prefWidth="284.0" resizable="false" text="Text Segment">
                                        <columns>
