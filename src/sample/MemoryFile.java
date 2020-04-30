@@ -68,13 +68,9 @@ public class MemoryFile {
 
     public ObservableList<Data> getMemoryData (){
 
-        //sb.append("Address\t\tData\n---------\t\t-------------------------------\n");
-
         List<Data> memoryData = new ArrayList<>();
 
         for (int i = stackPointer.getValue() >> 2; i < data.length; i++) {
-
-            //sb.append(String.format("%6d", i << 2)).append("\t\t");
 
             String address = String.format("%6d", i << 2);
             StringBuilder val = new StringBuilder();
@@ -86,10 +82,7 @@ public class MemoryFile {
 
             Data datum = new Data(address, val.toString());
             memoryData.add(datum);
-            //sb.append("\n");
-
         }
-        //return sb.toString();
 
         return FXCollections.observableArrayList(memoryData);
     }

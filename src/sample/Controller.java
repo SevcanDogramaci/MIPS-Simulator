@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -127,8 +126,6 @@ public class Controller {
                 processor.step();
                 rTable.refresh();
                 setupStackTable(processor.getStackData());
-                //sTable.refresh();
-                //sTable.setText(processor.getStackData());
                 selectLine(processor.getIndex());
             } else
                 showAlertDialog("The program has finished!", "Do you want to run again ?", false);
@@ -193,9 +190,13 @@ public class Controller {
         RegisterFile.resetData();
         rTable.refresh();
 
-        MemoryFile.resetData();
+        try {
+            MemoryFile.resetData();
+        } catch (Exception e){
+
+        }
+
         sTable.setItems(null);
-        //sTable.setText("");
     }
 
     public void showAlertDialog(String header, String content, boolean isResetApplication) {
