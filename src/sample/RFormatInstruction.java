@@ -14,7 +14,7 @@ public class RFormatInstruction extends Instruction {
         this.line = line;
 
         parseInstruction(line);
-        machineCode = getMachineCode();
+        value = getMachineCode();
     }
 
     public static boolean checkFormat(String functionName) {

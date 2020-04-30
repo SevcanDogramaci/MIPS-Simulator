@@ -18,14 +18,10 @@ public class Controller {
     @FXML private Button btnRun, btnStep, btnChoose, btnReset;
     @FXML private TextArea assemblyCodeArea;
     @FXML private TableView<Register> rTable;
-    @FXML private TableColumn<Register, Integer> rNo;
-    @FXML private TableColumn<Register, Integer> rValue;
+    @FXML private TableColumn<Register, Integer> rNo, rValue;
     @FXML private TableColumn<Register, String > rName;
-
-    @FXML private TableColumn<Data, String > textSegAddress, textSegValue;
-    @FXML private TableView<Data> textSegTable;
-    @FXML private TableView<Data> sTable;
-    @FXML private TableColumn<Data, String> sAddress, sValue;
+    @FXML private TableColumn<Data, String > textSegAddress, textSegValue, sAddress, sValue;
+    @FXML private TableView<Data> textSegTable, sTable;
 
     private Parser parser;
     private Processor processor;
