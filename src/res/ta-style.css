@@ -9,6 +9,7 @@
     -fx-background-position: center;
     -fx-background-color: transparent;
 }
+
 #btnRun {
     -fx-background-size: 16px 18px;
     -fx-background-image: url("runIcon.png");
@@ -34,7 +35,6 @@
     -fx-background-radius : 0.0em;
     -fx-border-radius :2.0em;
 }
-
 
 .scroll-bar:horizontal .increment-button ,
 .scroll-bar:horizontal .decrement-button {

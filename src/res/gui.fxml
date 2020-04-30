@@ -57,22 +57,22 @@
                                     <children>
                                        <Button id="btnChoose" fx:id="btnChoose" defaultButton="true" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#chooseFilePressed" prefHeight="25.0" prefWidth="25.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0">
                                           <font>
-                                             <Font name="Segoe UI" size="12.0" />
+                                             <Font name="Consolas" size="12.0" />
                                           </font>
                                        </Button>
                                        <Button id="btnRun" fx:id="btnRun" defaultButton="true" layoutX="146.0" layoutY="8.0" mnemonicParsing="false" onAction="#runPressed" prefHeight="18.0" prefWidth="18.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="8.0">
                                           <font>
-                                             <Font name="Segoe UI" size="12.0" />
+                                             <Font name="Consolas" size="12.0" />
                                           </font>
                                        </Button>
                                        <Button id="btnStep" fx:id="btnStep" disable="true" layoutX="358.0" layoutY="9.0" mnemonicParsing="false" onAction="#onStep" prefHeight="18.0" prefWidth="30.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
                                           <font>
-                                             <Font name="Segoe UI" size="12.0" />
+                                             <Font name="Consolas" size="12.0" />
                                           </font>
                                        </Button>
                                        <Button id="btnReset" fx:id="btnReset" defaultButton="true" layoutX="88.0" layoutY="8.0" mnemonicParsing="false" onAction="#resetApplication" prefHeight="18.0" prefWidth="18.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="4.0">
                                           <font>
-                                             <Font name="Segoe UI" size="12.0" />
+                                             <Font name="Consolas" size="12.0" />
                                           </font>
                                        </Button>
                                     </children>
@@ -81,7 +81,7 @@
                                     <children>
                                                 <TextArea fx:id="assemblyCodeArea" promptText="Write assembly code here or choose an assembly file" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                     <font>
-                                                        <Font name="Segoe UI" size="12.0" />
+                                                        <Font name="Consolas" size="12.0" />
                                                     </font>
                                                     <padding>
                                                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
