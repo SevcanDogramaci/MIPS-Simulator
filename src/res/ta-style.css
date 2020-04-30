@@ -1,5 +1,5 @@
 .text-input {
-    -fx-highlight-fill: paleturquoise;
+    -fx-highlight-fill: #00c0e6;
     -fx-font-size: 13;
 }
 
@@ -25,6 +25,15 @@
 
 #btnReset {
     -fx-background-image: url("resetIcon.png");
+}
+
+.aligned-column {
+    -fx-alignment: CENTER;
+    -fx-padding: 5;
+}
+
+#textSegValue {
+    -fx-padding: 5 5 5 20;
 }
 
 .scroll-bar:horizontal .track,
