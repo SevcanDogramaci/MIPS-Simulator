@@ -4,8 +4,8 @@ public class Data {
 
     private String address, value;
 
-    public Data(String address, String value) {
-        this.address = address;
+    public Data(int address, String value) {
+        this.address = String.format("%04X", address & 0xFFFF);
         this.value = value;
     }
 

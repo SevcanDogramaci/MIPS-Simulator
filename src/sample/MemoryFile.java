@@ -80,7 +80,7 @@ public class MemoryFile {
                         .replace(' ', '0')).append(" ");
             }
 
-            Data datum = new Data(address, val.toString());
+            Data datum = new Data(i << 2, val.toString());
             memoryData.add(datum);
         }
 

@@ -21,9 +21,9 @@ public class Controller {
     @FXML private TableColumn<Register, Integer> rNo;
     @FXML private TableColumn<Register, Integer> rValue;
     @FXML private TableColumn<Register, String > rName;
-    @FXML private TableColumn<Instruction, Short > textSegAddress;
-    @FXML private TableColumn<Instruction, String > textSegValue;
-    @FXML private TableView<Instruction> textSegTable;
+
+    @FXML private TableColumn<Data, String > textSegAddress, textSegValue;
+    @FXML private TableView<Data> textSegTable;
     @FXML private TableView<Data> sTable;
     @FXML private TableColumn<Data, String> sAddress, sValue;
 
@@ -66,9 +66,9 @@ public class Controller {
         rTable.setItems(RegisterFile.getRegisters());
     }
 
-    private void setupTextSegmentTable() {
+    private void setupTextSegmentTable() throws Exception {
         textSegAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        textSegValue.setCellValueFactory(new PropertyValueFactory<>("machineCode"));
+        textSegValue.setCellValueFactory(new PropertyValueFactory<>("value"));
         textSegTable.setItems(InstructionMemoryFile.getInstructions());
     }
 
@@ -78,7 +78,7 @@ public class Controller {
         sTable.setItems(data);
     }
     @FXML
-    public void runPressed(ActionEvent event) {
+    public void runPressed(ActionEvent event) throws Exception {
 
         if(assemblyCodeArea.getText().equals("") && parser == null) {
             return;
@@ -109,7 +109,7 @@ public class Controller {
 
     }
 
-    private void startAgain () {
+    private void startAgain () throws Exception {
         List<Instruction> instructions = parser.getInstructions();
         processor = new Processor();
         processor.loadInstructionsToMemory(instructions);
@@ -120,7 +120,7 @@ public class Controller {
     }
 
     @FXML
-    public void onStep(ActionEvent event) {
+    public void onStep(ActionEvent event) throws Exception {
         try {
             if (!processor.isDone()) {
                 processor.step();
@@ -199,7 +199,7 @@ public class Controller {
         sTable.setItems(null);
     }
 
-    public void showAlertDialog(String header, String content, boolean isResetApplication) {
+    public void showAlertDialog(String header, String content, boolean isResetApplication) throws Exception {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText(header);
