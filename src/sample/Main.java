@@ -14,10 +14,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         // construct GUI
-        Parent root = FXMLLoader.load(getClass().getResource("./res/gui.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/res/gui.fxml"));
         primaryStage.setTitle(appName);
         primaryStage.setScene(new Scene(root, 1000, 600));
-        primaryStage.resizableProperty().setValue(false);
+        primaryStage.resizableProperty().setValue(true);
         primaryStage.show();
     }
 

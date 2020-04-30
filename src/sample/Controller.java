@@ -1,10 +1,10 @@
 package sample;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -16,21 +16,26 @@ import java.util.Optional;
 public class Controller {
 
     @FXML private Button btnRun, btnStep, btnChoose, btnReset;
-    @FXML private TextArea assemblyCodeArea, sTable;
+    @FXML private TextArea assemblyCodeArea;
     @FXML private TableView<Register> rTable;
     @FXML private TableColumn<Register, Integer> rNo;
     @FXML private TableColumn<Register, Integer> rValue;
     @FXML private TableColumn<Register, String > rName;
-    @FXML private TableColumn<Instruction, Short > textSegAddress, stackAddress;
-    @FXML private TableColumn<Instruction, String > textSegValue, stackValue;
-    @FXML private TableView<Instruction> textSegTable, stackTable;
+
+    @FXML private TableColumn<Data, String > textSegAddress, textSegValue;
+    @FXML private TableView<Data> textSegTable;
+    @FXML private TableView<Data> sTable;
+    @FXML private TableColumn<Data, String> sAddress, sValue;
 
     private Parser parser;
     private Processor processor;
 
     @FXML
     public void initialize(){
+
+        setUpTablePlaceholders();
         setupRegisterTable();
+
         Tooltip runTip = new Tooltip("Run");
         runTip.setShowDelay(Duration.millis(10));
         Tooltip.install(btnRun, runTip);
@@ -49,6 +54,11 @@ public class Controller {
 
     }
 
+    private void setUpTablePlaceholders() {
+        sTable.setPlaceholder(new Label("Stack is empty"));
+        textSegTable.setPlaceholder(new Label("No instruction in memory"));
+    }
+
     private void setupRegisterTable() {
         rNo.setCellValueFactory(new PropertyValueFactory<>("no"));
         rValue.setCellValueFactory(new PropertyValueFactory<>("value"));
@@ -56,14 +66,19 @@ public class Controller {
         rTable.setItems(RegisterFile.getRegisters());
     }
 
-    private void setupTextSegmentTable() {
+    private void setupTextSegmentTable() throws Exception {
         textSegAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        textSegValue.setCellValueFactory(new PropertyValueFactory<>("machineCode"));
+        textSegValue.setCellValueFactory(new PropertyValueFactory<>("value"));
         textSegTable.setItems(InstructionMemoryFile.getInstructions());
     }
 
+    private void setupStackTable(ObservableList<Data> data) {
+        sAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        sValue.setCellValueFactory(new PropertyValueFactory<>("value"));
+        sTable.setItems(data);
+    }
     @FXML
-    public void runPressed(ActionEvent event) {
+    public void runPressed(ActionEvent event) throws Exception {
 
         if(assemblyCodeArea.getText().equals("") && parser == null) {
             return;
@@ -86,6 +101,7 @@ public class Controller {
             processor = new Processor();
             processor.loadInstructionsToMemory(instructions);
             setupTextSegmentTable();
+            setupStackTable(processor.getStackData());
             selectLine(0);
         } catch (Exception e){
             showAlertDialog("Error", e.getMessage(), true);
@@ -93,22 +109,25 @@ public class Controller {
 
     }
 
-    private void startAgain () {
+    private void startAgain () throws Exception {
         List<Instruction> instructions = parser.getInstructions();
         processor = new Processor();
         processor.loadInstructionsToMemory(instructions);
         rTable.refresh();
         setupTextSegmentTable();
+        setupStackTable(processor.getStackData());
         selectLine(0);
     }
 
     @FXML
-    public void onStep(ActionEvent event) {
+    public void onStep(ActionEvent event) throws Exception {
         try {
             if (!processor.isDone()) {
                 processor.step();
                 rTable.refresh();
-                sTable.setText(processor.getStackData());
+                setupStackTable(processor.getStackData());
+                //sTable.refresh();
+                //sTable.setText(processor.getStackData());
                 selectLine(processor.getIndex());
             } else
                 showAlertDialog("The program has finished!", "Do you want to run again ?", false);
@@ -172,10 +191,13 @@ public class Controller {
 
         RegisterFile.resetData();
         rTable.refresh();
-        sTable.setText("");
+
+        MemoryFile.resetData();
+        sTable.setItems(null);
+        //sTable.setText("");
     }
 
-    public void showAlertDialog(String header, String content, boolean isResetApplication) {
+    public void showAlertDialog(String header, String content, boolean isResetApplication) throws Exception {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText(header);

@@ -3,6 +3,7 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InstructionMemoryFile {
@@ -29,7 +30,11 @@ public class InstructionMemoryFile {
         return instructions.length * 4;
     }
 
-    public static ObservableList<Instruction> getInstructions() {
-        return FXCollections.observableArrayList(instructions);
+    public static ObservableList<Data> getInstructions() throws Exception {
+        List<Data> memoryData = new ArrayList<>();
+        for (int i = 0; i < instructions.length; i++) {
+            memoryData.add(new Data(i << 2, instructions[i].getMachineCode()));
+        }
+        return FXCollections.observableArrayList(memoryData);
     }
 }
