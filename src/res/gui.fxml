@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@ta-style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@ta-style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
         <SplitPane dividerPositions="0.62" layoutX="285.0" layoutY="100.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -84,9 +85,17 @@
                                                         <Font name="Consolas" size="12.0" />
                                                     </font>
                                                     <padding>
-                                                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                        <Insets bottom="12.0" left="35.0" right="12.0" top="12.0" />
                                                     </padding>
                                                 </TextArea>
+                                        <ScrollPane fitToHeight="true" prefHeight="553.0" prefWidth="36.0">
+                                            <content>
+                                                <Label fx:id="lblLine" alignment="TOP_RIGHT" layoutX="-1.0" layoutY="17.0" lineSpacing="2" prefHeight="538.0" prefWidth="25.0">
+                                                <padding>
+                                                   <Insets top="16.0" />
+                                                </padding></Label>
+                                            </content>
+                                        </ScrollPane>
                                     </children>
                                  </AnchorPane>
                               </items>

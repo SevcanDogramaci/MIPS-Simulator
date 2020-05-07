@@ -1,10 +1,14 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -17,6 +21,7 @@ public class Controller {
 
     @FXML private Button btnRun, btnStep, btnChoose, btnReset;
     @FXML private TextArea assemblyCodeArea;
+    @FXML private Label lblLine;
     @FXML private TableView<Register> rTable;
     @FXML private TableColumn<Register, Integer> rNo, rValue;
     @FXML private TableColumn<Register, String > rName;
@@ -26,9 +31,23 @@ public class Controller {
     private Parser parser;
     private Processor processor;
 
+    private void setLineNumber(String text){
+        System.out.println("I was here: " + text);
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+
+        for(int i=0; i < text.length(); i++)
+        {    if(text.charAt(i) == '\n' || i == 0)
+                sb.append(++count).append("\n");
+        }
+
+        lblLine.setText(sb.toString());
+    }
+
     @FXML
     public void initialize(){
 
+        assemblyCodeArea.textProperty().addListener((observableValue, s, t1) -> setLineNumber(t1));
         setUpTablePlaceholders();
         setupRegisterTable();
 
@@ -73,6 +92,7 @@ public class Controller {
         sValue.setCellValueFactory(new PropertyValueFactory<>("value"));
         sTable.setItems(data);
     }
+
     @FXML
     public void runPressed(ActionEvent event) throws Exception {
 
