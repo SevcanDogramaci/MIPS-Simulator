@@ -119,7 +119,7 @@ public class Controller {
         if(assemblyCodeArea.getText().equals("") && parser == null) {
             return;
         }
-
+        setRectY(0);
         btnRun.setDisable(true);
         btnStep.setDisable(false);
 
@@ -215,7 +215,7 @@ public class Controller {
 
     @FXML
     public void resetApplication() {
-
+        setRectY(0);
         assemblyCodeArea.setText("");
         assemblyCodeArea.setEditable(true);
 
