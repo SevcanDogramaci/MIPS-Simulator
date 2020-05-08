@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 public class Controller {
 
+    @FXML private Rectangle rectangle;
     @FXML private Button btnRun, btnStep, btnChoose, btnReset;
     @FXML private TextArea assemblyCodeArea;
     @FXML private Label lblLine;
@@ -30,14 +32,31 @@ public class Controller {
 
     private Parser parser;
     private Processor processor;
+    private double rectStartingY;
 
+    @FXML
+    private void handleRect(){
+        if (btnStep.isDisabled()) {
+            int position = assemblyCodeArea.getCaretPosition();
+            String text = assemblyCodeArea.getText();
+            //setLineNumber(text);
+            int count = 0;
+            for (int i = 0; i < position; i++) {
+                if (i < text.length() && text.charAt(i) == '\n')
+                    count++;
+            }
+            setRectY(count);
+        }
+    }
+
+    private void setRectY(int count){ if(count < 28) rectangle.setY(rectStartingY + count*19); }
     private void setLineNumber(String text){
         System.out.println("I was here: " + text);
         StringBuilder sb = new StringBuilder();
-        int count = 0;
-
+        int count = 1;
+        sb.append(count).append("\n");
         for(int i=0; i < text.length(); i++)
-        {    if(text.charAt(i) == '\n' || i == 0)
+        {    if(text.charAt(i) == '\n')
                 sb.append(++count).append("\n");
         }
 
@@ -46,7 +65,8 @@ public class Controller {
 
     @FXML
     public void initialize(){
-
+        assemblyCodeArea.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> handleRect());
+        rectStartingY = rectangle.getY();
         assemblyCodeArea.textProperty().addListener((observableValue, s, t1) -> setLineNumber(t1));
         setUpTablePlaceholders();
         setupRegisterTable();
@@ -143,8 +163,11 @@ public class Controller {
                 rTable.refresh();
                 setupStackTable(processor.getStackData());
                 selectLine(processor.getIndex());
-            } else
+                setRectY(processor.getIndex());
+            } else {
+                setRectY(0);
                 showAlertDialog("The program has finished!", "Do you want to run again ?", false);
+            }
         } catch (Exception e){
             showAlertDialog("Problem at line " + (processor.getIndex() + 1), e.getMessage(), false);
         }

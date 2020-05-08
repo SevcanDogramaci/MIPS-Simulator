@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@ta-style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
@@ -80,21 +81,26 @@
                                  </AnchorPane>
                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                     <children>
-                                                <TextArea fx:id="assemblyCodeArea" promptText="Write assembly code here or choose an assembly file" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <ScrollPane fitToHeight="true" prefHeight="553.0">
+                                            <content>
+                                                <AnchorPane prefHeight="555.0" prefWidth="356.0">
+                                                    <TextArea fx:id="assemblyCodeArea" onMouseClicked="#handleRect" promptText="Write assembly code here or choose an assembly file" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                     <font>
                                                         <Font name="Consolas" size="12.0" />
                                                     </font>
                                                     <padding>
                                                         <Insets bottom="12.0" left="35.0" right="12.0" top="12.0" />
                                                     </padding>
-                                                </TextArea>
-                                        <ScrollPane fitToHeight="true" prefHeight="553.0" prefWidth="36.0">
-                                            <content>
-                                                <Label fx:id="lblLine" alignment="TOP_RIGHT" layoutX="-1.0" layoutY="17.0" lineSpacing="2" prefHeight="538.0" prefWidth="25.0">
-                                                <padding>
-                                                   <Insets top="16.0" />
-                                                </padding></Label>
+                                                    </TextArea>
+
+
+                                                    <Label fx:id="lblLine" alignment="TOP_RIGHT" layoutX="-1.0" layoutY="17.0" lineSpacing="2" prefHeight="519.0" prefWidth="25.0" />
+                                                <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#5bff1f" height="22.0" layoutX="-1.0" layoutY="14.0" opacity="0.2" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="345.0" />
+
+                                                </AnchorPane>
+
                                             </content>
+
                                         </ScrollPane>
                                     </children>
                                  </AnchorPane>
