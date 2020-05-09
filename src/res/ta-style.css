@@ -1,6 +1,7 @@
 .text-input {
     -fx-highlight-fill: #00c0e6;
     -fx-font-size: 13;
+    -fx-font-family: Consolas;
 }
 
 .button  {
