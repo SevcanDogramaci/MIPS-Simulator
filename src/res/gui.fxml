@@ -92,13 +92,9 @@
                                                                         <Insets bottom="12.0" left="35.0" right="12.0" top="12.0" />
                                                                     </padding>
                                                                 </TextArea>
-                                                                <ScrollPane fx:id="labelScroll" hbarPolicy="NEVER" layoutX="-1.0" layoutY="17.0" vbarPolicy="NEVER">
-                                                                    <content>
 
 
-                                                                        <Label fx:id="lblLine" alignment="TOP_RIGHT" lineSpacing="2" prefHeight="519.0" prefWidth="25.0" />
-                                                                    </content>
-                                                                </ScrollPane>
+                                                                <Label fx:id="lblLine" alignment="TOP_RIGHT" layoutX="-1.0" layoutY="17.0" lineSpacing="2" prefHeight="519.0" prefWidth="25.0" />
                                                                 <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#5bff1f" height="22.0" layoutX="-1.0" layoutY="14.0" onMouseClicked="#chooseRect" opacity="0.2" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="345.0" AnchorPane.leftAnchor="0.0" />
 
                                                             </AnchorPane>
