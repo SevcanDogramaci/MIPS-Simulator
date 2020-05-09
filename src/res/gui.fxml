@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@ta-style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@ta-style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
         <SplitPane dividerPositions="0.62" layoutX="285.0" layoutY="100.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -51,13 +51,13 @@
                                     </SplitPane>
                                 </children>
                             </AnchorPane>
-                            <AnchorPane fx:id="deneme" minHeight="0.0" minWidth="0.0" prefHeight="596.0" prefWidth="295.0">
+                            <AnchorPane fx:id="deneme" minHeight="0.0" minWidth="0.0" prefHeight="596.0" prefWidth="411.0">
                                 <children>
-                           <SplitPane dividerPositions="0.0707070707070707" orientation="VERTICAL" prefHeight="575.0" prefWidth="285.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <SplitPane dividerPositions="0.06902356902356903" orientation="VERTICAL" prefHeight="575.0" prefWidth="285.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                               <items>
                                  <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" stylesheets="@ta-style.css" SplitPane.resizableWithParent="false">
                                     <children>
-                                       <Button id="btnChoose" fx:id="btnChoose" defaultButton="true" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#chooseFilePressed" prefHeight="25.0" prefWidth="25.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                       <Button id="btnChoose" fx:id="btnChoose" defaultButton="true" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#chooseFilePressed" prefHeight="25.0" prefWidth="25.0" scaleShape="false" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="4.0">
                                           <font>
                                              <Font name="Consolas" size="12.0" />
                                           </font>
@@ -79,12 +79,12 @@
                                        </Button>
                                     </children>
                                  </AnchorPane>
-                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="547.0" prefWidth="430.0" SplitPane.resizableWithParent="false">
                                     <children>
-                                        <ScrollPane fitToHeight="true" prefHeight="553.0">
+                                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <content>
                                                 <AnchorPane prefHeight="555.0" prefWidth="356.0">
-                                                    <TextArea fx:id="assemblyCodeArea" onMouseClicked="#handleRect" promptText="Write assembly code here or choose an assembly file" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <TextArea fx:id="assemblyCodeArea" onMouseClicked="#handleRect" prefHeight="551.0" prefWidth="374.0" promptText="Write assembly code here or choose an assembly file" stylesheets="@ta-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                     <font>
                                                         <Font name="Consolas" size="12.0" />
                                                     </font>
@@ -95,7 +95,7 @@
 
 
                                                     <Label fx:id="lblLine" alignment="TOP_RIGHT" layoutX="-1.0" layoutY="17.0" lineSpacing="2" prefHeight="519.0" prefWidth="25.0" />
-                                                <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#5bff1f" height="22.0" layoutX="-1.0" layoutY="14.0" opacity="0.2" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="345.0" />
+                                                <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#5bff1f" height="22.0" layoutX="-1.0" layoutY="14.0" onMouseClicked="#chooseRect" opacity="0.2" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="345.0" AnchorPane.leftAnchor="0.0" />
 
                                                 </AnchorPane>
 
