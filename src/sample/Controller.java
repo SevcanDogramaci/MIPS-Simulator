@@ -1,22 +1,19 @@
 package sample;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
+import javafx.collections.ObservableList;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.scene.control.*;
 import javafx.util.Duration;
+import javafx.stage.Stage;
+import javafx.fxml.FXML;
 
-import java.io.File;
-import java.util.List;
 import java.util.Optional;
+import java.util.List;
+import java.io.File;
 
 public class Controller {
 
@@ -33,6 +30,9 @@ public class Controller {
     private Parser parser;
     private Processor processor;
     private double rectStartingY;
+
+    @FXML
+    private void chooseRect(){ assemblyCodeArea.requestFocus(); }
 
     @FXML
     private void handleRect(){
@@ -65,9 +65,7 @@ public class Controller {
 
     @FXML
     public void initialize(){
-        assemblyCodeArea.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> handleRect());
-        rectStartingY = rectangle.getY();
-        assemblyCodeArea.textProperty().addListener((observableValue, s, t1) -> setLineNumber(t1));
+        setUpAssemblyCodeAreas();
         setUpTablePlaceholders();
         setupRegisterTable();
 
@@ -87,6 +85,13 @@ public class Controller {
         stepTip.setShowDelay(Duration.millis(10));
         Tooltip.install(btnStep, stepTip);
 
+    }
+
+    private void setUpAssemblyCodeAreas() {
+        assemblyCodeArea.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> handleRect());
+        rectStartingY = rectangle.getY();
+        assemblyCodeArea.textProperty().addListener((observableValue, s, t1) -> setLineNumber(t1));
+        rectangle.widthProperty().bind(assemblyCodeArea.widthProperty().subtract(assemblyCodeArea.getPadding().getRight()));
     }
 
     private void setUpTablePlaceholders() {
