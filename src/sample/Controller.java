@@ -1,8 +1,5 @@
 package sample;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
 import javafx.scene.shape.Rectangle;
@@ -17,7 +14,6 @@ import javafx.fxml.FXML;
 import java.util.Optional;
 import java.util.List;
 import java.io.File;
-import java.util.function.Consumer;
 
 public class Controller {
 
@@ -68,6 +64,7 @@ public class Controller {
 
     @FXML
     public void initialize(){
+
         setUpAssemblyCodeAreas();
         setUpTablePlaceholders();
         setupRegisterTable();
