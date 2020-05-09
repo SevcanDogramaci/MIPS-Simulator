@@ -52,7 +52,7 @@ public class RegisterFile {
     }
 
     public static void setRegisterData(int index, int dataValue){
-        registers.get(index).setValue(dataValue);
+        registers.get(index).setRegValue(dataValue);
     }
 
     public static ObservableList<Register> getRegisters(){
@@ -61,8 +61,8 @@ public class RegisterFile {
 
     public static void resetData(){
         for(Register register : registers) {
-            register.setValue(0);
-            if (register.getName().equals("sp")) register.setValue(MemoryFile.STACK_START);
+            register.setRegValue(0);
+            if (register.getName().equals("sp")) register.setRegValue(MemoryFile.STACK_START);
         }
     }
 
@@ -73,9 +73,9 @@ public class RegisterFile {
         this.wr = wr;
     }
 
-    public int readData1() { return  rr1 == null ? 0 : rr1.getValue(); }
+    public int readData1() { return  rr1 == null ? 0 : rr1.getRegValue(); }
 
-    public int readData2() { return  rr2 == null ? 0 : rr2.getValue(); }
+    public int readData2() { return  rr2 == null ? 0 : rr2.getRegValue(); }
 
     // Regwrite
     public void write(boolean regWrite, int dataValue) {

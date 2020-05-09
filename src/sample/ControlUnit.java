@@ -74,12 +74,12 @@ public class ControlUnit {
 
                 // identify function with temporary shift amount value
                 if (instruction.shiftAmount == 1){
-                    instruction.getTargetReg().setValue(0);
+                    instruction.getTargetReg().setRegValue(0);
                     branchCode = 1;
                 }
                 else{
                     branchCode = 4;
-                    instruction.getTargetReg().setValue(1);
+                    instruction.getTargetReg().setRegValue(1);
                 }
             }
             else if (instruction.opcode == 7){  // bgtz
@@ -91,7 +91,7 @@ public class ControlUnit {
                 ALUOp1 = true;
                 instruction.opcode = 42;
                 branchCode = 3;
-                instruction.getTargetReg().setValue(1);
+                instruction.getTargetReg().setRegValue(1);
             }
         }
 

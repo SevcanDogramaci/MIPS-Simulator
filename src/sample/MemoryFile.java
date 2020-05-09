@@ -70,7 +70,7 @@ public class MemoryFile {
 
         List<Data> memoryData = new ArrayList<>();
 
-        for (int i = stackPointer.getValue() >> 2; i < data.length; i++) {
+        for (int i = stackPointer.getRegValue() >> 2; i < data.length; i++) {
 
             String address = String.format("%6d", i << 2);
             StringBuilder val = new StringBuilder();

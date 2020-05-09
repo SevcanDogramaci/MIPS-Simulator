@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
 import javafx.scene.shape.Rectangle;
@@ -14,6 +17,7 @@ import javafx.fxml.FXML;
 import java.util.Optional;
 import java.util.List;
 import java.io.File;
+import java.util.function.Consumer;
 
 public class Controller {
 
@@ -39,7 +43,6 @@ public class Controller {
         if (btnStep.isDisabled()) {
             int position = assemblyCodeArea.getCaretPosition();
             String text = assemblyCodeArea.getText();
-            //setLineNumber(text);
             int count = 0;
             for (int i = 0; i < position; i++) {
                 if (i < text.length() && text.charAt(i) == '\n')
@@ -50,8 +53,8 @@ public class Controller {
     }
 
     private void setRectY(int count){ if(count < 28) rectangle.setY(rectStartingY + count*19); }
+
     private void setLineNumber(String text){
-        System.out.println("I was here: " + text);
         StringBuilder sb = new StringBuilder();
         int count = 1;
         sb.append(count).append("\n");
@@ -101,9 +104,16 @@ public class Controller {
 
     private void setupRegisterTable() {
         rNo.setCellValueFactory(new PropertyValueFactory<>("no"));
-        rValue.setCellValueFactory(new PropertyValueFactory<>("value"));
+        rValue.setCellValueFactory(new PropertyValueFactory<>("regValue"));
         rName.setCellValueFactory(new PropertyValueFactory<>("name"));
         rTable.setItems(RegisterFile.getRegisters());
+        rTable.getItems().forEach(
+                register -> register.addListener(
+                        (observableValue, o, t1) -> {
+            int regNo =((Register)observableValue).getNo();
+            rTable.getSelectionModel().select(regNo);
+            rTable.scrollTo(regNo);
+        }));
     }
 
     private void setupTextSegmentTable() throws Exception {
@@ -168,7 +178,6 @@ public class Controller {
                 rTable.refresh();
                 setupStackTable(processor.getStackData());
                 selectLine(processor.getIndex());
-                setRectY(processor.getIndex());
             } else {
                 setRectY(0);
                 showAlertDialog("The program has finished!", "Do you want to run again ?", false);
@@ -177,7 +186,7 @@ public class Controller {
             showAlertDialog("Problem at line " + (processor.getIndex() + 1), e.getMessage(), false);
         }
     }
-
+/*
     private int ordinalIndexOf(String str, String substr, int n) {
         int pos = -1;
         do {
@@ -185,15 +194,17 @@ public class Controller {
         } while (n-- > 0 && pos != -1);
         return pos;
     }
-
+*/
     private void selectLine(int lineNum){
         textSegTable.getSelectionModel().select(lineNum);
-        String txt = assemblyCodeArea.getText();
+        setRectY(lineNum);
+
+        /*String txt = assemblyCodeArea.getText();
 
         int start = lineNum == 0 ? 0 : ordinalIndexOf(txt, "\n", lineNum - 1);
         int end = ordinalIndexOf(txt, "\n", lineNum );
 
-        assemblyCodeArea.selectRange(start, end);
+        assemblyCodeArea.selectRange(start, end);*/
     }
 
     @FXML
