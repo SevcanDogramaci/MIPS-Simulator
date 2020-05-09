@@ -11,6 +11,7 @@ public class Processor {
     private InstructionMemoryFile instructionMemoryFile;
     private MemoryFile memory;
     private ALU alu;
+    private int changedMemIdx;
 
     public Processor() { // Initialize components that are connected to processor.
         pc = new ProgramCounter();
@@ -42,6 +43,7 @@ public class Processor {
         int alu_out = 0, data_out = 0, regData1 = 0, regData2 = 0,
                 new_pc = pc.get(), write_data;
         boolean alu_zero;
+        changedMemIdx = - 1;
 
         // fetch instruction
         instruction = instructionMemoryFile.fetch(pc);
@@ -74,6 +76,8 @@ public class Processor {
 
         data_out = memory.cycle(controlUnit.isMemRead(), controlUnit.isMemWrite(),
                 alu_out, regData2, accessLength, controlUnit.isSignExtend());
+        if(controlUnit.isMemRead() || controlUnit.isMemWrite())
+            changedMemIdx = alu_out;
 
         // writeback
         write_data = (int)mux(alu_out, data_out, controlUnit.isMemtoReg());
@@ -139,4 +143,6 @@ public class Processor {
     public ObservableList<Data> getStackData(){
         return memory.getMemoryData();
     }
+    public int getChangedMemIdx(){return changedMemIdx;}
+
 }

@@ -28,6 +28,7 @@ public class MemoryFile {
     // Do read or write operation if required according to flags.
     public int cycle(boolean read, boolean write, int index, int writeValue, int accessLength, boolean signed){
 
+        System.out.println("sp: " + stackPointer.getRegValue() + " index: " + index);
         if (read){
             return get(index, accessLength, signed);
         }
@@ -70,7 +71,7 @@ public class MemoryFile {
 
         List<Data> memoryData = new ArrayList<>();
 
-        for (int i = stackPointer.getRegValue() >> 2; i < data.length; i++) {
+        for (int i = data.length - 1; i >= stackPointer.getRegValue() >> 2; i--) {
 
             String address = String.format("%6d", i << 2);
             StringBuilder val = new StringBuilder();
