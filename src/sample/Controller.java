@@ -126,6 +126,13 @@ public class Controller {
         sAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         sValue.setCellValueFactory(new PropertyValueFactory<>("value"));
         sTable.setItems(data);
+        int changed = processor.getChangedMemIdx();
+        if(changed != -1){
+            changed = (4000 - changed)/4;
+            sTable.scrollTo(changed - 1);
+            sTable.getSelectionModel().select(changed - 1);
+            System.out.println(changed);
+        }
     }
 
     @FXML
@@ -197,6 +204,8 @@ public class Controller {
 */
     private void selectLine(int lineNum){
         textSegTable.getSelectionModel().select(lineNum);
+        if(lineNum > 3)
+        textSegTable.scrollTo(lineNum - 4);
         setRectY(lineNum);
 
         /*String txt = assemblyCodeArea.getText();
