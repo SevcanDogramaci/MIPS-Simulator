@@ -28,7 +28,6 @@ public class MemoryFile {
     // Do read or write operation if required according to flags.
     public int cycle(boolean read, boolean write, int index, int writeValue, int accessLength, boolean signed){
 
-        System.out.println("sp: " + stackPointer.getRegValue() + " index: " + index);
         if (read){
             return get(index, accessLength, signed);
         }

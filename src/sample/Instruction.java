@@ -78,6 +78,7 @@ public abstract class Instruction extends Data{
         for (int i = expectedLen - sBuilder.length(); i > 0; i--){
             sBuilder.insert(0, "0");
         }
+
         return sBuilder.toString();
     }
 }
