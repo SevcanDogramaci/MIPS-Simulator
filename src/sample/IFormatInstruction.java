@@ -46,8 +46,12 @@ public class IFormatInstruction extends Instruction {
         try {
             sb.append(fillWithZero(Integer.toBinaryString(opcode), 6)).append(" ")
                     .append(fillWithZero(Integer.toBinaryString(sourceReg.getNo()), 5)).append(" ")
-                    .append(fillWithZero(Integer.toBinaryString(targetReg.getNo()), 5)).append(" ")
-                    .append(fillWithZero(Integer.toBinaryString(immediate), 16));
+                    .append(fillWithZero(Integer.toBinaryString(targetReg.getNo()), 5)).append(" ");
+
+            String imm = fillWithZero(Integer.toBinaryString(immediate), 16);
+            if (imm.length() > 16)
+                imm = imm.substring(imm.length() - 16);
+            sb.append(imm);
         }catch (Exception e){
             throw new Exception("Error occurred while generating machine code!\nCheck instruction format : " + line);
         }

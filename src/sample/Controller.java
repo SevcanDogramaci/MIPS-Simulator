@@ -134,7 +134,8 @@ public class Controller {
                         (observableValue, o, t1) -> {
             int regNo =((Register)observableValue).getNo();
             rTable.getSelectionModel().select(regNo);
-            rTable.scrollTo(regNo);
+            if (regNo > 3)
+                rTable.scrollTo(regNo - 4);
         }));
     }
 
@@ -153,7 +154,6 @@ public class Controller {
             changed = (4000 - changed)/4;
             sTable.scrollTo(changed - 1);
             sTable.getSelectionModel().select(changed - 1);
-            System.out.println(changed);
         }
     }
 
@@ -227,7 +227,7 @@ public class Controller {
     private void selectLine(int lineNum){
         textSegTable.getSelectionModel().select(lineNum);
         if(lineNum > 3)
-        textSegTable.scrollTo(lineNum - 4);
+            textSegTable.scrollTo(lineNum - 4);
         setRectY(lineNum);
 
         /*String txt = assemblyCodeArea.getText();

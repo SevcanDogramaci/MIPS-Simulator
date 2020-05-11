@@ -46,8 +46,13 @@ public class JFormatInstruction extends Instruction {
 
         try{
         sb.append(fillWithZero(Integer.toBinaryString(opcode), 6))
-                .append(" ")
-                .append(fillWithZero(Integer.toBinaryString(immediate), 26));}
+                .append(" ");
+        String imm = fillWithZero(Integer.toBinaryString(immediate), 26);
+        if (imm.length() > 26)
+                imm = imm.substring(imm.length() - 26);
+            sb.append(imm);
+        }
+
         catch (Exception exception){
             throw new Exception("Error occurred while generating machine code!\nCheck instruction format : " + line);
         }
