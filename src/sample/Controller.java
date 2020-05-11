@@ -1,7 +1,13 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
@@ -27,6 +33,10 @@ public class Controller {
     @FXML private TableColumn<Data, String > textSegAddress, textSegValue, sAddress, sValue;
     @FXML private TableView<Data> textSegTable, sTable;
 
+    @FXML private TextArea lineNum;
+
+    //@FXML private ScrollPane lineScroll, codeScroll;
+
     private Parser parser;
     private Processor processor;
     private double rectStartingY;
@@ -48,22 +58,37 @@ public class Controller {
         }
     }
 
-    private void setRectY(int count){ if(count < 28) rectangle.setY(rectStartingY + count*19); }
+    private void setRectY(int count){ if(count < 28) rectangle.setY(rectStartingY + count*rectangle.getHeight()); }
 
     private void setLineNumber(String text){
         StringBuilder sb = new StringBuilder();
         int count = 1;
-        sb.append(count).append("\n");
+        sb.append(count);
         for(int i=0; i < text.length(); i++)
         {    if(text.charAt(i) == '\n')
-                sb.append(++count).append("\n");
+                sb.append("\n").append(++count);
         }
 
-        lblLine.setText(sb.toString());
+        //lblLine.setText(sb.toString());
+        lineNum.setText(sb.toString());
     }
 
     @FXML
     public void initialize(){
+
+        lineNum.scrollTopProperty().bindBidirectional(assemblyCodeArea.scrollTopProperty());
+        assemblyCodeArea.setOnKeyReleased(new EventHandler<KeyEvent>()
+        {
+            @Override
+            public void handle(KeyEvent keyEvent)
+            {
+                if(keyEvent.getCode() == KeyCode.ENTER)
+                {
+                    assemblyCodeArea.setScrollTop(Double.MAX_VALUE);
+                    lineNum.setScrollTop(Double.MAX_VALUE);
+                }
+            }
+        });
 
         setUpAssemblyCodeAreas();
         setUpTablePlaceholders();
@@ -84,14 +109,14 @@ public class Controller {
         Tooltip stepTip = new Tooltip("Step");
         stepTip.setShowDelay(Duration.millis(10));
         Tooltip.install(btnStep, stepTip);
-
     }
 
     private void setUpAssemblyCodeAreas() {
-        assemblyCodeArea.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> handleRect());
         rectStartingY = rectangle.getY();
         assemblyCodeArea.textProperty().addListener((observableValue, s, t1) -> setLineNumber(t1));
-        rectangle.widthProperty().bind(assemblyCodeArea.widthProperty().subtract(assemblyCodeArea.getPadding().getRight()));
+        rectangle.widthProperty().bind(assemblyCodeArea.widthProperty().
+                add(lineNum.widthProperty()).
+                subtract(assemblyCodeArea.getPadding().getRight()));
     }
 
     private void setUpTablePlaceholders() {
