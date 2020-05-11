@@ -58,7 +58,10 @@ public class Controller {
         }
     }
 
-    private void setRectY(int count){ if(count < 28) rectangle.setY(rectStartingY + count*rectangle.getHeight()); }
+    private void setRectY(int count){
+        //rectangle.setTranslateY(count * 19);
+        if(count < 28) rectangle.setY(rectStartingY + count*rectangle.getHeight());
+    }
 
     private void setLineNumber(String text){
         StringBuilder sb = new StringBuilder();
@@ -112,6 +115,7 @@ public class Controller {
     }
 
     private void setUpAssemblyCodeAreas() {
+        assemblyCodeArea.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> handleRect());
         rectStartingY = rectangle.getY();
         assemblyCodeArea.textProperty().addListener((observableValue, s, t1) -> setLineNumber(t1));
         rectangle.widthProperty().bind(assemblyCodeArea.widthProperty().
