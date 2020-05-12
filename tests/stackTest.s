@@ -1,5 +1,6 @@
 foo:
     addi $sp, $sp, -32
+    addi $a0, $a0, -4
     sw $a0, 16($sp)
     sw $ra, 12($sp)
     sw $fp, 8($sp)
